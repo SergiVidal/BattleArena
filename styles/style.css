@@ -1,0 +1,101 @@
+html {
+  height: 100%;
+  background-color: black; }
+  html h3, html li, html a {
+    font-family: "Arial Black", monospace !important; }
+  html header {
+    display: grid;
+    grid-template-columns: 50% 50%; }
+    html header #header-left {
+      padding: 0 100px; }
+      html header #header-left img {
+        width: 250px; }
+    html header #header-center h1 {
+      color: #ec2d42; }
+    html header #header-right {
+      padding: 40px 50px; }
+      html header #header-right button {
+        padding: 0 20px;
+        margin-left: 20px;
+        color: white;
+        background-color: #ec2d42; }
+  html main #top {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    border: 1px solid #ec2d42; }
+    html main #top #west-top {
+      border: 1px solid #ec2d42; }
+      html main #top #west-top h1 {
+        color: #ec2d42;
+        text-align: center; }
+      html main #top #west-top #compass img {
+        width: 100px;
+        color: white;
+        margin: 20px auto;
+        display: block; }
+      html main #top #west-top #map {
+        height: 350px;
+        background-color: white;
+        margin: 20px auto;
+        width: 350px; }
+    html main #top #middle-top {
+      border: 1px solid #ec2d42; }
+      html main #top #middle-top h1 {
+        color: #ec2d42;
+        text-align: center; }
+      html main #top #middle-top #visor {
+        height: 500px;
+        background-color: white;
+        margin: 20px auto;
+        width: 500px; }
+    html main #top #east-top {
+      border: 1px solid #ec2d42; }
+      html main #top #east-top h1 {
+        color: #ec2d42;
+        padding: 0 100px;
+        text-align: center; }
+      html main #top #east-top #playerCharacteristics img {
+        width: 50px;
+        margin: 20px auto;
+        display: block; }
+      html main #top #east-top #playerCharacteristics h3 {
+        color: #ec2d42;
+        padding: 0 100px; }
+  html main #bottom {
+    display: grid;
+    grid-template-columns: 67% 33%;
+    border: 1px solid #ec2d42; }
+    html main #bottom #middle-bottom {
+      border: 1px solid #ec2d42; }
+      html main #bottom #middle-bottom h1 {
+        color: #ec2d42;
+        padding: 0 100px; }
+      html main #bottom #middle-bottom #console {
+        height: 350px;
+        background-color: white;
+        margin: 20px auto;
+        width: 1000px; }
+    html main #bottom #east-bottom {
+      border: 1px solid #ec2d42; }
+      html main #bottom #east-bottom h1 {
+        color: #ec2d42;
+        padding: 0 100px;
+        text-align: center; }
+      html main #bottom #east-bottom #controls {
+        height: 350px;
+        background-color: white;
+        margin: 20px auto;
+        width: 350px; }
+  html footer {
+    border: 1px solid #ec2d42;
+    text-align: center;
+    padding: 10px;
+    background-color: black; }
+    html footer a {
+      margin: 0 20px;
+      color: white;
+      text-decoration: none; }
+    html footer a:hover {
+      color: #ec2d42; }
+
+/*# sourceMappingURL=style.css.map */

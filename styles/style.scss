@@ -1,0 +1,172 @@
+$primary_color: #ec2d42;
+
+$black_color: black;
+$white_color: white;
+
+html {
+  height: 100%;
+  background-color: $black_color;
+
+  h3, li, a {
+    font-family: "Arial Black", monospace !important;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+
+    #header-left {
+      padding: 0 100px;
+
+      img {
+        width: 250px;
+      }
+    }
+
+    #header-center {
+      h1 {
+        color: $primary_color;
+      }
+    }
+
+    #header-right {
+      padding: 40px 50px;
+
+      button {
+        padding: 0 20px;
+        margin-left: 20px;
+        color: $white_color;
+        background-color: $primary_color;
+      }
+    }
+  }
+
+  main {
+
+
+    #top {
+      display: grid;
+      grid-template-columns: 25% 50% 25%;
+      border: 1px solid $primary_color;
+
+      #west-top {
+        border: 1px solid $primary_color;
+        h1{
+          color: $primary_color;
+          text-align: center;
+        }
+
+        #compass {
+          img {
+            width: 100px;
+            color: $white_color;
+            margin: 20px auto;
+            display: block;
+          }
+        }
+
+        #map {
+          height: 350px;
+          background-color: $white_color;
+          margin: 20px auto;
+          width: 350px;
+        }
+
+      }
+
+      #middle-top {
+        border: 1px solid $primary_color;
+        h1{
+          color: $primary_color;
+          text-align: center;
+        }
+        #visor {
+
+          height: 500px;
+          background-color: $white_color;
+          margin: 20px auto;
+          width: 500px;
+        }
+
+      }
+
+      #east-top {
+        border: 1px solid $primary_color;
+        h1{
+          color: $primary_color;
+          padding: 0 100px;
+          text-align: center;
+        }
+        #playerCharacteristics {
+          img{
+            width: 50px;
+            margin: 20px auto;
+            display: block;
+          }
+          h3{
+            color: $primary_color;
+            padding: 0 100px;
+          }
+        }
+
+      }
+
+    }
+
+    #bottom {
+      display: grid;
+      grid-template-columns: 67% 33%;
+      border: 1px solid $primary_color;
+
+      #middle-bottom {
+        border: 1px solid $primary_color;
+
+        h1{
+          color: $primary_color;
+          padding: 0 100px;
+        }
+        #console {
+          height: 350px;
+          background-color: $white_color;
+          margin: 20px auto;
+          width: 1000px;
+        }
+      }
+
+      #east-bottom {
+        border: 1px solid $primary_color;
+        h1{
+          color: $primary_color;
+          padding: 0 100px;
+          text-align: center;
+        }
+        #controls {
+          height: 350px;
+          background-color: $white_color;
+          margin: 20px auto;
+          width: 350px;
+        }
+      }
+
+
+    }
+
+
+  }
+  footer {
+    border: 1px solid $primary_color;
+    text-align: center;
+    padding: 10px;
+    background-color: $black_color;
+    a {
+      margin: 0 20px;
+      color: $white_color;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $primary_color;
+    }
+  }
+}

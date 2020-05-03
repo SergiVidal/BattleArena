@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica 2 - Sergi Vidal</title>
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/map.js"></script>
+    <script src="scripts/player.js"></script>
+    <script src="scripts/visor.js"></script>
+
+</head>
+<body>
+<header>
+    <div id="header-left">
+        <img src="images/logo.png">
+    </div>
+    <div id="header-right">
+        <button id="newPlayer">Nuevo Jugador</button>
+        <button id="revivePlayer">Revivir Jugador</button>
+        <button id="deletePlayer">Eliminar Jugador</button>
+        <button id="ranking">Ver Ranking</button>
+    </div>
+</header>
+<main>
+    <section>
+        <div id="top">
+            <div id="west-top">
+                <h1>Map</h1>
+
+                <div id="map"></div>
+                <div id="compass">
+                    <img src="images/compass_red.png">
+                </div>
+            </div>
+            <div id="middle-top">
+                <h1>Visor</h1>
+                <div id="visor"></div>
+            </div>
+            <div id="east-top">
+                <h1>Player Stats</h1>
+                <div id="playerCharacteristics">
+                    <img src="images/skull.png">
+                    <h3>Name: - </h3>
+                    <h3>Attack: - </h3>
+                    <h3>Defense: - </h3>
+                    <h3>Vitality Points: - </h3>
+                </div>
+
+            </div>
+        </div>
+        <div id="bottom">
+            <div id="middle-bottom">
+                <h1>Console</h1>
+                <div id="console">
+
+                </div>
+            </div>
+
+
+            <div id="east-bottom">
+                <h1>Controls</h1>
+                <div id="controls"></div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <a href="#">Avíso legal</a>
+    <a href="#">Términos uso</a>
+    <a href="#">Contacto</a>
+</footer>
+</body>
+</html>
