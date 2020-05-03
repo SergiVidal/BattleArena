@@ -8,6 +8,8 @@
     <script src="scripts/map.js"></script>
     <script src="scripts/player.js"></script>
     <script src="scripts/visor.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/game.js"></script>
 
 </head>
 <body>
@@ -16,9 +18,20 @@
         <img src="images/logo.png">
     </div>
     <div id="header-right">
-        <button id="newPlayer">Nuevo Jugador</button>
-        <button id="revivePlayer">Revivir Jugador</button>
-        <button id="deletePlayer">Eliminar Jugador</button>
+        <button id="new-player">Nuevo Jugador</button>
+        <div class="form-popup" >
+            <form id="form-create-player" class="form-container">
+                <h1>Create Player</h1>
+
+                <label><b>Name</b></label>
+                <input id="input-player-name" type="text" placeholder="Enter Name" name="name" required>
+
+                <button type="button" class="btn">Create</button>
+                <button id="btn-close-create-player" type="button" class="btn cancel">Close</button>
+            </form>
+        </div>
+        <button id="revive-player">Revivir Jugador</button>
+        <button id="delete-player">Eliminar Jugador</button>
         <button id="ranking">Ver Ranking</button>
     </div>
 </header>

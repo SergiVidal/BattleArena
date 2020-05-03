@@ -13,7 +13,47 @@ html {
     html header #header-center h1 {
       color: #ec2d42; }
     html header #header-right {
-      padding: 40px 50px; }
+      padding: 40px 50px;
+      /* The popup form - hidden by default */
+      /* Add styles to the form container */
+      /* Full-width input fields */
+      /* When the inputs get focus, do something */
+      /* Set a style for the submit/login button */
+      /* Add a red background color to the cancel button */
+      /* Add some hover effects to buttons */ }
+      html header #header-right .form-popup {
+        display: none;
+        position: fixed;
+        border: 3px solid black;
+        z-index: 9; }
+      html header #header-right .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white; }
+      html header #header-right .form-container input[type=text], html header #header-right .form-container input[type=password] {
+        width: 90%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1; }
+      html header #header-right .form-container input[type=text]:focus, html header #header-right .form-container input[type=password]:focus {
+        background-color: white;
+        outline: none; }
+      html header #header-right .form-container .btn {
+        background-color: #1ed760;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 86%;
+        margin-bottom: 10px;
+        opacity: 0.8; }
+      html header #header-right .form-container .cancel {
+        background-color: #ec2d42; }
+      html header #header-right .form-container .btn:hover, html header #header-right .open-button:hover {
+        opacity: 1; }
+      html header #header-right #new-player {
+        margin-left: 3px !important; }
       html header #header-right button {
         padding: 0 20px;
         margin-left: 20px;
