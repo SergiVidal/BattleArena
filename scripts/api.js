@@ -1,12 +1,12 @@
 /** ASYNC GET - Create new Player**/
-function createNewPlayer(playerName) {
+function createNewPlayer(playerName, callback) {
     function reqListener () {
         //var People = eval(this.responseText); // NO
         // var Player = JSON.parse(this.responseText);
         // console.log(Player);
         // console.log(this.responseText);
-        return this.responseText;
-    }
+        callback(this.responseText);
+}
 
     var ajaxASYNC_GET = {
         request: function (url){

@@ -49,7 +49,10 @@ function initCreatePlayerForm(){
  */
 function onClickCreateNewPlayer() {
     var input_player_name = document.getElementById('input-player-name').value;
-    // console.log(input_player_name);
-    var playername = createNewPlayer(input_player_name);
-    console.log(playername);
+    createNewPlayer(input_player_name, function (result) {
+        var playername = result;
+        console.log(playername);
+
+    });
+
 }
