@@ -159,7 +159,7 @@ class PlayerAPI{
         function reqListener() {
             let response;
             if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El Jugador se ha movido al "+ d;
+                response = "El Jugador se ha movido a la dirección: "+ d;
                 console.log(response, this.status);
             }else {
                 response = "Ha ocurrido un error!";
@@ -188,7 +188,15 @@ class PlayerAPI{
      */
     attackPlayer(token, d, callback){
         function reqListener() {
-            callback();
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El Jugador ha atacado a la dirección: "+ d;
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(this.responseText);
+            }
+            callback(response, this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -201,6 +209,37 @@ class PlayerAPI{
         };
 
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/attack/" + token + "/" + d);
+    }
+
+    //TODO: ERROR AL RECUPERAR EL RANKING, POR CULPA DEL FORMATO, NO FUNCIONA JSON.parse()
+
+    /**
+     * Función encargada de obtener el Ranking de Jugadores
+     * @param callback - Función callback donde tratar la información de la API
+     */
+    showRanking(callback){
+        function reqListener() {
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "Se ha mostrado correctamente el Ranking";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(this.responseText);
+            }
+            callback(response, this.status, JSON.parse(this.responseText));
+        }
+
+        var ajaxASYNC_GET = {
+            request: function (url) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", reqListener);
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+        };
+
+        ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/ranking");
     }
 }
 

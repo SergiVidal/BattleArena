@@ -59,6 +59,7 @@ function addButtonsEvent() {
     document.getElementById('new-player').addEventListener("click", openCreatePlayerFrom);
     document.getElementById('revive-player').addEventListener("click", onClickRevivePlayer);
     document.getElementById('delete-player').addEventListener("click", onClickDeletePlayer);
+    document.getElementById('ranking').addEventListener("click", onClickShowRanking);
 
     initPlayersControls();
 
@@ -129,6 +130,20 @@ function onClickDeletePlayer() {
             blockDeletePlayerButton();
             blockRankingButton();
             blockControlButtons();
+        }
+    });
+}
+
+/**
+ * Función onClick del botón Mostrar Ranking, se encarga de gestionar las fuciones encargadas de Mostrar el Ranking mediante una llamada a la API
+ */
+function onClickShowRanking() {
+    playerAPI.showRanking(function (response, status, object) {
+        addTextToConsole(response);
+
+        if (status === 200) {
+
+            console.log(object);
         }
     });
 }
