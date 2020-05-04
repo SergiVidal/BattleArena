@@ -1,4 +1,8 @@
-/** ASYNC GET - Create new Player**/
+/**
+ * Funcion encargada de llamar a la API para crear un Nuevo Jugador
+ * @param playerName - Nombre del usuario
+ * @param callback - Función callback donde tratar la información de la API
+ */
 function createNewPlayer(playerName, callback) {
     function reqListener() {
         callback(this.responseText);
@@ -16,10 +20,14 @@ function createNewPlayer(playerName, callback) {
     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/spawn/" + playerName);
 }
 
-/** ASYNC GET - Delete current Player**/
-function deleteCurrentPlayer(token) {
+/**
+ * Funcion encargada de llamar a la API para eliminar el Jugador Actual
+ * @param token - Identificqador único del Jugador Actual
+ * @param callback - Función callback donde tratar la información de la API
+ */
+function deleteCurrentPlayer(token, callback) {
     function reqListener() {
-        alert("El jugador ha sido eliminado correctamente!")
+        callback();
     }
 
     var ajaxASYNC_GET = {
@@ -34,6 +42,33 @@ function deleteCurrentPlayer(token) {
     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/remove/" + token);
 }
 
+/**
+ * Funcion encargada de llamar a la API para actualizar el Jugador Actual
+ * @param token - Identificqador único del Jugador Actual
+ * @param callback - Función callback donde tratar la información de la API
+ */
+function respawnCurrentPlayer(token, callback) {
+    function reqListener() {
+        callback();
+    }
+
+    var ajaxASYNC_GET = {
+        request: function (url) {
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", reqListener);
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+    };
+
+    ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/respawn/" + token);
+}
+
+/**
+ * Funcion encargada de llamar a la API para obtener la información del Jugador Actual
+ * @param token - Identificqador único del Jugador Actual
+ * @param callback - Función callback donde tratar la información de la API
+ */
 function getCurrentPlayerInfo(token, callback) {
     function reqListener() {
         callback(JSON.parse(this.responseText));
@@ -58,7 +93,11 @@ function getCurrentPlayerInfo(token, callback) {
     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + token);
 }
 
-/** ASYNC GET - Get Player info**/
+/**
+ * Funcion encargada de llamar a la API para obtener información detallada de los jugadores y enemigos localizados en celdas colindantes
+ * @param token - Identificqador único del Jugador Actual
+ * @param callback - Función callback donde tratar la información de la API
+ */
 function getNearPlayers(token, callback) {
     function reqListener() {
         callback(JSON.parse(this.responseText));
@@ -75,3 +114,5 @@ function getNearPlayers(token, callback) {
 
     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/players/" + token);
 }
+
+//TODO: Preguntar como comprobar si las llamadas han sido 200 o !200

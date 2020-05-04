@@ -1,10 +1,7 @@
 let player;
 
-
 /** OnLoad, esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
-    // var token = createNewPlayer("test0007");
-    // console.log(token)
     initGame();
 };
 
@@ -19,7 +16,8 @@ function initUI() {
     addTextToConsole("Bienvenido a Battle Arena! (Desarrollado por <b>Sergi Vidal</b>)");
 
     createMap();
-    blockReviveDeletePlayerButtons();
+    blockRevivePlayerButton();
+    blockDeletePlayerButton();
     initCreatePlayerForm();
 }
 
@@ -46,16 +44,19 @@ function closeCreatePlayerForm() {
  */
 function initCreatePlayerForm() {
     closeCreatePlayerForm();
-    document.getElementById('new-player').addEventListener("click", openCreatePlayerFrom);
     document.getElementById('btn-close-create-player').addEventListener("click", closeCreatePlayerForm);
     document.getElementById('form-create-player').addEventListener("click", onClickCreateNewPlayer);
+
+    document.getElementById('new-player').addEventListener("click", openCreatePlayerFrom);
+    document.getElementById('revive-player').addEventListener("click", onClickRevivePlayer);
+    document.getElementById('delete-player').addEventListener("click", onClickDeletePlayer);
 }
 
 /**
- * A partir del nombre de usuario, se encarga de llamar a las fuciones encargadas de crear el jugador y de obtener su información
+ * Función onClick del botón Crear un nuevo jugador, se encarga de gestionar las fuciones encargadas de crear el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickCreateNewPlayer() {
-    var playerName = document.getElementById('input-player-name').value;
+    let playerName = document.getElementById('input-player-name').value;
     closeCreatePlayerForm();
     createNewPlayer(playerName, function (token) {
         console.log(token);
@@ -63,10 +64,40 @@ function onClickCreateNewPlayer() {
             player = new Player(object);
             addTextToConsole("Has creado un nuevo jugador! En la parte superior derecha verás sus estadisticas!");
             updateViewWithPlayerInfo();
-            enableReviveDeletePlayerButtons();
+
+            blockCreatePlayerButton();
+            enableRevivePlayerButton();
+            enableDeletePlayerButton();
         })
     });
 
+}
+
+/**
+ * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
+ */
+function onClickRevivePlayer() {
+    respawnCurrentPlayer(player.token, function () {
+        addTextToConsole("El jugador ha sido actualizado correctamente!");
+
+        getCurrentPlayerInfo(player.token, function (object) {
+            player = new Player(object);
+            addTextToConsole("En la parte superior derecha verás sus estadisticas!");
+            updateViewWithPlayerInfo();
+        });
+    });
+}
+
+/**
+ * Función onClick del botón Eliminar el jugador actual, se encarga de gestionar las fuciones encargadas de eliminar el jugador mediante una llamada a la API
+ */
+function onClickDeletePlayer() {
+    deleteCurrentPlayer(player.token, function () {
+        addTextToConsole("El jugador ha sido eliminado correctamente!");
+        enableCreatePlayerButton();
+        blockRevivePlayerButton();
+        blockDeletePlayerButton();
+    });
 }
 
 /**
@@ -93,48 +124,98 @@ function createH3Element(data, tag) {
 }
 
 /**
- * Función encargada de bloquear los botones de revivir y eliminar usuario cuando aun no estan creados
+ * Función encargada de bloquear el botón de crear un nuevo jugador
  */
-function blockReviveDeletePlayerButtons() {
-    let reviveBtn = document.getElementById('revive-player');
-    reviveBtn.style.pointerEvents = "none";
-    reviveBtn.style.backgroundColor = "grey";
-
-    let deleteBtn = document.getElementById('delete-player');
-    deleteBtn.style.pointerEvents = "none";
-    deleteBtn.style.backgroundColor = "grey";
-
+function blockCreatePlayerButton() {
+    let createBtn = document.getElementById('new-player');
+    createBtn.style.pointerEvents = "none";
+    createBtn.style.backgroundColor = "grey";
 }
 
 /**
- * Función encargada de desbloquear los botones de revivir y eliminar usuario
+ * Función encargada de bloquear el botón de revivir el jugador actual
  */
-function enableReviveDeletePlayerButtons() {
+function blockRevivePlayerButton() {
+    let reviveBtn = document.getElementById('revive-player');
+    reviveBtn.style.pointerEvents = "none";
+    reviveBtn.style.backgroundColor = "grey";
+}
+
+/**
+ * Función encargada de bloquear el botón de eliminar el jugador actual
+ */
+function blockDeletePlayerButton() {
+    let deleteBtn = document.getElementById('delete-player');
+    deleteBtn.style.pointerEvents = "none";
+    deleteBtn.style.backgroundColor = "grey";
+}
+
+/**
+ * Función encargada de desbloquear el botón de crear un nuevo jugador
+ */
+function enableCreatePlayerButton() {
+    let createBtn = document.getElementById('new-player');
+    createBtn.style.pointerEvents = "auto";
+    createBtn.style.backgroundColor = "#ec2d42";
+}
+
+/**
+ * Función encargada de desbloquear el botón de revivir el jugador actual
+ */
+function enableRevivePlayerButton() {
     let reviveBtn = document.getElementById('revive-player');
     reviveBtn.style.pointerEvents = "auto";
     reviveBtn.style.backgroundColor = "#ec2d42";
+}
 
+/**
+ * Función encargada de desbloquear el botón de eliminar el jugador actual
+ */
+function enableDeletePlayerButton() {
     let deleteBtn = document.getElementById('delete-player');
     deleteBtn.style.pointerEvents = "auto";
     deleteBtn.style.backgroundColor = "#ec2d42";
 }
 
 //TODO: preguntar como hacer la consola, su tipo de tag y que contenga un scroll!
+/**
+ * FUncion encargada de añadir logs a la consola
+ * @param text - Información de lo sucedido
+ */
 function addTextToConsole(text) {
     let console = document.getElementById('console');
-    console.innerHTML = console.innerHTML + text + "</br>";
+    console.innerHTML = console.innerHTML + "[" + getTime() + "]: " + text + "</br>";
 }
 
+/**
+ * Se encarga de crear el Map segun las filas y columnas definidas
+ */
 function createMap() {
     let map = document.getElementById('map');
 
-
-    for (let i = 0; i < ROWS; i ++){
-        for(let j = 0; j < COLUMNS; j++){
+    for (let i = 0; i < ROWS; i++) {
+        for (let j = 0; j < COLUMNS; j++) {
             let node = document.createElement("DIV");
             node.setAttribute("class", "cell");
             map.appendChild(node);
 
         }
     }
+}
+
+/**
+ * Función encargada de obtener la hora actual.
+ * @returns {string} - Devuelve un string en formato HH:MM:SS
+ */
+
+function getTime() {
+    let pad = function (input) {
+        return input < 10 ? "0" + input : input;
+    };
+    let date = new Date();
+    return [
+        pad(date.getHours()),
+        pad(date.getMinutes()),
+        pad(date.getSeconds())
+    ].join(':');
 }
