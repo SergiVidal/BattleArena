@@ -27,12 +27,11 @@ function initUI() {
     addTextToConsole("Bienvenido a Battle Arena! (Desarrollado por <b>Sergi Vidal</b>)");
 
     createMap();
+    addButtonsEvent();
     blockRevivePlayerButton();
     blockDeletePlayerButton();
     blockRankingButton();
-    initCreatePlayerForm();
     blockControlButtons();
-    initPlayersControls();
 }
 
 /**
@@ -52,7 +51,7 @@ function closeCreatePlayerForm() {
 /**
  * Inicializa el formulario para crear el nuevo jugador
  */
-function initCreatePlayerForm() {
+function addButtonsEvent() {
     closeCreatePlayerForm();
     document.getElementById('btn-close-create-player').addEventListener("click", closeCreatePlayerForm);
     document.getElementById('form-create-player').addEventListener("click", onClickCreateNewPlayer);
@@ -60,6 +59,9 @@ function initCreatePlayerForm() {
     document.getElementById('new-player').addEventListener("click", openCreatePlayerFrom);
     document.getElementById('revive-player').addEventListener("click", onClickRevivePlayer);
     document.getElementById('delete-player').addEventListener("click", onClickDeletePlayer);
+
+    initPlayersControls();
+
 }
 
 /**
