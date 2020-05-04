@@ -241,124 +241,63 @@ class PlayerAPI{
 
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/ranking");
     }
-}
 
+    /**
+     * Funcion encargada de llamar a la API para obtener información detallada de los jugadores y enemigos localizados en celdas colindantes
+     * @param token - Identificqador único del Jugador Actual
+     * @param callback - Función callback donde tratar la información de la API
+     */
+    getNearPlayers(token, callback) {
+        function reqListener() {
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(this.responseText);
+            }
+            callback(response, this.status, JSON.parse(this.responseText));
+        }
 
-// /**
-//  * Funcion encargada de llamar a la API para crear un Nuevo Jugador
-//  * @param playerName - Nombre del usuario
-//  * @param callback - Función callback donde tratar la información de la API
-//  */
-// function createNewPlayer(playerName, callback) {
-//     function reqListener() {
-//         callback(this.responseText);
-//     }
-//
-//     var ajaxASYNC_GET = {
-//         request: function (url) {
-//             var xhr = new XMLHttpRequest();
-//             xhr.addEventListener("load", reqListener);
-//             xhr.open("GET", url, true);
-//             xhr.send();
-//         }
-//     };
-//
-//     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/spawn/" + playerName);
-// }
+        var ajaxASYNC_GET = {
+            request: function (url) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", reqListener);
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+        };
 
-// /**
-//  * Funcion encargada de llamar a la API para eliminar el Jugador Actual
-//  * @param token - Identificqador único del Jugador Actual
-//  * @param callback - Función callback donde tratar la información de la API
-//  */
-// function deleteCurrentPlayer(token, callback) {
-//     function reqListener() {
-//         callback();
-//     }
-//
-//     var ajaxASYNC_GET = {
-//         request: function (url) {
-//             var xhr = new XMLHttpRequest();
-//             xhr.addEventListener("load", reqListener);
-//             xhr.open("GET", url, true);
-//             xhr.send();
-//         }
-//     };
-//
-//     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/remove/" + token);
-// }
-
-// /**
-//  * Funcion encargada de llamar a la API para actualizar el Jugador Actual
-//  * @param token - Identificqador único del Jugador Actual
-//  * @param callback - Función callback donde tratar la información de la API
-//  */
-// function respawnCurrentPlayer(token, callback) {
-//     function reqListener() {
-//         callback();
-//     }
-//
-//     var ajaxASYNC_GET = {
-//         request: function (url) {
-//             var xhr = new XMLHttpRequest();
-//             xhr.addEventListener("load", reqListener);
-//             xhr.open("GET", url, true);
-//             xhr.send();
-//         }
-//     };
-//
-//     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/respawn/" + token);
-// }
-
-// /**
-//  * Funcion encargada de llamar a la API para obtener la información del Jugador Actual
-//  * @param token - Identificqador único del Jugador Actual
-//  * @param callback - Función callback donde tratar la información de la API
-//  */
-// function getCurrentPlayerInfo(token, callback) {
-//     function reqListener() {
-//         callback(JSON.parse(this.responseText));
-//     }
-//
-//     var ajaxASYNC_GET = {
-//         request: function (url) {
-//             var xhr = new XMLHttpRequest();
-//             xhr.addEventListener("load", reqListener);
-//             xhr.open("GET", url, true);
-//             xhr.send();
-//             // if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-//             //     callback(JSON.parse(this.responseText));
-//
-//                 // return xhr.responseText;
-//             // }else {
-//             //     alert("Ha ocurrido un error, posiblemente el usuario ya exista");
-//             // }
-//         }
-//     };
-//
-//     ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + token);
-// }
-
-/**
- * Funcion encargada de llamar a la API para obtener información detallada de los jugadores y enemigos localizados en celdas colindantes
- * @param token - Identificqador único del Jugador Actual
- * @param callback - Función callback donde tratar la información de la API
- */
-function getNearPlayers(token, callback) {
-    function reqListener() {
-        callback(JSON.parse(this.responseText));
+        ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/players/" + token);
     }
 
-    var ajaxASYNC_GET = {
-        request: function (url) {
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("load", reqListener);
-            xhr.open("GET", url, true);
-            xhr.send();
+    /**
+     * Funcion encargada de llamar a la API para obtener la información del mapa (localización de los enemigos)
+     * @param callback - Función callback donde tratar la información de la API
+     */
+    getMap(callback) {
+        function reqListener() {
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "Se ha obtenido correctamente la información del mapa!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(this.responseText);
+            }
+            callback(response, this.status, JSON.parse(this.responseText));
         }
-    };
 
-    ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/players/" + token);
+        var ajaxASYNC_GET = {
+            request: function (url) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", reqListener);
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+        };
+
+        ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/map");
+    }
 }
-
-//TODO: Preguntar como comprobar si las llamadas han sido 200 o !200
