@@ -29,6 +29,7 @@ function initUI() {
     blockRevivePlayerButton();
     blockDeletePlayerButton();
     initCreatePlayerForm();
+    initPlayersControls();
 }
 
 /**
@@ -102,8 +103,8 @@ function onClickDeletePlayer() {
     playerAPI.deleteCurrentPlayer(playerAPI.getToken, function () {
         addTextToConsole("El jugador ha sido eliminado correctamente!");
 
-       player = null;
-       updateViewWithPlayerInfo();
+        player = null;
+        updateViewWithPlayerInfo();
         enableCreatePlayerButton();
         blockRevivePlayerButton();
         blockDeletePlayerButton();
@@ -116,12 +117,12 @@ function onClickDeletePlayer() {
 function updateViewWithPlayerInfo() {
     let playerStats = document.getElementById('stats');
     playerStats.innerHTML = "";
-    if(player !== null) {
+    if (player !== null) {
         createH3Element("Name: " + player.name, playerStats);
         createH3Element("Attack: " + player.attack, playerStats);
         createH3Element("Defense: " + player.defense, playerStats);
         createH3Element("Vitality Points: " + player.vp, playerStats);
-    }else{
+    } else {
         createH3Element("Name: -", playerStats);
         createH3Element("Attack: -", playerStats);
         createH3Element("Defense: -", playerStats);
@@ -224,7 +225,6 @@ function createMap() {
  * Función encargada de obtener la hora actual.
  * @returns {string} - Devuelve un string en formato HH:MM:SS
  */
-
 function getTime() {
     let pad = function (input) {
         return input < 10 ? "0" + input : input;
@@ -235,4 +235,68 @@ function getTime() {
         pad(date.getMinutes()),
         pad(date.getSeconds())
     ].join(':');
+}
+
+/**
+ * Función encargada de inicializar los controles del Jugador.
+ */
+function initPlayersControls() {
+    initAttackControls();
+    initMoveControls();
+}
+
+/**
+ * Función encargada de asignar un onClick a los controles de ataque.
+ */
+function initAttackControls() {
+    document.getElementById('attack-north').addEventListener("click", function () {
+        onClickAttack("N")
+    });
+    document.getElementById('attack-west').addEventListener("click", function () {
+        onClickAttack("O")
+    });
+    document.getElementById('attack-east').addEventListener("click", function () {
+        onClickAttack("E")
+    });
+    document.getElementById('attack-south').addEventListener("click", function () {
+        onClickAttack("S")
+    });
+}
+
+/**
+ * Función encargada de asignar un onClick a los controles de movimiento.
+ */
+function initMoveControls() {
+    document.getElementById('move-north').addEventListener("click", function () {
+        onClickMove("N")
+    });
+    document.getElementById('move-west').addEventListener("click", function (){
+        onClickMove("O")
+    });
+    document.getElementById('move-east').addEventListener("click", function (){
+        onClickMove("E")
+    });
+    document.getElementById('move-south').addEventListener("click", function (){
+        onClickMove("S")
+    });
+}
+
+/**
+ * Función encargada de llamar a la función de la clase PlayerAPI encargada de realizar el ataque de un Jugador.
+ * @param d - Dirección donde va dirigido el ataque
+ */
+function onClickAttack(d) {
+    playerAPI.attackPlayer(playerAPI.getToken, d, function () {
+
+    })
+}
+
+/**
+ * Función encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
+ * @param d - Dirección donde moverse
+ */
+function onClickMove(d) {
+    playerAPI.movePlayer(playerAPI.getToken, d, function () {
+
+    })
 }

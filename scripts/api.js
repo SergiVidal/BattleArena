@@ -115,6 +115,51 @@ class PlayerAPI{
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + token);
     }
 
+    /**
+     * Función encargada de mover el Jugador hacia una dirección
+     * @param token - Identificqador único del Jugador Actual
+     * @param d - Letra coincidente con la dirección objetivo (N,S,E,O)
+     * @param callback - Función callback donde tratar la información de la API
+     */
+    movePlayer(token, d, callback){
+        function reqListener() {
+            callback();
+        }
+
+        var ajaxASYNC_GET = {
+            request: function (url) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", reqListener);
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+        };
+
+        ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/move/" + token + "/" + d);
+    }
+
+    /**
+     * Función encargada de atacar a un Jugador/Enemigo hacia una dirección
+     * @param token - Identificqador único del Jugador Actual
+     * @param d - Letra coincidente con la dirección objetivo (N,S,E,O)
+     * @param callback - Función callback donde tratar la información de la API
+     */
+    attackPlayer(token, d, callback){
+        function reqListener() {
+            callback();
+        }
+
+        var ajaxASYNC_GET = {
+            request: function (url) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("load", reqListener);
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
+        };
+
+        ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/attack/" + token + "/" + d);
+    }
 }
 
 
