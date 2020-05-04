@@ -1,4 +1,6 @@
 let player;
+let playerAPI;
+let map;
 
 /** OnLoad, esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
@@ -7,9 +9,17 @@ window.onload = function () {
 
 /** Initialize game**/
 function initGame() {
-    initUI();
     initObjects();
+    initUI();
 }
+
+/** Initialize objects and variables **/
+function initObjects() {
+    playerAPI = new PlayerAPI();
+    map = new Map();
+    map.init();
+}
+
 
 /** Initialize objects and variables **/
 function initUI() {
@@ -19,10 +29,6 @@ function initUI() {
     blockRevivePlayerButton();
     blockDeletePlayerButton();
     initCreatePlayerForm();
-}
-
-/** Initialize objects and variables **/
-function initObjects() {
 }
 
 /**
@@ -58,9 +64,10 @@ function initCreatePlayerForm() {
 function onClickCreateNewPlayer() {
     let playerName = document.getElementById('input-player-name').value;
     closeCreatePlayerForm();
-    createNewPlayer(playerName, function (token) {
+    playerAPI.createNewPlayer(playerName, function (token) {
         console.log(token);
-        getCurrentPlayerInfo(token, function (object) {
+        playerAPI.setToken(token);
+        playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
             player = new Player(object);
             addTextToConsole("Has creado un nuevo jugador! En la parte superior derecha verás sus estadisticas!");
             updateViewWithPlayerInfo();
@@ -77,10 +84,10 @@ function onClickCreateNewPlayer() {
  * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
-    respawnCurrentPlayer(player.token, function () {
+    playerAPI.respawnCurrentPlayer(playerAPI.getToken, function () {
         addTextToConsole("El jugador ha sido actualizado correctamente!");
 
-        getCurrentPlayerInfo(player.token, function (object) {
+        playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
             player = new Player(object);
             addTextToConsole("En la parte superior derecha verás sus estadisticas!");
             updateViewWithPlayerInfo();
@@ -92,8 +99,11 @@ function onClickRevivePlayer() {
  * Función onClick del botón Eliminar el jugador actual, se encarga de gestionar las fuciones encargadas de eliminar el jugador mediante una llamada a la API
  */
 function onClickDeletePlayer() {
-    deleteCurrentPlayer(player.token, function () {
+    playerAPI.deleteCurrentPlayer(playerAPI.getToken, function () {
         addTextToConsole("El jugador ha sido eliminado correctamente!");
+
+       player = null;
+       updateViewWithPlayerInfo();
         enableCreatePlayerButton();
         blockRevivePlayerButton();
         blockDeletePlayerButton();
@@ -106,10 +116,17 @@ function onClickDeletePlayer() {
 function updateViewWithPlayerInfo() {
     let playerStats = document.getElementById('stats');
     playerStats.innerHTML = "";
-    createH3Element("Name: " + player.name, playerStats);
-    createH3Element("Attack: " + player.attack, playerStats);
-    createH3Element("Defense: " + player.defense, playerStats);
-    createH3Element("Vitality Points: " + player.vp, playerStats);
+    if(player !== null) {
+        createH3Element("Name: " + player.name, playerStats);
+        createH3Element("Attack: " + player.attack, playerStats);
+        createH3Element("Defense: " + player.defense, playerStats);
+        createH3Element("Vitality Points: " + player.vp, playerStats);
+    }else{
+        createH3Element("Name: -", playerStats);
+        createH3Element("Attack: -", playerStats);
+        createH3Element("Defense: -", playerStats);
+        createH3Element("Vitality Points: -", playerStats);
+    }
 
 }
 
