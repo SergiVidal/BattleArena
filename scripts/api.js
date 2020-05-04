@@ -1,5 +1,5 @@
 /**
- * Representa una clase Player donde almacenar su información.
+ * Representa una clase PlayerAPI donde gestionar las llamadas a la API que hacen referencia al usuario.
  * @constructor
  */
 
