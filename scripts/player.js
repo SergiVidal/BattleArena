@@ -57,6 +57,47 @@ class Player {
         this.img = object.img;
     }
 
+    get getToken(){
+        return this.token;
+    }
+
+    get getSpawn(){
+        return this.spawn;
+    }
+
+    get getX(){
+        return this.x;
+    }
+
+    get getY(){
+        return this.y;
+    }
+
+    get getD(){
+        return this.d;
+    }
+    get getVp(){
+        return this.vp;
+    }
+
+    get getName(){
+        return this.name;
+    }
+
+    get getAttack(){
+        return this.attack;
+    }
+
+    get getDefense(){
+        return this.defense;
+    }
+
+    get getClass(){
+        return this.class;
+    }
+    get getImg(){
+        return this.img;
+    }
 }
 
 /*

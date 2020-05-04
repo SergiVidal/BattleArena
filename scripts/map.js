@@ -45,23 +45,42 @@ class Map {
     }
 
     /**
-     * Inicializa la matriz de elementos HTML con el elemento pasado por parametro
-     * @param element - Elemento HTML
+     * Inicializa la matriz de elementos HTML
      */
-    initDomMatrix(element) {
+    initDomMatrix() {
         for (let i = 0; i < ROWS; i++) {
             this.domMatrix[i] = [];
             for (let j = 0; j < COLUMNS; j++) {
-                this.domMatrix[i][j] = element;
+                this.domMatrix[i][j] = null;
             }
         }
     }
 
     /**
+     * Obtiene una casilla de la matriz de booleans
+     * @param x - Fila
+     * @param y - Columna
+     * @returns {boolean} - Valor de la casilla
+     */
+    getBoolCell(x, y){
+        return this.getBoolMatrix[x][y];
+    }
+
+    /**
+     * Obtiene una casilla de la matriz de elementos HTML
+     * @param x - Fila
+     * @param y - Columna
+     * @returns {Object}
+     */
+    getDomCell(x, y){
+        return this.getDomMatrix[x][y];
+    }
+
+    /**
      * Modifica una casilla de la matriz de booleans
-     * @param x - Filas
-     * @param y - Columnas
-     * @param boolean - Valor de la casilla (True: Ocupada / False: Desocupada)
+     * @param x - Fila
+     * @param y - Columna
+     * @param boolean - Valor de la casilla
      */
     setBoolCell(x, y, boolean){
         this.getBoolMatrix[x][y] = boolean;
@@ -69,8 +88,8 @@ class Map {
 
     /**
      * Modifica una casilla de la matriz de elementos HTML
-     * @param x - Filas
-     * @param y - Columnas
+     * @param x - Fila
+     * @param y - Columna
      * @param element - Elemento HTML de la casilla
      */
     setDomCell(x, y, element){

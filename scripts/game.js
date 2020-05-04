@@ -12,8 +12,6 @@ window.onload = function () {
 function initGame() {
     initObjects();
     initUI();
-    getMapInfo();
-
 }
 
 /** Inicicializa las clases necesarias para el desarrollo del juego **/
@@ -21,6 +19,7 @@ function initObjects() {
     playerAPI = new PlayerAPI();
     map = new Map();
     map.initBoolMatrix();
+    map.initDomMatrix();
 }
 
 
@@ -85,12 +84,13 @@ function onClickCreateNewPlayer() {
                 if (status === 200) {
                     player = new Player(object);
                     updateViewWithPlayerInfo();
-
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
                     enableDeletePlayerButton();
                     enableRankingButton();
                     enableControlButtons();
+                    getMapInfo();
+
                 }
             })
         }
@@ -266,13 +266,16 @@ function addTextToConsole(text) {
  * Se encarga de crear el Map segun las filas y columnas definidas
  */
 function createMap() {
-    let map = document.getElementById('map');
+    let mapUI = document.getElementById('map');
 
     for (let i = 0; i < ROWS; i++) {
         for (let j = 0; j < COLUMNS; j++) {
             let node = document.createElement("DIV");
             node.setAttribute("class", "cell");
-            map.appendChild(node);
+            mapUI.appendChild(node);
+
+            console.log(typeof node);
+            map.setDomCell(i, j, node);
 
         }
     }
@@ -409,19 +412,21 @@ function getMapInfo() {
                 let x = object[i][0];
                 let y = object[i][1];
                 map.setBoolCell(x, y, true);
+                let node = map.getDomCell(x, y);
+                node.style.backgroundColor = "#ec2d42";
             }
+            let playerX = player.getX;
+            let playerY = player.getY;
+            let playerD = player.getD;
+
+            let playerNode = map.getDomCell(playerX, playerY);
+            playerNode.style.backgroundColor = "blue";
+
+            //TODO: Añadir la imagen de la direccion donde mira el usuario!
+            let test = map.getDomCell(playerX, playerY);
+            test.style.backgroundImage = "url('../images/player-dir.png')";
 
             console.log(map.getBoolMatrix);
         }
     })
-}
-
-function updateMap() {
-    var cellsMap = document.querySelectorAll('.cell');
-
-    for (let i = 0; i < map.getBoolMatrix.length; i++) {
-        for (let j = 0; i < map.getBoolMatrix[i].length; i++) {
-            // if()
-        }
-    }
 }
