@@ -66,18 +66,25 @@ function initCreatePlayerForm() {
 function onClickCreateNewPlayer() {
     let playerName = document.getElementById('input-player-name').value;
     closeCreatePlayerForm();
-    playerAPI.createNewPlayer(playerName, function (token) {
-        console.log(token);
-        playerAPI.setToken(token);
-        playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
-            player = new Player(object);
-            addTextToConsole("Has creado un nuevo jugador! En la parte superior derecha verás sus estadisticas!");
-            updateViewWithPlayerInfo();
+    playerAPI.createNewPlayer(playerName, function (response, status, token) {
+        addTextToConsole(response);
 
-            blockCreatePlayerButton();
-            enableRevivePlayerButton();
-            enableDeletePlayerButton();
-        })
+        if (status === 200) {
+            console.log(token);
+            playerAPI.setToken(token);
+            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+                addTextToConsole(response);
+
+                if (status === 200) {
+                    player = new Player(object);
+                    updateViewWithPlayerInfo();
+
+                    blockCreatePlayerButton();
+                    enableRevivePlayerButton();
+                    enableDeletePlayerButton();
+                }
+            })
+        }
     });
 
 }
@@ -86,14 +93,18 @@ function onClickCreateNewPlayer() {
  * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
-    playerAPI.respawnCurrentPlayer(playerAPI.getToken, function () {
-        addTextToConsole("El jugador ha sido actualizado correctamente!");
+    playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
+        addTextToConsole(response);
+        if (status === 200) {
+            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+                addTextToConsole(response);
 
-        playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
-            player = new Player(object);
-            addTextToConsole("En la parte superior derecha verás sus estadisticas!");
-            updateViewWithPlayerInfo();
-        });
+                if (status === 200) {
+                    player = new Player(object);
+                    updateViewWithPlayerInfo();
+                }
+            });
+        }
     });
 }
 
@@ -101,14 +112,16 @@ function onClickRevivePlayer() {
  * Función onClick del botón Eliminar el jugador actual, se encarga de gestionar las fuciones encargadas de eliminar el jugador mediante una llamada a la API
  */
 function onClickDeletePlayer() {
-    playerAPI.deleteCurrentPlayer(playerAPI.getToken, function () {
-        addTextToConsole("El jugador ha sido eliminado correctamente!");
+    playerAPI.deleteCurrentPlayer(playerAPI.getToken, function (response, status) {
+        addTextToConsole(response);
 
-        player = null;
-        updateViewWithPlayerInfo();
-        enableCreatePlayerButton();
-        blockRevivePlayerButton();
-        blockDeletePlayerButton();
+        if (status === 200) {
+            player = null;
+            updateViewWithPlayerInfo();
+            enableCreatePlayerButton();
+            blockRevivePlayerButton();
+            blockDeletePlayerButton();
+        }
     });
 }
 
@@ -271,13 +284,13 @@ function initMoveControls() {
     document.getElementById('move-north').addEventListener("click", function () {
         onClickMove("N")
     });
-    document.getElementById('move-west').addEventListener("click", function (){
+    document.getElementById('move-west').addEventListener("click", function () {
         onClickMove("O")
     });
-    document.getElementById('move-east').addEventListener("click", function (){
+    document.getElementById('move-east').addEventListener("click", function () {
         onClickMove("E")
     });
-    document.getElementById('move-south').addEventListener("click", function (){
+    document.getElementById('move-south').addEventListener("click", function () {
         onClickMove("S")
     });
 }
@@ -287,8 +300,12 @@ function initMoveControls() {
  * @param d - Dirección donde va dirigido el ataque
  */
 function onClickAttack(d) {
-    playerAPI.attackPlayer(playerAPI.getToken, d, function () {
+    playerAPI.attackPlayer(playerAPI.getToken, d, function (response, status) {
+        addTextToConsole(response);
 
+        if (status === 200) {
+
+        }
     })
 }
 
@@ -297,7 +314,11 @@ function onClickAttack(d) {
  * @param d - Dirección donde moverse
  */
 function onClickMove(d) {
-    playerAPI.movePlayer(playerAPI.getToken, d, function () {
+    playerAPI.movePlayer(playerAPI.getToken, d, function (response, status) {
+        addTextToConsole(response);
 
+        if (status === 200) {
+
+        }
     })
 }

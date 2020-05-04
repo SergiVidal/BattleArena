@@ -34,7 +34,16 @@ class PlayerAPI{
      */
     createNewPlayer(playerName, callback) {
         function reqListener() {
-            callback(this.responseText);
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El jugador ha sido creado correctamente!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(response, this.status);
+
+            }
+            callback(response, this.status, this.responseText);
         }
 
         var ajaxASYNC_GET = {
@@ -56,7 +65,16 @@ class PlayerAPI{
      */
     respawnCurrentPlayer(token, callback) {
         function reqListener() {
-            callback();
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El jugador ha sido actualizado correctamente!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(response, this.status);
+
+            }
+            callback(response, this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -78,7 +96,15 @@ class PlayerAPI{
      */
     deleteCurrentPlayer(token, callback) {
         function reqListener() {
-            callback();
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El jugador ha sido eliminado correctamente!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(response, this.status);
+            }
+            callback(response, this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -100,7 +126,15 @@ class PlayerAPI{
      */
     getCurrentPlayerInfo(token, callback) {
         function reqListener() {
-            callback(JSON.parse(this.responseText));
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "Se ha obtenido la información del Jugador correctamente!";
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(response, this.status);
+            }
+            callback(response, this.status, JSON.parse(this.responseText));
         }
 
         var ajaxASYNC_GET = {
@@ -123,7 +157,15 @@ class PlayerAPI{
      */
     movePlayer(token, d, callback){
         function reqListener() {
-            callback();
+            let response;
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El Jugador se ha movido al "+ d;
+                console.log(response, this.status);
+            }else {
+                response = "Ha ocurrido un error!";
+                console.log(this.responseText);
+            }
+            callback(response, this.status);
         }
 
         var ajaxASYNC_GET = {
