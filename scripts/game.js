@@ -1,19 +1,20 @@
+//TODO: JSDoc como definir estas variables de clase
 let player;
 let playerAPI;
 let map;
 
-/** OnLoad, esta función es la primera que se llama cuando la aplicacion es iniciada **/
+/** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
     initGame();
 };
 
-/** Initialize game**/
+/** Inicializa el juego**/
 function initGame() {
     initObjects();
     initUI();
 }
 
-/** Initialize objects and variables **/
+/** Inicicializa las clases necesarias para el desarrollo del juego **/
 function initObjects() {
     playerAPI = new PlayerAPI();
     map = new Map();
@@ -21,7 +22,7 @@ function initObjects() {
 }
 
 
-/** Initialize objects and variables **/
+/** Inicializa los componentes de la UI **/
 function initUI() {
     addTextToConsole("Bienvenido a Battle Arena! (Desarrollado por <b>Sergi Vidal</b>)");
 
@@ -282,7 +283,7 @@ function initMoveControls() {
 }
 
 /**
- * Función encargada de llamar a la función de la clase PlayerAPI encargada de realizar el ataque de un Jugador.
+ * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el ataque de un Jugador.
  * @param d - Dirección donde va dirigido el ataque
  */
 function onClickAttack(d) {
@@ -292,7 +293,7 @@ function onClickAttack(d) {
 }
 
 /**
- * Función encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
+ * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
  * @param d - Dirección donde moverse
  */
 function onClickMove(d) {
