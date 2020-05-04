@@ -29,6 +29,7 @@ function initUI() {
     createMap();
     blockRevivePlayerButton();
     blockDeletePlayerButton();
+    blockRankingButton();
     initCreatePlayerForm();
     blockControlButtons();
     initPlayersControls();
@@ -83,6 +84,7 @@ function onClickCreateNewPlayer() {
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
                     enableDeletePlayerButton();
+                    enableRankingButton();
                     enableControlButtons();
                 }
             })
@@ -123,6 +125,7 @@ function onClickDeletePlayer() {
             enableCreatePlayerButton();
             blockRevivePlayerButton();
             blockDeletePlayerButton();
+            blockRankingButton();
             blockControlButtons();
         }
     });
@@ -186,6 +189,15 @@ function blockDeletePlayerButton() {
 }
 
 /**
+ * Función encargada de bloquear el botón de mostrar el ranking
+ */
+function blockRankingButton() {
+    let rankingBtn = document.getElementById('ranking');
+    rankingBtn.style.pointerEvents = "none";
+    rankingBtn.style.backgroundColor = "grey";
+}
+
+/**
  * Función encargada de desbloquear el botón de crear un nuevo jugador
  */
 function enableCreatePlayerButton() {
@@ -210,6 +222,15 @@ function enableDeletePlayerButton() {
     let deleteBtn = document.getElementById('delete-player');
     deleteBtn.style.pointerEvents = "auto";
     deleteBtn.style.backgroundColor = "#ec2d42";
+}
+
+/**
+ * Función encargada de desbloquear el botón de mostrar ranking
+ */
+function enableRankingButton() {
+    let rankingBtn = document.getElementById('ranking');
+    rankingBtn.style.pointerEvents = "auto";
+    rankingBtn.style.backgroundColor = "#ec2d42";
 }
 
 //TODO: preguntar como hacer la consola, su tipo de tag y que contenga un scroll!
