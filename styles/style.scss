@@ -4,35 +4,56 @@ $green_color: #1ed760;
 $black_color: black;
 $white_color: white;
 $grey_color: #f1f1f1;
+
+@font-face {
+  font-family: Gotham_medium;
+  src: url("../font/gotham_medium.otf");
+}
+
+@font-face {
+  font-family: Gotham_thin;
+  src: url("../font/gotham_thin.otf");
+}
+
+h3, a {
+  font-family: Gotham_medium;
+
+}
+
 html {
   height: 100%;
   background-color: $black_color;
 
-  h3, li, a {
-    font-family: "Arial Black", monospace !important;
-  }
-
   header {
     display: grid;
-    grid-template-columns: 50% 50%;
-
+    grid-template-columns: 40% 60%;
 
     #header-left {
       padding: 0 100px;
 
       img {
         width: 250px;
+        margin: 15px;
       }
     }
 
     #header-center {
-      h1 {
+      h3 {
         color: $primary_color;
       }
     }
 
     #header-right {
-      padding: 40px 50px;
+      padding: 50px 50px;
+
+      label b {
+        font-family: Gotham_medium;
+
+      }
+
+      form button {
+        margin: 0 20px;
+      }
 
       /* The popup form - hidden by default */
       .form-popup {
@@ -41,12 +62,14 @@ html {
         border: 3px solid $black_color;
         z-index: 9;
       }
+
       /* Add styles to the form container */
       .form-container {
         max-width: 300px;
         padding: 10px;
         background-color: $white_color;
       }
+
       /* Full-width input fields */
       .form-container input[type=text], .form-container input[type=password] {
         width: 90%;
@@ -70,7 +93,7 @@ html {
         border: none;
         cursor: pointer;
         width: 86%;
-        margin-bottom:10px;
+        margin-bottom: 10px;
         opacity: 0.8;
       }
 
@@ -84,12 +107,14 @@ html {
         opacity: 1;
       }
 
-      #new-player{
+      #new-player {
         margin-left: 3px !important;
       }
+
       button {
-        padding: 0 20px;
-        margin-left: 20px;
+        font-family: Gotham_medium;
+        padding: 5px 20px;
+        margin-left: 50px;
         color: $white_color;
         background-color: $primary_color;
       }
@@ -99,68 +124,83 @@ html {
   main {
 
 
+    .title {
+      background-color: $primary_color;
+      margin: 0 20px 15px;
+      padding: 1px;
+
+      color: $white_color;
+      text-align: center;
+    }
+
     #top {
       display: grid;
-      grid-template-columns: 25% 50% 25%;
-      border: 1px solid $primary_color;
+      grid-template-columns: 30% 40% 30%;
+      max-height: 500px;
 
       #west-top {
-        border: 1px solid $primary_color;
-        h1{
-          color: $primary_color;
+        max-height: 500px;
+
+        h3 {
+          color: $white_color;
           text-align: center;
         }
 
         #compass {
           img {
-            width: 100px;
-            color: $white_color;
-            margin: 20px auto;
+            width: 75px;
+            color: white;
+            margin: 5px auto;
             display: block;
           }
         }
 
         #map {
-          height: 350px;
-          background-color: $white_color;
-          margin: 20px auto;
-          width: 350px;
+          margin: 0 110px;
+          display: grid;
+          grid-template-columns: auto auto auto auto auto auto;
+          grid-template-rows: auto auto auto auto auto auto;
+        }
+
+        .cell {
+          border-radius: 5px;
+          align-self: stretch;
+          background-color: $grey_color;
+          border: 1px solid $black_color;
+          width: 45px;
+          height: 45px;
         }
 
       }
 
       #middle-top {
-        border: 1px solid $primary_color;
-        h1{
-          color: $primary_color;
-          text-align: center;
-        }
-        #visor {
+        max-height: 500px;
 
-          height: 500px;
-          background-color: $white_color;
-          margin: 20px auto;
-          width: 500px;
+
+        #visor {
+          img {
+            width: 40%;
+            margin: 40px auto;
+            display: block;
+          }
         }
 
       }
 
       #east-top {
-        border: 1px solid $primary_color;
-        h1{
-          color: $primary_color;
-          padding: 0 100px;
-          text-align: center;
-        }
-        #playerCharacteristics {
-          img{
-            width: 50px;
-            margin: 20px auto;
+        max-height: 500px;
+
+        #player-characteristics {
+          img {
+            width: 75px;
+            margin: 10px auto;
             display: block;
           }
-          h3{
+
+          h3 {
             color: $primary_color;
-            padding: 0 100px;
+            padding: 5px 100px;
+
           }
         }
 
@@ -170,37 +210,109 @@ html {
 
     #bottom {
       display: grid;
-      grid-template-columns: 67% 33%;
-      border: 1px solid $primary_color;
+      grid-template-columns: 60% 40%;
+      max-height: 500px;
 
       #middle-bottom {
-        border: 1px solid $primary_color;
+        max-height: 500px;
 
-        h1{
-          color: $primary_color;
-          padding: 0 100px;
-        }
         #console {
-          height: 350px;
-          background-color: $white_color;
-          margin: 20px auto;
-          width: 1000px;
+          height: 255px;
+          background-color: $grey_color;
+          margin: 0 20px;
         }
       }
 
       #east-bottom {
-        border: 1px solid $primary_color;
-        h1{
-          color: $primary_color;
-          padding: 0 100px;
-          text-align: center;
-        }
+        max-height: 500px;
+
         #controls {
-          height: 350px;
-          background-color: $white_color;
-          margin: 20px auto;
-          width: 350px;
+          margin: 0 80px;
+          display: grid;
+          grid-template-columns: auto;
+          grid-template-rows: auto;
         }
+
+        .box {
+          border-radius: 5px;
+          align-self: stretch;
+          height: 85px;
+          width: 85px;
+
+          .control-image {
+            width: 100%;
+            height: 100%;
+          }
+
+          .btn_control {
+            background: none;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        #attack-north {
+          grid-column: 3/4;
+          grid-row: 1/2;
+          background: none;
+          margin: 0;
+        }
+
+        #move-north {
+          grid-column: 4/5;
+          grid-row: 1/2;
+
+          img {
+            transform: rotate(-90deg);
+          }
+        }
+
+        #attack-west {
+          grid-column: 1/2;
+          grid-row: 2/3;
+        }
+
+        #move-west {
+          grid-column: 2/3;
+          grid-row: 2/3;
+
+          img {
+            transform: rotate(180deg);
+          }
+        }
+
+
+        #attack-east {
+          grid-column: 6/7;
+          grid-row: 2/3;
+
+        }
+
+        #move-east {
+          grid-column: 5/6;
+          grid-row: 2/3;
+
+          img {
+            //transform: rotate(90deg);
+          }
+        }
+
+
+        #attack-south {
+          grid-column: 3/4;
+          grid-row: 3/4;
+        }
+
+        #move-south {
+          grid-column: 4/5;
+          grid-row: 3/4;
+
+          img {
+            transform: rotate(90deg);
+          }
+        }
+
+
       }
 
 
@@ -208,19 +320,20 @@ html {
 
 
   }
-  footer {
-    border: 1px solid $primary_color;
-    text-align: center;
-    padding: 10px;
-    background-color: $black_color;
-    a {
-      margin: 0 20px;
-      color: $white_color;
-      text-decoration: none;
-    }
 
-    a:hover {
-      color: $primary_color;
-    }
-  }
+  //footer {
+  //  text-align: center;
+  //  padding: 10px;
+  //  background-color: $black_color;
+  //
+  //  a {
+  //    margin: 0 20px;
+  //    color: $white_color;
+  //    text-decoration: none;
+  //  }
+  //
+  //  a:hover {
+  //    color: $primary_color;
+  //  }
+  //}
 }

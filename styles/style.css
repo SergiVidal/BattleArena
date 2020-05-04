@@ -1,19 +1,27 @@
+@font-face {
+  font-family: Gotham_medium;
+  src: url("../font/gotham_medium.otf"); }
+@font-face {
+  font-family: Gotham_thin;
+  src: url("../font/gotham_thin.otf"); }
+h3, a {
+  font-family: Gotham_medium; }
+
 html {
   height: 100%;
   background-color: black; }
-  html h3, html li, html a {
-    font-family: "Arial Black", monospace !important; }
   html header {
     display: grid;
-    grid-template-columns: 50% 50%; }
+    grid-template-columns: 40% 60%; }
     html header #header-left {
       padding: 0 100px; }
       html header #header-left img {
-        width: 250px; }
-    html header #header-center h1 {
+        width: 250px;
+        margin: 15px; }
+    html header #header-center h3 {
       color: #ec2d42; }
     html header #header-right {
-      padding: 40px 50px;
+      padding: 50px 50px;
       /* The popup form - hidden by default */
       /* Add styles to the form container */
       /* Full-width input fields */
@@ -21,6 +29,10 @@ html {
       /* Set a style for the submit/login button */
       /* Add a red background color to the cancel button */
       /* Add some hover effects to buttons */ }
+      html header #header-right label b {
+        font-family: Gotham_medium; }
+      html header #header-right form button {
+        margin: 0 20px; }
       html header #header-right .form-popup {
         display: none;
         position: fixed;
@@ -55,87 +67,118 @@ html {
       html header #header-right #new-player {
         margin-left: 3px !important; }
       html header #header-right button {
-        padding: 0 20px;
-        margin-left: 20px;
+        font-family: Gotham_medium;
+        padding: 5px 20px;
+        margin-left: 50px;
         color: white;
         background-color: #ec2d42; }
+  html main .title {
+    background-color: #ec2d42;
+    margin: 0 20px 15px;
+    padding: 1px;
+    color: white;
+    text-align: center; }
   html main #top {
     display: grid;
-    grid-template-columns: 25% 50% 25%;
-    border: 1px solid #ec2d42; }
+    grid-template-columns: 30% 40% 30%;
+    max-height: 500px; }
     html main #top #west-top {
-      border: 1px solid #ec2d42; }
-      html main #top #west-top h1 {
-        color: #ec2d42;
+      max-height: 500px; }
+      html main #top #west-top h3 {
+        color: white;
         text-align: center; }
       html main #top #west-top #compass img {
-        width: 100px;
+        width: 75px;
         color: white;
-        margin: 20px auto;
+        margin: 5px auto;
         display: block; }
       html main #top #west-top #map {
-        height: 350px;
-        background-color: white;
-        margin: 20px auto;
-        width: 350px; }
+        margin: 0 110px;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto; }
+      html main #top #west-top .cell {
+        border-radius: 5px;
+        align-self: stretch;
+        background-color: #f1f1f1;
+        border: 1px solid black;
+        width: 45px;
+        height: 45px; }
     html main #top #middle-top {
-      border: 1px solid #ec2d42; }
-      html main #top #middle-top h1 {
-        color: #ec2d42;
-        text-align: center; }
-      html main #top #middle-top #visor {
-        height: 500px;
-        background-color: white;
-        margin: 20px auto;
-        width: 500px; }
-    html main #top #east-top {
-      border: 1px solid #ec2d42; }
-      html main #top #east-top h1 {
-        color: #ec2d42;
-        padding: 0 100px;
-        text-align: center; }
-      html main #top #east-top #playerCharacteristics img {
-        width: 50px;
-        margin: 20px auto;
+      max-height: 500px; }
+      html main #top #middle-top #visor img {
+        width: 40%;
+        margin: 40px auto;
         display: block; }
-      html main #top #east-top #playerCharacteristics h3 {
+    html main #top #east-top {
+      max-height: 500px; }
+      html main #top #east-top #player-characteristics img {
+        width: 75px;
+        margin: 10px auto;
+        display: block; }
+      html main #top #east-top #player-characteristics h3 {
         color: #ec2d42;
-        padding: 0 100px; }
+        padding: 5px 100px; }
   html main #bottom {
     display: grid;
-    grid-template-columns: 67% 33%;
-    border: 1px solid #ec2d42; }
+    grid-template-columns: 60% 40%;
+    max-height: 500px; }
     html main #bottom #middle-bottom {
-      border: 1px solid #ec2d42; }
-      html main #bottom #middle-bottom h1 {
-        color: #ec2d42;
-        padding: 0 100px; }
+      max-height: 500px; }
       html main #bottom #middle-bottom #console {
-        height: 350px;
-        background-color: white;
-        margin: 20px auto;
-        width: 1000px; }
+        height: 255px;
+        background-color: #f1f1f1;
+        margin: 0 20px; }
     html main #bottom #east-bottom {
-      border: 1px solid #ec2d42; }
-      html main #bottom #east-bottom h1 {
-        color: #ec2d42;
-        padding: 0 100px;
-        text-align: center; }
+      max-height: 500px; }
       html main #bottom #east-bottom #controls {
-        height: 350px;
-        background-color: white;
-        margin: 20px auto;
-        width: 350px; }
-  html footer {
-    border: 1px solid #ec2d42;
-    text-align: center;
-    padding: 10px;
-    background-color: black; }
-    html footer a {
-      margin: 0 20px;
-      color: white;
-      text-decoration: none; }
-    html footer a:hover {
-      color: #ec2d42; }
+        margin: 0 80px;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto; }
+      html main #bottom #east-bottom .box {
+        border-radius: 5px;
+        align-self: stretch;
+        height: 85px;
+        width: 85px; }
+        html main #bottom #east-bottom .box .control-image {
+          width: 100%;
+          height: 100%; }
+        html main #bottom #east-bottom .box .btn_control {
+          background: none;
+          width: 100%;
+          height: 100%; }
+      html main #bottom #east-bottom #attack-north {
+        grid-column: 3/4;
+        grid-row: 1/2;
+        background: none;
+        margin: 0; }
+      html main #bottom #east-bottom #move-north {
+        grid-column: 4/5;
+        grid-row: 1/2; }
+        html main #bottom #east-bottom #move-north img {
+          transform: rotate(-90deg); }
+      html main #bottom #east-bottom #attack-west {
+        grid-column: 1/2;
+        grid-row: 2/3; }
+      html main #bottom #east-bottom #move-west {
+        grid-column: 2/3;
+        grid-row: 2/3; }
+        html main #bottom #east-bottom #move-west img {
+          transform: rotate(180deg); }
+      html main #bottom #east-bottom #attack-east {
+        grid-column: 6/7;
+        grid-row: 2/3; }
+      html main #bottom #east-bottom #move-east {
+        grid-column: 5/6;
+        grid-row: 2/3; }
+      html main #bottom #east-bottom #attack-south {
+        grid-column: 3/4;
+        grid-row: 3/4; }
+      html main #bottom #east-bottom #move-south {
+        grid-column: 4/5;
+        grid-row: 3/4; }
+        html main #bottom #east-bottom #move-south img {
+          transform: rotate(90deg); }
 
 /*# sourceMappingURL=style.css.map */

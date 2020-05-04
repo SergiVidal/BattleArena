@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Battle Arena">
+    <meta name="keywords" content="HTML, CSS, JS">
+    <meta name="author" content="Sergi Vidal">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Práctica 2 - Sergi Vidal</title>
     <link rel="stylesheet" type="text/css" href="styles/normalize.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -15,13 +19,13 @@
 <body>
 <header>
     <div id="header-left">
-        <img src="images/logo.png">
+        <img src="images/logo.png" alt="logo">
     </div>
     <div id="header-right">
-        <button id="new-player">Nuevo Jugador</button>
-        <div class="form-popup" >
+        <button id="new-player">New Player</button>
+        <div class="form-popup">
             <form class="form-container">
-                <h1>Create Player</h1>
+                <h3>Create Player</h3>
 
                 <label><b>Name</b></label>
                 <input id="input-player-name" type="text" placeholder="Enter Name" name="name" required>
@@ -30,41 +34,53 @@
                 <button id="btn-close-create-player" type="button" class="btn cancel">Close</button>
             </form>
         </div>
-        <button id="revive-player">Revivir Jugador</button>
-        <button id="delete-player">Eliminar Jugador</button>
-        <button id="ranking">Ver Ranking</button>
+        <button id="revive-player">Revive Player</button>
+        <button id="delete-player">Delete Player</button>
+        <button id="ranking">Show Ranking</button>
     </div>
 </header>
 <main>
     <section>
         <div id="top">
             <div id="west-top">
-                <h1>Map</h1>
-
-                <div id="map"></div>
+                <div class="title">
+                    <h3>Map</h3>
+                </div>
+                <div id="map">
+                </div>
                 <div id="compass">
-                    <img src="images/compass_red.png">
+                    <img src="images/compass_red.png" alt="compass">
                 </div>
             </div>
             <div id="middle-top">
-                <h1>Visor</h1>
-                <div id="visor"></div>
+                <div class="title">
+                    <h3>Visor</h3>
+                </div>
+                <div id="visor">
+                    <img src="images/attack.png" alt="visor">
+                </div>
             </div>
             <div id="east-top">
-                <h1>Player Stats</h1>
-                <div id="playerCharacteristics">
-                    <img src="images/skull.png">
-                    <h3>Name: - </h3>
-                    <h3>Attack: - </h3>
-                    <h3>Defense: - </h3>
-                    <h3>Vitality Points: - </h3>
+                <div class="title">
+                    <h3>Player Stats</h3>
+                </div>
+                <div id="player-characteristics">
+                    <img src="images/skull.png" alt="skull">
+                    <div id="stats">
+                        <h3>Name: - </h3>
+                        <h3>Attack: - </h3>
+                        <h3>Defense: - </h3>
+                        <h3>Vitality Points: - </h3>
+                    </div>
                 </div>
 
             </div>
         </div>
         <div id="bottom">
             <div id="middle-bottom">
-                <h1>Console</h1>
+                <div class="title">
+                    <h3>Console</h3>
+                </div>
                 <div id="console">
 
                 </div>
@@ -72,16 +88,49 @@
 
 
             <div id="east-bottom">
-                <h1>Controls</h1>
-                <div id="controls"></div>
+                <div class="title">
+                    <h3>Game Controls</h3>
+                </div>
+                <div id="controls">
+                    <div id="attack-north" class="box">
+                        <button class="btn_control"><img src="images/sword.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+                    <div id="move-north" class="box">
+                        <button class="btn_control"><img src="images/red_arrow.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+
+                    <div id="attack-west" class="box">
+                        <button class="btn_control"><img src="images/sword.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+                    <div id="move-west" class="box">
+                        <button class="btn_control"><img src="images/red_arrow.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+
+                    <div id="attack-east" class="box">
+                        <button class="btn_control"><img src="images/sword.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+                    <div id="move-east" class="box">
+                        <button class="btn_control"><img src="images/red_arrow.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+
+                    <div id="attack-south" class="box">
+                        <button class="btn_control"><img src="images/sword.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+                    <div id="move-south" class="box">
+                        <button class="btn_control"><img src="images/red_arrow.png" class="control-image" alt="control">
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </main>
-<footer>
-    <a href="#">Avíso legal</a>
-    <a href="#">Términos uso</a>
-    <a href="#">Contacto</a>
-</footer>
 </body>
 </html>
