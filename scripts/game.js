@@ -30,6 +30,7 @@ function initUI() {
     blockRevivePlayerButton();
     blockDeletePlayerButton();
     initCreatePlayerForm();
+    blockControlButtons();
     initPlayersControls();
 }
 
@@ -82,6 +83,7 @@ function onClickCreateNewPlayer() {
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
                     enableDeletePlayerButton();
+                    enableControlButtons();
                 }
             })
         }
@@ -121,6 +123,7 @@ function onClickDeletePlayer() {
             enableCreatePlayerButton();
             blockRevivePlayerButton();
             blockDeletePlayerButton();
+            blockControlButtons();
         }
     });
 }
@@ -292,6 +295,26 @@ function initMoveControls() {
     });
     document.getElementById('move-south').addEventListener("click", function () {
         onClickMove("S")
+    });
+}
+
+/**
+ * Función encargada de bloquear los controles del Jugador
+ */
+function blockControlButtons() {
+    document.querySelectorAll('.box').forEach(function(element) {
+        element.style.pointerEvents = "none";
+        element.style.background = "grey";
+    });
+}
+
+/**
+ * Función encargada de desbloquear los controles del Jugador
+ */
+function enableControlButtons() {
+    document.querySelectorAll('.box').forEach(function(element) {
+        element.style.pointerEvents = "auto";
+        element.style.background = "none";
     });
 }
 
