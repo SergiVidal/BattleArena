@@ -12,13 +12,15 @@ window.onload = function () {
 function initGame() {
     initObjects();
     initUI();
+    getMapInfo();
+
 }
 
 /** Inicicializa las clases necesarias para el desarrollo del juego **/
 function initObjects() {
     playerAPI = new PlayerAPI();
     map = new Map();
-    map.init();
+    map.initBoolMatrix();
 }
 
 
@@ -340,7 +342,7 @@ function initMoveControls() {
  * Función encargada de bloquear los controles del Jugador
  */
 function blockControlButtons() {
-    document.querySelectorAll('.box').forEach(function(element) {
+    document.querySelectorAll('.box').forEach(function (element) {
         element.style.pointerEvents = "none";
         element.style.background = "grey";
     });
@@ -350,7 +352,7 @@ function blockControlButtons() {
  * Función encargada de desbloquear los controles del Jugador
  */
 function enableControlButtons() {
-    document.querySelectorAll('.box').forEach(function(element) {
+    document.querySelectorAll('.box').forEach(function (element) {
         element.style.pointerEvents = "auto";
         element.style.background = "none";
     });
@@ -382,4 +384,44 @@ function onClickMove(d) {
 
         }
     })
+}
+
+
+function getNearPlayers() {
+    playerAPI.getNearPlayers(playerAPI.getToken, function (response, status, object) {
+        addTextToConsole(response);
+
+        if (status === 200) {
+
+        }
+    })
+}
+
+function getMapInfo() {
+    playerAPI.getMapInfo(function (response, status, object) {
+        addTextToConsole(response);
+
+        if (status === 200) {
+            // console.log(object);
+            console.log(object.length);
+
+            for (let i = 0; i < object.length; i++) {
+                let x = object[i][0];
+                let y = object[i][1];
+                map.setBoolCell(x, y, true);
+            }
+
+            console.log(map.getBoolMatrix);
+        }
+    })
+}
+
+function updateMap() {
+    var cellsMap = document.querySelectorAll('.cell');
+
+    for (let i = 0; i < map.getBoolMatrix.length; i++) {
+        for (let j = 0; i < map.getBoolMatrix[i].length; i++) {
+            // if()
+        }
+    }
 }

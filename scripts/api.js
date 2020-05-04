@@ -276,7 +276,7 @@ class PlayerAPI{
      * Funcion encargada de llamar a la API para obtener la información del mapa (localización de los enemigos)
      * @param callback - Función callback donde tratar la información de la API
      */
-    getMap(callback) {
+    getMapInfo(callback) {
         function reqListener() {
             let response;
             if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {

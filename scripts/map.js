@@ -9,33 +9,71 @@ const COLUMNS = 6;
  * */
 class Map {
     constructor() {
-        /**
-         * @type {Array.<boolean[]>} - True (Ocupada) / False (Desocupada)
-         * */
-        this.matrix = [];
+        /** @type {Array.<boolean[]>} - True (Ocupada) / False (Desocupada) */
+        this.boolMatrix = [];
+
+        /** @type {Array.<Object[]>} - Alamcenará un elemento en formato HTML */
+        this.domMatrix = [];
     }
 
-    get getMatrix() {
-        return this.matrix;
+    /**
+     * Obtiene la matriz de booleans
+     * @returns {Array<boolean[]>} - Matriz de boolean
+     */
+    get getBoolMatrix() {
+        return this.boolMatrix;
     }
 
-    init() {
+    /**
+     * Obtiene la matriz de elementos HTML
+     * @returns {Array<Object[]>} - Matriz de elementos HTMl
+     */
+    get getDomMatrix() {
+        return this.domMatrix;
+    }
+
+    /**
+     * Inicializa la matriz de booleanos a FALSE
+     */
+    initBoolMatrix() {
         for (let i = 0; i < ROWS; i++) {
-            this.matrix[i] = [];
+            this.boolMatrix[i] = [];
             for (let j = 0; j < COLUMNS; j++) {
-                this.matrix[i][j] = false;
+                this.boolMatrix[i][j] = false;
             }
         }
     }
-}
 
-// //constructor() {
-//     /**
-//      * @type type1
-//      * */
-//     //this.type1 = 1;
-//     /**
-//      * @type type2
-//      * */
-//     //this.type2 = 2;
-// // }
+    /**
+     * Inicializa la matriz de elementos HTML con el elemento pasado por parametro
+     * @param element - Elemento HTML
+     */
+    initDomMatrix(element) {
+        for (let i = 0; i < ROWS; i++) {
+            this.domMatrix[i] = [];
+            for (let j = 0; j < COLUMNS; j++) {
+                this.domMatrix[i][j] = element;
+            }
+        }
+    }
+
+    /**
+     * Modifica una casilla de la matriz de booleans
+     * @param x - Filas
+     * @param y - Columnas
+     * @param boolean - Valor de la casilla (True: Ocupada / False: Desocupada)
+     */
+    setBoolCell(x, y, boolean){
+        this.getBoolMatrix[x][y] = boolean;
+    }
+
+    /**
+     * Modifica una casilla de la matriz de elementos HTML
+     * @param x - Filas
+     * @param y - Columnas
+     * @param element - Elemento HTML de la casilla
+     */
+    setDomCell(x, y, element){
+        this.getDomMatrix[x][y] = element;
+    }
+}
