@@ -132,6 +132,7 @@ function onClickDeletePlayer() {
             blockDeletePlayerButton();
             blockRankingButton();
             blockControlButtons();
+            restartMap();
         }
     });
 }
@@ -149,6 +150,15 @@ function onClickShowRanking() {
         }
     });
 }
+
+function restartMap() {
+
+    map = new Map();
+    map.initBoolMatrix();
+    map.initDomMatrix();
+    createMap();
+}
+
 
 /**
  * Función encargada de actualizar informació del usuario en el HTMl
@@ -267,6 +277,10 @@ function addTextToConsole(text) {
  */
 function createMap() {
     let mapUI = document.getElementById('map');
+
+    while (mapUI.firstChild) {
+        mapUI.removeChild(mapUI.lastChild);
+    }
 
     for (let i = 0; i < ROWS; i++) {
         for (let j = 0; j < COLUMNS; j++) {
@@ -424,8 +438,18 @@ function getMapInfo() {
 
             //TODO: Añadir la imagen de la direccion donde mira el usuario!
             let test = map.getDomCell(playerX, playerY);
-            test.style.backgroundImage = "url('../images/player-dir.png')";
-
+            test.style.backgroundImage = "url('images/player-dir.png')";
+            test.style.backgroundSize = "20px";
+            test.style.backgroundRepeat = "no-repeat";
+            if(playerD === "E") {
+                test.style.transform = "rotate(90deg)";
+            } else if (playerD === "S"){
+                test.style.transform = "rotate(180deg)";
+            }else if(playerD === "O"){
+                test.style.transform = "rotate(-90deg)";
+            }
+            // background-size: 20px;
+            // background-repeat: no-repeat;
             console.log(map.getBoolMatrix);
         }
     })
