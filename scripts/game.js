@@ -409,6 +409,96 @@ function onClickMove(d) {
     })
 }
 
+function initCornerVisors() {
+    let floorImg = "url('images/floor.png')";
+    let wallImg = "url('images/wall.png')";
+
+    //Top Visors
+    let nwVisor = document.getElementById('nw-visor');
+    setEnemyImage(nwVisor, floorImg);
+
+    let nVisor = document.getElementById('n-visor');
+    setEnemyImage(nVisor, floorImg);
+
+    let neVisor = document.getElementById('ne-visor');
+    setEnemyImage(neVisor, floorImg);
+
+    //Center Visors
+    let mwVisor = document.getElementById('mw-visor');
+    setEnemyImage(mwVisor, floorImg);
+
+    let mVisor = document.getElementById('m-visor');
+    setEnemyImage(mVisor, floorImg);
+
+    let meVisor = document.getElementById('me-visor');
+    setEnemyImage(meVisor, floorImg);
+
+    //Bottom Visors
+    let swVisor = document.getElementById('sw-visor');
+    setEnemyImage(swVisor, floorImg);
+
+    let sVisor = document.getElementById('s-visor');
+    setEnemyImage(sVisor, floorImg);
+
+    let seVisor = document.getElementById('se-visor');
+    setEnemyImage(seVisor, floorImg);
+
+    let x = player.getX;
+    let y = player.getY;
+
+    //NORTH
+    if (x === 0) {
+        setEnemyImage(nVisor, wallImg);
+    }
+
+    //EAST
+    if (y === 0) {
+        setEnemyImage(mwVisor, wallImg);
+    }
+
+    //WEST
+    if ((y + 1) === COLUMNS) {
+        setEnemyImage(meVisor, wallImg);
+    }
+
+    //South
+    if ((x + 1) === ROWS) {
+        setEnemyImage(sVisor, wallImg);
+    }
+
+    //Esquina superior izquierda
+    if (x === 0 && y === 0) {
+        setEnemyImage(nwVisor, wallImg);
+        setEnemyImage(neVisor, wallImg);
+        setEnemyImage(swVisor, wallImg);
+
+    }
+
+    //Esquina superior derecha
+    if (x === 0 && (y + 1) === COLUMNS) {
+        setEnemyImage(neVisor, wallImg);
+        setEnemyImage(nwVisor, wallImg);
+        setEnemyImage(seVisor, wallImg);
+
+    }
+
+    //Esquina inferior izquierda
+    if ((x + 1) === ROWS && y === 0) {
+        setEnemyImage(swVisor, wallImg);
+        setEnemyImage(nwVisor, wallImg);
+        setEnemyImage(seVisor, wallImg);
+
+    }
+
+    //Esquina inferior derecha
+    if ((x + 1) === ROWS && (y + 1) === COLUMNS) {
+        setEnemyImage(seVisor, wallImg);
+        setEnemyImage(neVisor, wallImg);
+        setEnemyImage(swVisor, wallImg);
+
+    }
+}
+
 function updateVisor(enemy) {
 
     let wallImg = "url('images/wall.png')";
@@ -432,53 +522,51 @@ function updateVisor(enemy) {
     let seVisor = document.getElementById('se-visor');
 
     // for (let i = 0; i < object.length; i++) {
-        // if(player.getName() !== object[i].getName()){
-        // let enemy = new Player(object[i]);
-        if (player.getName !== enemy.getName) {
+    // if(player.getName() !== object[i].getName()){
+    // let enemy = new Player(object[i]);
+    if (player.getName !== enemy.getName) {
 
-            console.log("near:");
-            console.log(enemy);
+        console.log("near:");
+        console.log(enemy);
+        setEnemyImage(seVisor, floorImg);
 
-            //TODO: Solo entra en 1 y el resto no (sin else if)
-            if (player.getD === 'N') {
-                if((player.getX + 1) === ROWS || (player.getY + 1) === COLUMNS || player.getX === 0 || player.getY === 0){
-                    setEnemyImage(nwVisor, wallImg);
+        //TODO: Solo entra en 1 y el resto no (sin else if)
+        if (player.getD === 'N') {
 
-                }else if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY - 1)) { // -1 -1
-                    setEnemyImage(nwVisor, enemyImg);
-                } else if (enemy.getX === (player.getX - 1) && enemy.getY === player.getY) { // -1 0
-                    setEnemyImage(nVisor, enemyImg);
 
-                } else if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY + 1)) { //-1 +1
-                    setEnemyImage(neVisor, enemyImg);
+            if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY - 1)) { // -1 -1
+                setEnemyImage(nwVisor, enemyImg);
+            } else if (enemy.getX === (player.getX - 1) && enemy.getY === player.getY) { // -1 0
+                setEnemyImage(nVisor, enemyImg);
 
-                } else if (enemy.getX === player.getX && enemy.getY === (player.getY - 1)) { // 0 -1
-                    setEnemyImage(mwVisor, enemyImg);
+            } else if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY + 1)) { //-1 +1
+                setEnemyImage(neVisor, enemyImg);
 
-                } else if (enemy.getX === player.getX && enemy.getY === player.getY) { // 0 0
-                    setEnemyImage(mVisor, enemyImg);
+            } else if (enemy.getX === player.getX && enemy.getY === (player.getY - 1)) { // 0 -1
+                setEnemyImage(mwVisor, enemyImg);
 
-                } else if (enemy.getX === player.getX && enemy.getY === (player.getY + 1)) { // 0 +1
-                    setEnemyImage(meVisor, enemyImg);
+            } else if (enemy.getX === player.getX && enemy.getY === player.getY) { // 0 0
+                setEnemyImage(mVisor, enemyImg);
 
-                } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY - 1)) { // +1 -1
-                    setEnemyImage(swVisor, enemyImg);
+            } else if (enemy.getX === player.getX && enemy.getY === (player.getY + 1)) { // 0 +1
+                setEnemyImage(meVisor, enemyImg);
 
-                } else if (enemy.getX === (player.getX + 1) && enemy.getY === player.getY) { // +1 0
-                    setEnemyImage(sVisor, enemyImg);
+            } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY - 1)) { // +1 -1
+                setEnemyImage(swVisor, enemyImg);
 
-                } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY + 1)) { // + 1 +1
-                    setEnemyImage(seVisor, enemyImg);
-                } else{
-                    setEnemyImage(seVisor, floorImg);
-                }
-            } else if (player.getD === 'W') {
+            } else if (enemy.getX === (player.getX + 1) && enemy.getY === player.getY) { // +1 0
+                setEnemyImage(sVisor, enemyImg);
 
-            } else if (player.getD === 'E') {
-
-            } else {
-
+            } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY + 1)) { // + 1 +1
+                setEnemyImage(seVisor, enemyImg);
             }
+        } else if (player.getD === 'W') {
+
+        } else if (player.getD === 'E') {
+
+        } else {
+
+        }
 
 
         // }
@@ -504,9 +592,10 @@ function getNearPlayers() {
             console.log("myPos: ");
             console.log(player.getX + " - " + player.getY);
 
+            initCornerVisors();
             for (let i = 0; i < object.length; i++) {
                 let enemy = new Player(object[i]);
-                updateVisor(enemy);
+                // updateVisor(enemy);
             }
             // document.getElementById('nw-visor').style.backgroundImage = "url('images/enemy.png')";
         }
