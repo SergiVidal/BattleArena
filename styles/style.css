@@ -46,7 +46,8 @@ html {
         max-width: 400px;
         padding: 10px;
         background-color: white;
-        right: 165px; }
+        right: 62px;
+        width: 15%; }
         html header #header-right .ranking-popup #ranking-content {
           overflow-y: scroll;
           max-height: 150px;
