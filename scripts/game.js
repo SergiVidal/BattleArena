@@ -407,7 +407,9 @@ function onClickMove(d) {
     })
 }
 
-
+/**
+ * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener los enemigos cercados
+ */
 function getNearPlayers() {
     playerAPI.getNearPlayers(playerAPI.getToken, function (response, status, object) {
         addTextToConsole(response);
@@ -418,6 +420,9 @@ function getNearPlayers() {
     })
 }
 
+/**
+ * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener la información del mapa y de actualizarlo
+ */
 function getMapInfo() {
     playerAPI.getMapInfo(function (response, status, object) {
         addTextToConsole(response);
