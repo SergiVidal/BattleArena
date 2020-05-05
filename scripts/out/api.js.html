@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: api.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: api.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Representa una clase PlayerAPI donde gestionar las llamadas a la API que hacen referencia al usuario.
  * @constructor
  */
@@ -35,7 +63,7 @@ class PlayerAPI {
     createNewPlayer(playerName, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "El jugador ha sido creado correctamente!";
                 console.log(response, this.status);
             } else {
@@ -66,7 +94,7 @@ class PlayerAPI {
     respawnCurrentPlayer(token, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "El jugador ha sido actualizado correctamente!";
                 console.log(response, this.status);
             } else {
@@ -97,7 +125,7 @@ class PlayerAPI {
     deleteCurrentPlayer(token, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "El jugador ha sido eliminado correctamente!";
                 console.log(response, this.status);
             } else {
@@ -127,7 +155,7 @@ class PlayerAPI {
     getCurrentPlayerInfo(token, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "Se ha obtenido la información del Jugador correctamente!";
                 console.log(response, this.status);
             } else {
@@ -158,7 +186,7 @@ class PlayerAPI {
     movePlayer(token, d, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "El Jugador se ha movido a la dirección: " + d;
                 console.log(response, this.status);
             } else {
@@ -189,7 +217,7 @@ class PlayerAPI {
     attackPlayer(token, d, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "El Jugador ha atacado a la dirección: " + d;
                 console.log(response, this.status);
             } else {
@@ -220,7 +248,7 @@ class PlayerAPI {
     showRanking(callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "Se ha mostrado correctamente el Ranking";
                 console.log(response, this.status);
             } else {
@@ -252,7 +280,7 @@ class PlayerAPI {
     getNearPlayers(token, callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
                 console.log(response, this.status);
             } else {
@@ -281,7 +309,7 @@ class PlayerAPI {
     getMapInfo(callback) {
         function reqListener() {
             let response;
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE &amp;&amp; this.status === 200) {
                 response = "Se ha obtenido correctamente la información del mapa!";
                 console.log(response, this.status);
             } else {
@@ -330,4 +358,26 @@ class PlayerAPI {
         })
     }
 
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Map.html">Map</a></li><li><a href="global.html#Player">Player</a></li><li><a href="PlayerAPI.html">PlayerAPI</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addButtonsEvent">addButtonsEvent</a></li><li><a href="global.html#addTextToConsole">addTextToConsole</a></li><li><a href="global.html#blockControlButtons">blockControlButtons</a></li><li><a href="global.html#blockCreatePlayerButton">blockCreatePlayerButton</a></li><li><a href="global.html#blockDeletePlayerButton">blockDeletePlayerButton</a></li><li><a href="global.html#blockRankingButton">blockRankingButton</a></li><li><a href="global.html#blockRevivePlayerButton">blockRevivePlayerButton</a></li><li><a href="global.html#closeCreatePlayerForm">closeCreatePlayerForm</a></li><li><a href="global.html#closeRanking">closeRanking</a></li><li><a href="global.html#COLUMNS">COLUMNS</a></li><li><a href="global.html#createElement">createElement</a></li><li><a href="global.html#createMap">createMap</a></li><li><a href="global.html#enableControlButtons">enableControlButtons</a></li><li><a href="global.html#enableCreatePlayerButton">enableCreatePlayerButton</a></li><li><a href="global.html#enableDeletePlayerButton">enableDeletePlayerButton</a></li><li><a href="global.html#enableRankingButton">enableRankingButton</a></li><li><a href="global.html#enableRevivePlayerButton">enableRevivePlayerButton</a></li><li><a href="global.html#getMapInfo">getMapInfo</a></li><li><a href="global.html#getNearPlayers">getNearPlayers</a></li><li><a href="global.html#getPlayerInfo">getPlayerInfo</a></li><li><a href="global.html#getTime">getTime</a></li><li><a href="global.html#initAttackControls">initAttackControls</a></li><li><a href="global.html#initCornerVisors">initCornerVisors</a></li><li><a href="global.html#initGame">initGame</a></li><li><a href="global.html#initMap">initMap</a></li><li><a href="global.html#initMoveControls">initMoveControls</a></li><li><a href="global.html#initPlayersControls">initPlayersControls</a></li><li><a href="global.html#initUI">initUI</a></li><li><a href="global.html#onClickAttack">onClickAttack</a></li><li><a href="global.html#onClickCreateNewPlayer">onClickCreateNewPlayer</a></li><li><a href="global.html#onClickDeletePlayer">onClickDeletePlayer</a></li><li><a href="global.html#onClickMove">onClickMove</a></li><li><a href="global.html#onClickRevivePlayer">onClickRevivePlayer</a></li><li><a href="global.html#onClickShowRanking">onClickShowRanking</a></li><li><a href="global.html#openCreatePlayerFrom">openCreatePlayerFrom</a></li><li><a href="global.html#openRanking">openRanking</a></li><li><a href="global.html#refreshGame">refreshGame</a></li><li><a href="global.html#restartVisor">restartVisor</a></li><li><a href="global.html#ROWS">ROWS</a></li><li><a href="global.html#setVisorImage">setVisorImage</a></li><li><a href="global.html#updateViewWithPlayerInfo">updateViewWithPlayerInfo</a></li><li><a href="global.html#updateVisor">updateVisor</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 06 2020 01:39:31 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

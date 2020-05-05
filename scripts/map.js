@@ -10,10 +10,10 @@ const COLUMNS = 6;
  * */
 class Map {
     constructor() {
-        /** @type {Array.<boolean[]>} - True (Ocupada) / False (Desocupada) */
+        /** @type {Array.<boolean[]>} */
         this.boolMatrix = [];
 
-        /** @type {Array.<Object[]>} - Alamcenará un elemento en formato HTML */
+        /** @type {Array.<Object[]>} */
         this.domMatrix = [];
     }
 
