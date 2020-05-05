@@ -145,7 +145,8 @@ html {
       html main #bottom #middle-bottom #console {
         height: 255px;
         background-color: #f1f1f1;
-        margin: 0 20px; }
+        margin: 0 20px;
+        overflow-y: scroll; }
     html main #bottom #east-bottom {
       max-height: 500px; }
       html main #bottom #east-bottom #controls {

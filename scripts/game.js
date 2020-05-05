@@ -338,7 +338,7 @@ function enableRankingButton() {
  */
 function addTextToConsole(text) {
     let console = document.getElementById('console');
-    console.innerHTML = console.innerHTML + "[" + getTime() + "]: " + text + "</br>";
+    console.innerHTML = "[" + getTime() + "]: " + text + "</br>" + console.innerHTML;
 }
 
 /**
@@ -721,12 +721,8 @@ function getMapInfo() {
  * Función encargada de refrescar el juego a tiempo real
  */
 function refreshGame() {
-    //
-    // while (isGameOn === true) {
-    if (isGameOn) {
-        setTimeout(playerAPI.refreshGame(), 7000);
-        console.log("refreshedGame");
-    }
+    // if (isGameOn) {
+    //     setTimeout(playerAPI.refreshGame(), 7000);
     // }
 }
 
