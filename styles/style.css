@@ -85,7 +85,8 @@ html {
         cursor: pointer;
         width: 86%;
         margin-bottom: 10px;
-        opacity: 0.8; }
+        opacity: 0.8;
+        font-family: Gotham_medium; }
       html header #header-right .form-container .cancel, html header #header-right .ranking-popup .cancel {
         background-color: #ec2d42; }
       html header #header-right .form-container .btn:hover, html header #header-right .ranking-popup .btn:hover {
