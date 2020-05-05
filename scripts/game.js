@@ -196,14 +196,14 @@ function initMap() {
     createMap();
 }
 
+/**
+ * Función encargada de reiniciar el visor
+ */
 function restartVisor() {
-    //Top Visors
     document.querySelectorAll('.view').forEach(function (element) {
         element.style.backgroundImage = "none";
     });
-
 }
-
 
 /**
  * Función encargada de actualizar informació del usuario en el HTMl
@@ -432,7 +432,7 @@ function onClickAttack(d) {
         }
     })
 }
-//TODO: Comprobar bug, la direccion a la que se mueve el jugador no concuerda!
+
 /**
  * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
  * @param d - Dirección donde moverse
@@ -503,8 +503,6 @@ function initCornerVisors() {
     let verticalAxis = player.getX;//x
     let horizontalAxis = player.getY; //y
 
-    //TODO: Paredes Ok
-
     //Pared de arriba
     if (horizontalAxis === 0) {
         setVisorImage(nVisor, wallImg);
@@ -536,7 +534,6 @@ function initCornerVisors() {
         setVisorImage(seVisor, wallImg);
 
     }
-    //TODO: Esquinas OK
 
     //Esquina superior izquierda
     if (horizontalAxis === 0 && verticalAxis === 0) {

@@ -1,5 +1,6 @@
 /** @constant {number} - Número de filas que tiene la matriz Map */
 const ROWS = 6;
+
 /** @constant {number} - Número de columnas que tiene la matriz Map */
 const COLUMNS = 6;
 
