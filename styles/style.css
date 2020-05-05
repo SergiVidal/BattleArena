@@ -156,7 +156,7 @@ html {
         display: block; }
       html main #top #east-top #player-characteristics h3 {
         color: #ec2d42;
-        padding: 5px 100px; }
+        padding: 10px 100px; }
   html main #bottom {
     display: grid;
     grid-template-columns: 60% 40%;
