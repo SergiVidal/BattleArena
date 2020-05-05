@@ -731,3 +731,9 @@ function refreshGame() {
 }
 
 //TODO: Hay que modificar las funciones que hagan 2 llamadas seguidas a la API y unir las 2 llamadas a una Promise?
+//TODO: Añadir porcentajes a la vida, añadir cantidad de enemigos muertos en las estadisticas
+//TODO: Añadir animacions y efectos (visuales y/o sonoros)
+//TODO: Añadir al minimapa informacion aumentada (colores distintos segun puntos de vida... )
+//TODO: Hay un visor que muestra todos lo elementos, información de las APIs, información transformada  (porcentages…) o múltiples visores.
+//TODO: Al Atacar > intentar calcular el daño realizado y recibido
+//TODO: Añadir nuevos movimientos (huida: 2 pasos a la vez, ir en diagonal: 2 pasos a la vez...)
