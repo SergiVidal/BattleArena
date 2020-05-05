@@ -98,6 +98,26 @@ class Player {
     get getImg(){
         return this.img;
     }
+
+    setD(d){
+        this.d = d;
+    }
+
+    moveNorth(){
+        this.x--;
+    }
+
+    moveWest(){
+        this.y--;
+    }
+
+    moveEast(){
+        this.y++;
+    }
+
+    moveSouth(){
+        this.x++;
+    }
 }
 
 /*

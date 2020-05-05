@@ -97,6 +97,10 @@ function onClickCreateNewPlayer() {
 
                 if (status === 200) {
                     player = new Player(object);
+
+                    console.log("Direction:");
+                    console.log(player.getD);
+
                     updateViewWithPlayerInfo();
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
@@ -428,7 +432,7 @@ function onClickAttack(d) {
         }
     })
 }
-
+//TODO: Comprobar bug, la direccion a la que se mueve el jugador no concuerda!
 /**
  * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
  * @param d - Dirección donde moverse
@@ -439,10 +443,29 @@ function onClickMove(d) {
 
         if (status === 200) {
 
+            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+                addTextToConsole(response);
+
+                if (status === 200) {
+                    console.log("Before");
+                    console.log(player);
+                    player = new Player(object);
+                    console.log("After");
+                    console.log(player);
+
+                    // updateViewWithPlayerInfo();
+                    // initMap();
+                    // getMapInfo();
+                    // getNearPlayers();
+                }
+            });
         }
     })
 }
 
+/**
+ * Función encargada de inicializar los visores laterales (si el jugador se encuentra en una pared o esquina)
+ */
 function initCornerVisors() {
     let floorImg = "url('images/floor.png')";
     let wallImg = "url('images/wall.png')";
@@ -545,6 +568,10 @@ function initCornerVisors() {
     }
 }
 
+/**
+ * Función encargada de actualizar el visor según los enemigos colindantes
+ * @param enemy - Enemigo colindante
+ */
 function updateVisor(enemy) {
     if (player.getName !== enemy.getName) {
 
@@ -601,6 +628,11 @@ function updateVisor(enemy) {
     }
 }
 
+/**
+ * Función encargada de modificar la imagen del visor
+ * @param node - Visor a modificar
+ * @param image - URL de la imagen
+ */
 function setVisorImage(node, image) {
     node.style.backgroundImage = image;
     node.style.backgroundSize = "135px";
@@ -645,7 +677,6 @@ function getMapInfo() {
             let playerNode = map.getDomCell(playerX, playerY);
             playerNode.style.backgroundColor = "blue";
 
-            //TODO: Añadir la imagen de la direccion donde mira el usuario!
             let test = map.getDomCell(playerX, playerY);
             test.style.backgroundImage = "url('images/player-dir.png')";
             test.style.backgroundSize = "20px";
@@ -664,3 +695,5 @@ function getMapInfo() {
 function refreshGame() {
 
 }
+
+//TODO: Hay que modificar las funciones que hagan 2 llamadas seguidas a la API y unir las 2 llamadas a una Promise?
