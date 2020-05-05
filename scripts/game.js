@@ -88,7 +88,7 @@ function onClickCreateNewPlayer() {
                     enableRankingButton();
                     enableControlButtons();
                     getMapInfo();
-
+                    getNearPlayers();
                 }
             })
         }
@@ -102,8 +102,7 @@ function onClickCreateNewPlayer() {
 function onClickRevivePlayer() {
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
-        initMap();
-        getMapInfo();
+
 
         if (status === 200) {
             playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
@@ -112,6 +111,9 @@ function onClickRevivePlayer() {
                 if (status === 200) {
                     player = new Player(object);
                     updateViewWithPlayerInfo();
+                    initMap();
+                    getMapInfo();
+                    getNearPlayers();
                 }
             });
         }
@@ -413,8 +415,28 @@ function onClickMove(d) {
 function getNearPlayers() {
     playerAPI.getNearPlayers(playerAPI.getToken, function (response, status, object) {
         addTextToConsole(response);
-
         if (status === 200) {
+            console.log("length:");
+            console.log(object.length);
+
+            console.log("myPos: ");
+            console.log(player.getX + " - " + player.getY);
+
+            for (let i = 0; i < object.length; i++) {
+                // if(player.getName() !== object[i].getName()){
+                let enemy = new Player(object[i]);
+                if (player.getName !== enemy.getName) {
+
+                    console.log("near:");
+                    console.log(enemy);
+
+                    if(enemy.getX === (player.getX - 1) && enemy.getY === player.getY && player.getD === "N") { //tienes un enemigo delante comprobar player D?
+                        document.getElementById('view').src = "images/enemy.png";
+
+                    }
+
+                }
+            }
 
         }
     })
@@ -429,7 +451,7 @@ function getMapInfo() {
 
         if (status === 200) {
             // console.log(object);
-            console.log(object.length);
+            // console.log(object.length);
 
             for (let i = 0; i < object.length; i++) {
                 let x = object[i][0];
@@ -450,16 +472,20 @@ function getMapInfo() {
             test.style.backgroundImage = "url('images/player-dir.png')";
             test.style.backgroundSize = "20px";
             test.style.backgroundRepeat = "no-repeat";
-            if(playerD === "E") {
+            if (playerD === "E") {
                 test.style.transform = "rotate(90deg)";
-            } else if (playerD === "S"){
+            } else if (playerD === "S") {
                 test.style.transform = "rotate(180deg)";
-            }else if(playerD === "O"){
+            } else if (playerD === "O") {
                 test.style.transform = "rotate(-90deg)";
             }
             // background-size: 20px;
             // background-repeat: no-repeat;
-            console.log(map.getBoolMatrix);
+            // console.log(map.getBoolMatrix);
         }
     })
+}
+
+function refreshGame() {
+
 }
