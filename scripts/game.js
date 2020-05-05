@@ -116,6 +116,7 @@ function onClickCreateNewPlayer() {
  * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
+    closeRanking();
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
 
@@ -140,6 +141,7 @@ function onClickRevivePlayer() {
  * Función onClick del botón Eliminar el jugador actual, se encarga de gestionar las fuciones encargadas de eliminar el jugador mediante una llamada a la API
  */
 function onClickDeletePlayer() {
+    closeRanking();
     playerAPI.deleteCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
 
@@ -152,6 +154,7 @@ function onClickDeletePlayer() {
             blockRankingButton();
             blockControlButtons();
             initMap();
+            restartVisor();
         }
     });
 }
@@ -164,10 +167,15 @@ function onClickShowRanking() {
         addTextToConsole(response);
 
         if (status === 200) {
-
+            let ranking = document.getElementById("ranking-content");
+            while (ranking.firstChild) {
+                ranking.removeChild(ranking.lastChild);
+            }
+            createH3Element(object, ranking);
             // for(let i = 0; i < object.length; i++)
 
             openRanking();
+            console.log(typeof object);
             console.log(object);
         }
     });
@@ -182,6 +190,14 @@ function initMap() {
     map.initBoolMatrix();
     map.initDomMatrix();
     createMap();
+}
+
+function restartVisor() {
+    //Top Visors
+    document.querySelectorAll('.view').forEach(function (element) {
+        element.style.backgroundImage = "none";
+    });
+
 }
 
 

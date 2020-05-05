@@ -227,7 +227,9 @@ class PlayerAPI{
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
-            callback(response, this.status, JSON.parse(this.responseText));
+            // callback(response, this.status, JSON.parse(this.responseText));
+            callback(response, this.status, this.responseText);
+
         }
 
         var ajaxASYNC_GET = {
