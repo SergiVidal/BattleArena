@@ -2,23 +2,20 @@
 let player;
 let playerAPI;
 let map;
+let isGameOn;
 
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
     initGame();
 };
 
-/** Inicializa el juego**/
+/** Se encarga de inicializar el juego junto a sus componentes**/
 function initGame() {
-    initObjects();
-    initUI();
-}
-
-/** Inicicializa las clases necesarias para el desarrollo del juego **/
-function initObjects() {
+    // initObjects();
     playerAPI = new PlayerAPI();
     initMap();
-
+    initUI();
+    isGameOn = false;
 }
 
 
@@ -96,11 +93,13 @@ function onClickCreateNewPlayer() {
                 addTextToConsole(response);
 
                 if (status === 200) {
+                    console.log(typeof object);
+
                     player = new Player(object);
 
-                    console.log("Direction:");
-                    console.log(player.getD);
-                    console.log(player.getX +"-"+player.getY);
+                    // console.log("Direction:");
+                    // console.log(player.getD);
+                    // console.log(player.getX +"-"+player.getY);
                     updateViewWithPlayerInfo();
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
@@ -109,34 +108,58 @@ function onClickCreateNewPlayer() {
                     enableControlButtons();
                     getMapInfo();
                     getNearPlayers();
+                    isGameOn = true;
+                    refreshGame();
+
                 }
             })
+            // getPlayerInfo();
         }
     });
 
 }
 
 /**
+ * Encargada de llamar a la función que realiza una llamada a la API para obtener los datos del jugador
+ */
+function getPlayerInfo() {
+    playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+        addTextToConsole(response);
+
+        if (status === 200) {
+            player = new Player(object);
+            updateViewWithPlayerInfo();
+            initMap();
+            getMapInfo();
+            getNearPlayers();
+        }
+    });
+}
+
+
+/**
  * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
+//TODO: CAL?    isGameOn = false;
     closeRanking();
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
 
 
         if (status === 200) {
-            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
-                addTextToConsole(response);
-
-                if (status === 200) {
-                    player = new Player(object);
-                    updateViewWithPlayerInfo();
-                    initMap();
-                    getMapInfo();
-                    getNearPlayers();
-                }
-            });
+            // playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+            //     addTextToConsole(response);
+            //
+            //     if (status === 200) {
+            //         player = new Player(object);
+            //         updateViewWithPlayerInfo();
+            //         initMap();
+            //         getMapInfo();
+            //         getNearPlayers();
+            //     }
+            // });
+            getPlayerInfo();
         }
     });
 }
@@ -159,6 +182,7 @@ function onClickDeletePlayer() {
             blockControlButtons();
             initMap();
             restartVisor();
+            isGameOn = false;
         }
     });
 }
@@ -179,8 +203,8 @@ function onClickShowRanking() {
             // for(let i = 0; i < object.length; i++)
 
             openRanking();
-            console.log(typeof object);
-            console.log(object);
+            // console.log(typeof object);
+            // console.log(object);
         }
     });
 }
@@ -443,22 +467,23 @@ function onClickMove(d) {
 
         if (status === 200) {
 
-            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
-                addTextToConsole(response);
-
-                if (status === 200) {
-                    console.log("Before");
-                    console.log(player);
-                    player = new Player(object);
-                    console.log("After");
-                    console.log(player);
-
-                    updateViewWithPlayerInfo();
-                    initMap();
-                    getMapInfo();
-                    getNearPlayers();
-                }
-            });
+            // playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+            //     addTextToConsole(response);
+            //
+            //     if (status === 200) {
+            //         console.log("Before");
+            //         console.log(player);
+            //         player = new Player(object);
+            //         console.log("After");
+            //         console.log(player);
+            //
+            //         updateViewWithPlayerInfo();
+            //         initMap();
+            //         getMapInfo();
+            //         getNearPlayers();
+            //     }
+            // });
+            getPlayerInfo();
         }
     })
 }
@@ -574,7 +599,7 @@ function initCornerVisors() {
  */
 function updateVisor(enemy) {
     if (player.getName !== enemy.getName && enemy.getVp !== 0) {
-        console.log(enemy.getVp);
+        // console.log(enemy.getVp);
         // let wallImg = "url('images/wall.png')";
         // let floorImg = "url('images/floor.png')";
 
@@ -601,7 +626,7 @@ function updateVisor(enemy) {
 
         if (verticalAxis === (player.getY - 1) && horizontalAxis === (player.getX - 1)) { // NW
             setVisorImage(nwVisor, enemyImg);
-        } else if (verticalAxis === (player.getY -1) && horizontalAxis=== player.getX) { // N
+        } else if (verticalAxis === (player.getY - 1) && horizontalAxis === player.getX) { // N
             setVisorImage(nVisor, enemyImg);
 
         } else if (verticalAxis === (player.getY - 1) && horizontalAxis === (player.getX + 1)) { //NE
@@ -692,8 +717,17 @@ function getMapInfo() {
     })
 }
 
+/**
+ * Función encargada de refrescar el juego a tiempo real
+ */
 function refreshGame() {
-
+    //
+    // while (isGameOn === true) {
+    if (isGameOn) {
+        setTimeout(playerAPI.refreshGame(), 7000);
+        console.log("refreshedGame");
+    }
+    // }
 }
 
 //TODO: Hay que modificar las funciones que hagan 2 llamadas seguidas a la API y unir las 2 llamadas a una Promise?

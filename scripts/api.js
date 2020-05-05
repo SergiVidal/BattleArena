@@ -3,7 +3,7 @@
  * @constructor
  */
 
-class PlayerAPI{
+class PlayerAPI {
     constructor() {
         /**
          * @type {String} - Identificador único del Jugador Actual
@@ -15,7 +15,7 @@ class PlayerAPI{
      * Función encargada de obtener el token del Jugador Actual
      * @returns {String} - Identificador único del Jugador Actual
      */
-    get getToken(){
+    get getToken() {
         return this.token;
     }
 
@@ -23,7 +23,7 @@ class PlayerAPI{
      * Función encargada de actualizar el token del Jugador Actual
      * @param token - Identificador único del Jugador Actual
      */
-    setToken(token){
+    setToken(token) {
         this.token = token;
     }
 
@@ -35,10 +35,10 @@ class PlayerAPI{
     createNewPlayer(playerName, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "El jugador ha sido creado correctamente!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
 
@@ -66,10 +66,10 @@ class PlayerAPI{
     respawnCurrentPlayer(token, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "El jugador ha sido actualizado correctamente!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
 
@@ -97,10 +97,10 @@ class PlayerAPI{
     deleteCurrentPlayer(token, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "El jugador ha sido eliminado correctamente!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
             }
@@ -127,10 +127,10 @@ class PlayerAPI{
     getCurrentPlayerInfo(token, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido la información del Jugador correctamente!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
             }
@@ -155,13 +155,13 @@ class PlayerAPI{
      * @param d - Letra coincidente con la dirección objetivo (N,S,E,O)
      * @param callback - Función callback donde tratar la información de la API
      */
-    movePlayer(token, d, callback){
+    movePlayer(token, d, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El Jugador se ha movido a la dirección: "+ d;
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El Jugador se ha movido a la dirección: " + d;
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
@@ -186,13 +186,13 @@ class PlayerAPI{
      * @param d - Letra coincidente con la dirección objetivo (N,S,E,O)
      * @param callback - Función callback donde tratar la información de la API
      */
-    attackPlayer(token, d, callback){
+    attackPlayer(token, d, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El Jugador ha atacado a la dirección: "+ d;
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                response = "El Jugador ha atacado a la dirección: " + d;
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
@@ -217,13 +217,13 @@ class PlayerAPI{
      * Función encargada de obtener el Ranking de Jugadores
      * @param callback - Función callback donde tratar la información de la API
      */
-    showRanking(callback){
+    showRanking(callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha mostrado correctamente el Ranking";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
@@ -252,10 +252,10 @@ class PlayerAPI{
     getNearPlayers(token, callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
@@ -281,10 +281,10 @@ class PlayerAPI{
     getMapInfo(callback) {
         function reqListener() {
             let response;
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información del mapa!";
                 console.log(response, this.status);
-            }else {
+            } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
@@ -302,4 +302,32 @@ class PlayerAPI{
 
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/map");
     }
+
+    /**
+     * Función encargada de refrescar el juego a tiempo real
+     */
+    refreshGame() {
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //getPlayerInfo
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                player = new Player(data);
+                updateViewWithPlayerInfo();
+                initMap();
+            })
+            .then(function () {
+                setTimeout(getMapInfo, 2000);
+                // getMapInfo();
+            })
+            .then(function () {
+                setTimeout(getNearPlayers, 2000);
+                // getNearPlayers();
+            }).then(function () {
+            refreshGame();
+        }).catch((e) => {
+            console.log("error: " + e);
+        })
+    }
+
 }
