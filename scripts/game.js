@@ -409,6 +409,88 @@ function onClickMove(d) {
     })
 }
 
+function updateVisor(enemy) {
+
+    let wallImg = "url('images/wall.png')";
+    let floorImg = "url('images/floor.png')";
+
+    let enemyImg = "url('images/enemy.png')";
+
+    //Top Visors
+    let nwVisor = document.getElementById('nw-visor');
+    let nVisor = document.getElementById('n-visor');
+    let neVisor = document.getElementById('ne-visor');
+
+    //Center Visors
+    let mwVisor = document.getElementById('mw-visor');
+    let mVisor = document.getElementById('m-visor');
+    let meVisor = document.getElementById('me-visor');
+
+    //Bottom Visors
+    let swVisor = document.getElementById('sw-visor');
+    let sVisor = document.getElementById('s-visor');
+    let seVisor = document.getElementById('se-visor');
+
+    // for (let i = 0; i < object.length; i++) {
+        // if(player.getName() !== object[i].getName()){
+        // let enemy = new Player(object[i]);
+        if (player.getName !== enemy.getName) {
+
+            console.log("near:");
+            console.log(enemy);
+
+            //TODO: Solo entra en 1 y el resto no (sin else if)
+            if (player.getD === 'N') {
+                if((player.getX + 1) === ROWS || (player.getY + 1) === COLUMNS || player.getX === 0 || player.getY === 0){
+                    setEnemyImage(nwVisor, wallImg);
+
+                }else if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY - 1)) { // -1 -1
+                    setEnemyImage(nwVisor, enemyImg);
+                } else if (enemy.getX === (player.getX - 1) && enemy.getY === player.getY) { // -1 0
+                    setEnemyImage(nVisor, enemyImg);
+
+                } else if (enemy.getX === (player.getX - 1) && enemy.getY === (player.getY + 1)) { //-1 +1
+                    setEnemyImage(neVisor, enemyImg);
+
+                } else if (enemy.getX === player.getX && enemy.getY === (player.getY - 1)) { // 0 -1
+                    setEnemyImage(mwVisor, enemyImg);
+
+                } else if (enemy.getX === player.getX && enemy.getY === player.getY) { // 0 0
+                    setEnemyImage(mVisor, enemyImg);
+
+                } else if (enemy.getX === player.getX && enemy.getY === (player.getY + 1)) { // 0 +1
+                    setEnemyImage(meVisor, enemyImg);
+
+                } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY - 1)) { // +1 -1
+                    setEnemyImage(swVisor, enemyImg);
+
+                } else if (enemy.getX === (player.getX + 1) && enemy.getY === player.getY) { // +1 0
+                    setEnemyImage(sVisor, enemyImg);
+
+                } else if (enemy.getX === (player.getX + 1) && enemy.getY === (player.getY + 1)) { // + 1 +1
+                    setEnemyImage(seVisor, enemyImg);
+                } else{
+                    setEnemyImage(seVisor, floorImg);
+                }
+            } else if (player.getD === 'W') {
+
+            } else if (player.getD === 'E') {
+
+            } else {
+
+            }
+
+
+        // }
+    }
+}
+
+function setEnemyImage(node, image) {
+    node.style.backgroundImage = image;
+    node.style.backgroundSize = "135px";
+    node.style.backgroundRepeat = "no-repeat";
+}
+
 /**
  * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener los enemigos cercados
  */
@@ -423,21 +505,10 @@ function getNearPlayers() {
             console.log(player.getX + " - " + player.getY);
 
             for (let i = 0; i < object.length; i++) {
-                // if(player.getName() !== object[i].getName()){
                 let enemy = new Player(object[i]);
-                if (player.getName !== enemy.getName) {
-
-                    console.log("near:");
-                    console.log(enemy);
-
-                    if(enemy.getX === (player.getX - 1) && enemy.getY === player.getY && player.getD === "N") { //tienes un enemigo delante comprobar player D?
-                        document.getElementById('view').src = "images/enemy.png";
-
-                    }
-
-                }
+                updateVisor(enemy);
             }
-
+            // document.getElementById('nw-visor').style.backgroundImage = "url('images/enemy.png')";
         }
     })
 }

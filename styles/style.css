@@ -103,15 +103,21 @@ html {
         background-color: #f1f1f1;
         border: 1px solid black;
         width: 45px;
-        height: 45px;
-        background-size: 20px;
-        background-repeat: no-repeat; }
+        height: 45px; }
     html main #top #middle-top {
       max-height: 500px; }
-      html main #top #middle-top #visor img {
-        width: 40%;
-        margin: 40px auto;
-        display: block; }
+      html main #top #middle-top #visor {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto auto;
+        margin: 0 180px; }
+        html main #top #middle-top #visor .view {
+          border-radius: 5px;
+          align-self: stretch;
+          background-color: #f1f1f1;
+          border: 1px solid black;
+          width: 115px;
+          height: 115px; }
     html main #top #east-top {
       max-height: 500px; }
       html main #top #east-top #player-characteristics img {
