@@ -4,6 +4,8 @@ let playerAPI;
 let map;
 let isGameOn;
 
+//TODO: AL MATAR A UN ENEMIC NO DEIXAPAREIXEN, ELS POTS ATACAR INFINITAMENT (menys enemics crec)
+
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
     initGame();
