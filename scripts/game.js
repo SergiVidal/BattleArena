@@ -235,12 +235,15 @@ function restartVisor() {
 function updateViewWithPlayerInfo() {
     let playerStats = document.getElementById('stats');
     playerStats.innerHTML = "";
+    // url('images/floor.png')
     if (player !== null) {
+        document.getElementById('player-image').src = player.getImg;
         createH3Element("Name: " + player.name, playerStats);
         createH3Element("Attack: " + player.attack, playerStats);
         createH3Element("Defense: " + player.defense, playerStats);
         createH3Element("Vitality Points: " + player.vp, playerStats);
     } else {
+        document.getElementById('player-image').src = "images/skull.png";
         createH3Element("Name: -", playerStats);
         createH3Element("Attack: -", playerStats);
         createH3Element("Defense: -", playerStats);
