@@ -38,6 +38,15 @@ html {
         position: fixed;
         border: 3px solid black;
         z-index: 9; }
+      html header #header-right .ranking-popup {
+        display: none;
+        position: fixed;
+        border: 3px solid black;
+        z-index: 9;
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+        right: 165px; }
       html header #header-right .form-container {
         max-width: 300px;
         padding: 10px;
@@ -62,7 +71,7 @@ html {
         opacity: 0.8; }
       html header #header-right .form-container .cancel {
         background-color: #ec2d42; }
-      html header #header-right .form-container .btn:hover, html header #header-right .open-button:hover {
+      html header #header-right .form-container .btn:hover {
         opacity: 1; }
       html header #header-right #new-player {
         margin-left: 3px !important; }

@@ -48,6 +48,21 @@ function closeCreatePlayerForm() {
 }
 
 /**
+ * Se encarga de hacer aparecer el ranking
+ */
+function openRanking() {
+    document.getElementsByClassName("ranking-popup")[0].style.display = "block";
+}
+
+/**
+ * Se encarga de hacer desaparecer el ranking
+ */
+function closeRanking() {
+    document.getElementsByClassName("ranking-popup")[0].style.display = "none";
+}
+
+
+/**
  * Inicializa el formulario para crear el nuevo jugador
  */
 function addButtonsEvent() {
@@ -59,6 +74,7 @@ function addButtonsEvent() {
     document.getElementById('revive-player').addEventListener("click", onClickRevivePlayer);
     document.getElementById('delete-player').addEventListener("click", onClickDeletePlayer);
     document.getElementById('ranking').addEventListener("click", onClickShowRanking);
+    document.getElementById('btn-close-ranking').addEventListener("click", closeRanking);
 
     initPlayersControls();
 
@@ -149,6 +165,9 @@ function onClickShowRanking() {
 
         if (status === 200) {
 
+            // for(let i = 0; i < object.length; i++)
+
+            openRanking();
             console.log(object);
         }
     });
@@ -294,7 +313,6 @@ function createMap() {
             node.setAttribute("class", "cell");
             mapUI.appendChild(node);
 
-            console.log(typeof node);
             map.setDomCell(i, j, node);
 
         }
@@ -580,18 +598,11 @@ function getNearPlayers() {
     playerAPI.getNearPlayers(playerAPI.getToken, function (response, status, object) {
         addTextToConsole(response);
         if (status === 200) {
-            console.log("length:");
-            console.log(object.length);
-
-            console.log("myPos: ");
-            console.log(player.getX + " - " + player.getY);
-
             initCornerVisors();
             for (let i = 0; i < object.length; i++) {
                 let enemy = new Player(object[i]);
                 updateVisor(enemy);
             }
-            // document.getElementById('nw-visor').style.backgroundImage = "url('images/enemy.png')";
         }
     })
 }
@@ -604,9 +615,6 @@ function getMapInfo() {
         addTextToConsole(response);
 
         if (status === 200) {
-            // console.log(object);
-            // console.log(object.length);
-
             for (let i = 0; i < object.length; i++) {
                 let x = object[i][0];
                 let y = object[i][1];
@@ -633,9 +641,6 @@ function getMapInfo() {
             } else if (playerD === "O") {
                 test.style.transform = "rotate(-90deg)";
             }
-            // background-size: 20px;
-            // background-repeat: no-repeat;
-            // console.log(map.getBoolMatrix);
         }
     })
 }
