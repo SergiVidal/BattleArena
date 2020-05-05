@@ -21,7 +21,7 @@
         <img src="images/logo.png" alt="logo">
     </div>
     <div id="header-right">
-        <button id="new-player">New Player</button>
+        <button id="new-player" class="action-button">New Player</button>
         <div class="form-popup">
             <form class="form-container">
                 <h3>Create Player</h3>
@@ -33,17 +33,16 @@
                 <button id="btn-close-create-player" type="button" class="btn cancel">Close</button>
             </form>
         </div>
-        <button id="revive-player">Respawn Player</button>
-        <button id="delete-player">Delete Player</button>
-        <button id="ranking">Show Ranking</button>
+        <button id="revive-player" class="action-button">Respawn Player</button>
+        <button id="delete-player" class="action-button">Delete Player</button>
+        <button id="ranking" class="action-button">Show Ranking</button>
         <div class="ranking-popup">
             <h3>Ranking</h3>
+            <div id="ranking-content">
+                <ul id="ranking-list">
 
-            <div id="ranking-content"></div>
-            <!--                <label><b>Name</b></label>-->
-            <!--                <input id="input-player-name" type="text" placeholder="Enter Name" name="name" required>-->
-
-            <!--                <button id="form-create-player" type="button" class="btn">Create</button>-->
+                </ul>
+            </div>
             <button id="btn-close-ranking" type="button" class="btn cancel">Close</button>
         </div>
     </div>

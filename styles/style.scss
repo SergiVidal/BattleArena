@@ -68,12 +68,35 @@ html {
         position: fixed;
         border: 3px solid $black_color;
         z-index: 9;
-        max-width: 300px;
+        max-width: 400px;
         padding: 10px;
         background-color: $white_color;
         right: 165px;
+
+        #ranking-content {
+          overflow-y: scroll;
+          max-height: 150px;
+          margin-bottom: 10px;
+          ul {
+            margin: 0;
+            padding: 0;
+
+            li{
+              margin: 5px;
+            }
+          }
+        }
       }
-      //btn-close-ranking
+
+      #btn-close-ranking{
+        color: $white_color;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+      }
 
       /* Add styles to the form container */
       .form-container {
@@ -110,12 +133,12 @@ html {
       }
 
       /* Add a red background color to the cancel button */
-      .form-container .cancel {
+      .form-container .cancel, .ranking-popup .cancel {
         background-color: $primary_color;
       }
 
       /* Add some hover effects to buttons */
-      .form-container .btn:hover {
+      .form-container .btn:hover, .ranking-popup .btn:hover{
         opacity: 1;
       }
 
@@ -123,7 +146,7 @@ html {
         margin-left: 3px !important;
       }
 
-      button {
+      .action-button {
         font-family: Gotham_medium;
         padding: 5px 20px;
         margin-left: 50px;
@@ -168,10 +191,12 @@ html {
         }
 
         #map {
-          margin: 0 110px;
+          margin: 0 auto;
           display: grid;
           grid-template-columns: auto auto auto auto auto auto;
           grid-template-rows: auto auto auto auto auto auto;
+          max-width: 282px;
+          border: 1px solid $white_color;
         }
 
         .cell {
@@ -195,18 +220,21 @@ html {
           display: grid;
           grid-template-columns: auto auto auto;
           grid-template-rows: auto auto auto;
-          margin: 0 180px;
+          margin: 0 auto;
+          border: 1px solid $white_color;
+          max-width: 351px;
 
-          .view{
+          .view {
             border-radius: 5px;
             align-self: stretch;
-            background-color: #f1f1f1;
-            border: 1px solid black;
+            background-color: $grey_color;
+            border: 1px solid $black_color;
             width: 115px;
             height: 115px;
             //background-size: 135px;
             //background-repeat: no-repeat;
           }
+
           //img {
           //  width: 40%;
           //  margin: 40px auto;
@@ -246,10 +274,11 @@ html {
         max-height: 500px;
 
         #console {
-          height: 255px;
+          height: 245px;
           background-color: $grey_color;
           margin: 0 20px;
           overflow-y: scroll;
+          border: 3px solid $primary_color;
         }
       }
 
@@ -266,8 +295,9 @@ html {
         .box {
           border-radius: 5px;
           align-self: stretch;
-          height: 85px;
-          width: 85px;
+          height: 80px;
+          width: 80px;
+          border: 1px solid $white_color;
 
           .control-image {
             width: 100%;
@@ -276,7 +306,7 @@ html {
 
           .btn_control {
             background: none;
-            width: 100%;
+            border: none;
             height: 100%;
           }
         }

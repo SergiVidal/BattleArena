@@ -50,6 +50,7 @@ function closeCreatePlayerForm() {
  * Se encarga de hacer aparecer el ranking
  */
 function openRanking() {
+    blockRankingButton();
     document.getElementsByClassName("ranking-popup")[0].style.display = "block";
 }
 
@@ -57,6 +58,7 @@ function openRanking() {
  * Se encarga de hacer desaparecer el ranking
  */
 function closeRanking() {
+    enableRankingButton();
     document.getElementsByClassName("ranking-popup")[0].style.display = "none";
 }
 
@@ -98,10 +100,6 @@ function onClickCreateNewPlayer() {
                     console.log(typeof object);
 
                     player = new Player(object);
-
-                    // console.log("Direction:");
-                    // console.log(player.getD);
-                    // console.log(player.getX +"-"+player.getY);
                     updateViewWithPlayerInfo();
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
@@ -115,10 +113,8 @@ function onClickCreateNewPlayer() {
 
                 }
             })
-            // getPlayerInfo();
         }
     });
-
 }
 
 /**
@@ -150,17 +146,6 @@ function onClickRevivePlayer() {
 
 
         if (status === 200) {
-            // playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
-            //     addTextToConsole(response);
-            //
-            //     if (status === 200) {
-            //         player = new Player(object);
-            //         updateViewWithPlayerInfo();
-            //         initMap();
-            //         getMapInfo();
-            //         getNearPlayers();
-            //     }
-            // });
             getPlayerInfo();
         }
     });
@@ -197,16 +182,24 @@ function onClickShowRanking() {
         addTextToConsole(response);
 
         if (status === 200) {
-            let ranking = document.getElementById("ranking-content");
+            let ranking = document.getElementById("ranking-list");
             while (ranking.firstChild) {
                 ranking.removeChild(ranking.lastChild);
             }
-            createH3Element(object, ranking);
+
+            var linesArr = object.split('\n');
+            for (let i = 0; i < linesArr.length - 1; i++){
+                var playerArr = linesArr[i].split(',');
+                createElement(playerArr[0] + " => " + playerArr[1], ranking, "LI");
+
+
+            }
+            // console.log(linesArr);
+
+            // createH3Element(object, ranking);
             // for(let i = 0; i < object.length; i++)
 
             openRanking();
-            // console.log(typeof object);
-            // console.log(object);
         }
     });
 }
@@ -240,16 +233,16 @@ function updateViewWithPlayerInfo() {
     // url('images/floor.png')
     if (player !== null) {
         document.getElementById('player-image').src = player.getImg;
-        createH3Element("Name: " + player.name, playerStats);
-        createH3Element("Attack: " + player.attack, playerStats);
-        createH3Element("Defense: " + player.defense, playerStats);
-        createH3Element("Vitality Points: " + player.vp, playerStats);
+        createElement("Name: " + player.name, playerStats, "H3");
+        createElement("Attack: " + player.attack, playerStats, "H3");
+        createElement("Defense: " + player.defense, playerStats, "H3");
+        createElement("Vitality Points: " + player.vp, playerStats, "H3");
     } else {
         document.getElementById('player-image').src = "images/skull.png";
-        createH3Element("Name: -", playerStats);
-        createH3Element("Attack: -", playerStats);
-        createH3Element("Defense: -", playerStats);
-        createH3Element("Vitality Points: -", playerStats);
+        createElement("Name: -", playerStats, "H3");
+        createElement("Attack: -", playerStats, "H3");
+        createElement("Defense: -", playerStats, "H3");
+        createElement("Vitality Points: -", playerStats, "H3");
     }
 
 }
@@ -257,11 +250,11 @@ function updateViewWithPlayerInfo() {
 /**
  * Función encargada de crear un elemento H3
  */
-function createH3Element(data, tag) {
-    let node = document.createElement("H3");
+function createElement(data, parentNode, childNode) {
+    let node = document.createElement(childNode);
     let textNode = document.createTextNode(data);
     node.appendChild(textNode);
-    tag.appendChild(node);
+    parentNode.appendChild(node);
 }
 
 /**
@@ -434,7 +427,7 @@ function initMoveControls() {
 function blockControlButtons() {
     document.querySelectorAll('.box').forEach(function (element) {
         element.style.pointerEvents = "none";
-        element.style.background = "grey";
+        element.style.opacity = "0.7";
     });
 }
 
@@ -444,7 +437,8 @@ function blockControlButtons() {
 function enableControlButtons() {
     document.querySelectorAll('.box').forEach(function (element) {
         element.style.pointerEvents = "auto";
-        element.style.background = "none";
+        element.style.opacity = "1";
+        element.style.backgroundColor = "white";
     });
 }
 
@@ -707,16 +701,17 @@ function getMapInfo() {
             let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
             playerNode.style.backgroundColor = "blue";
 
-            let test = map.getDomCell(horizontalAxis, verticalAxis);
-            test.style.backgroundImage = "url('images/player-dir.png')";
-            test.style.backgroundSize = "20px";
-            test.style.backgroundRepeat = "no-repeat";
+            let playerCell = map.getDomCell(horizontalAxis, verticalAxis);
+            playerCell.style.backgroundImage = "url('images/player-dir.png')";
+            playerCell.style.backgroundSize = "15px";
+            playerCell.style.backgroundRepeat = "no-repeat";
+            playerCell.style.backgroundPosition = "center";
             if (playerD === "E") {
-                test.style.transform = "rotate(90deg)";
+                playerCell.style.transform = "rotate(90deg)";
             } else if (playerD === "S") {
-                test.style.transform = "rotate(180deg)";
+                playerCell.style.transform = "rotate(180deg)";
             } else if (playerD === "O") {
-                test.style.transform = "rotate(-90deg)";
+                playerCell.style.transform = "rotate(-90deg)";
             }
         }
     })

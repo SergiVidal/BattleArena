@@ -43,10 +43,27 @@ html {
         position: fixed;
         border: 3px solid black;
         z-index: 9;
-        max-width: 300px;
+        max-width: 400px;
         padding: 10px;
         background-color: white;
         right: 165px; }
+        html header #header-right .ranking-popup #ranking-content {
+          overflow-y: scroll;
+          max-height: 150px;
+          margin-bottom: 10px; }
+          html header #header-right .ranking-popup #ranking-content ul {
+            margin: 0;
+            padding: 0; }
+            html header #header-right .ranking-popup #ranking-content ul li {
+              margin: 5px; }
+      html header #header-right #btn-close-ranking {
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8; }
       html header #header-right .form-container {
         max-width: 300px;
         padding: 10px;
@@ -69,13 +86,13 @@ html {
         width: 86%;
         margin-bottom: 10px;
         opacity: 0.8; }
-      html header #header-right .form-container .cancel {
+      html header #header-right .form-container .cancel, html header #header-right .ranking-popup .cancel {
         background-color: #ec2d42; }
-      html header #header-right .form-container .btn:hover {
+      html header #header-right .form-container .btn:hover, html header #header-right .ranking-popup .btn:hover {
         opacity: 1; }
       html header #header-right #new-player {
         margin-left: 3px !important; }
-      html header #header-right button {
+      html header #header-right .action-button {
         font-family: Gotham_medium;
         padding: 5px 20px;
         margin-left: 50px;
@@ -102,10 +119,12 @@ html {
         margin: 5px auto;
         display: block; }
       html main #top #west-top #map {
-        margin: 0 110px;
+        margin: 0 auto;
         display: grid;
         grid-template-columns: auto auto auto auto auto auto;
-        grid-template-rows: auto auto auto auto auto auto; }
+        grid-template-rows: auto auto auto auto auto auto;
+        max-width: 282px;
+        border: 1px solid white; }
       html main #top #west-top .cell {
         border-radius: 5px;
         align-self: stretch;
@@ -119,7 +138,9 @@ html {
         display: grid;
         grid-template-columns: auto auto auto;
         grid-template-rows: auto auto auto;
-        margin: 0 180px; }
+        margin: 0 auto;
+        border: 1px solid white;
+        max-width: 351px; }
         html main #top #middle-top #visor .view {
           border-radius: 5px;
           align-self: stretch;
@@ -143,10 +164,11 @@ html {
     html main #bottom #middle-bottom {
       max-height: 500px; }
       html main #bottom #middle-bottom #console {
-        height: 255px;
+        height: 245px;
         background-color: #f1f1f1;
         margin: 0 20px;
-        overflow-y: scroll; }
+        overflow-y: scroll;
+        border: 3px solid #ec2d42; }
     html main #bottom #east-bottom {
       max-height: 500px; }
       html main #bottom #east-bottom #controls {
@@ -157,14 +179,15 @@ html {
       html main #bottom #east-bottom .box {
         border-radius: 5px;
         align-self: stretch;
-        height: 85px;
-        width: 85px; }
+        height: 80px;
+        width: 80px;
+        border: 1px solid white; }
         html main #bottom #east-bottom .box .control-image {
           width: 100%;
           height: 100%; }
         html main #bottom #east-bottom .box .btn_control {
           background: none;
-          width: 100%;
+          border: none;
           height: 100%; }
       html main #bottom #east-bottom #attack-north {
         grid-column: 3/4;
