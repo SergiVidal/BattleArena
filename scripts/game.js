@@ -453,10 +453,10 @@ function onClickMove(d) {
                     console.log("After");
                     console.log(player);
 
-                    // updateViewWithPlayerInfo();
-                    // initMap();
-                    // getMapInfo();
-                    // getNearPlayers();
+                    updateViewWithPlayerInfo();
+                    initMap();
+                    getMapInfo();
+                    getNearPlayers();
                 }
             });
         }
