@@ -100,7 +100,7 @@ function onClickCreateNewPlayer() {
 
                     console.log("Direction:");
                     console.log(player.getD);
-
+                    console.log(player.getX +"-"+player.getY);
                     updateViewWithPlayerInfo();
                     blockCreatePlayerButton();
                     enableRevivePlayerButton();
@@ -500,11 +500,13 @@ function initCornerVisors() {
     let seVisor = document.getElementById('se-visor');
     setVisorImage(seVisor, floorImg);
 
-    let x = player.getX;
-    let y = player.getY;
+    let verticalAxis = player.getX;//x
+    let horizontalAxis = player.getY; //y
+
+    //TODO: Paredes Ok
 
     //Pared de arriba
-    if (x === 0) {
+    if (horizontalAxis === 0) {
         setVisorImage(nVisor, wallImg);
         setVisorImage(nwVisor, wallImg);
         setVisorImage(neVisor, wallImg);
@@ -512,7 +514,7 @@ function initCornerVisors() {
     }
 
     //Pared de la izquierda
-    if (y === 0) {
+    if (verticalAxis === 0) {
         setVisorImage(mwVisor, wallImg);
         setVisorImage(nwVisor, wallImg);
         setVisorImage(swVisor, wallImg);
@@ -520,7 +522,7 @@ function initCornerVisors() {
     }
 
     //Pared de la derecha
-    if ((y + 1) === COLUMNS) {
+    if ((verticalAxis + 1) === COLUMNS) {
         setVisorImage(meVisor, wallImg);
         setVisorImage(neVisor, wallImg);
         setVisorImage(seVisor, wallImg);
@@ -528,15 +530,16 @@ function initCornerVisors() {
     }
 
     //Pared de abajo
-    if ((x + 1) === ROWS) {
+    if ((horizontalAxis + 1) === ROWS) {
         setVisorImage(sVisor, wallImg);
         setVisorImage(swVisor, wallImg);
         setVisorImage(seVisor, wallImg);
 
     }
+    //TODO: Esquinas OK
 
     //Esquina superior izquierda
-    if (x === 0 && y === 0) {
+    if (horizontalAxis === 0 && verticalAxis === 0) {
         setVisorImage(nwVisor, wallImg);
         setVisorImage(neVisor, wallImg);
         setVisorImage(swVisor, wallImg);
@@ -544,7 +547,7 @@ function initCornerVisors() {
     }
 
     //Esquina superior derecha
-    if (x === 0 && (y + 1) === COLUMNS) {
+    if (horizontalAxis === 0 && (verticalAxis + 1) === COLUMNS) {
         setVisorImage(neVisor, wallImg);
         setVisorImage(nwVisor, wallImg);
         setVisorImage(seVisor, wallImg);
@@ -552,7 +555,7 @@ function initCornerVisors() {
     }
 
     //Esquina inferior izquierda
-    if ((x + 1) === ROWS && y === 0) {
+    if ((horizontalAxis + 1) === ROWS && verticalAxis === 0) {
         setVisorImage(swVisor, wallImg);
         setVisorImage(nwVisor, wallImg);
         setVisorImage(seVisor, wallImg);
@@ -560,7 +563,7 @@ function initCornerVisors() {
     }
 
     //Esquina inferior derecha
-    if ((x + 1) === ROWS && (y + 1) === COLUMNS) {
+    if ((horizontalAxis + 1) === ROWS && (verticalAxis + 1) === COLUMNS) {
         setVisorImage(seVisor, wallImg);
         setVisorImage(neVisor, wallImg);
         setVisorImage(swVisor, wallImg);
@@ -573,16 +576,16 @@ function initCornerVisors() {
  * @param enemy - Enemigo colindante
  */
 function updateVisor(enemy) {
-    if (player.getName !== enemy.getName) {
-
+    if (player.getName !== enemy.getName && enemy.getVp !== 0) {
+        console.log(enemy.getVp);
         // let wallImg = "url('images/wall.png')";
         // let floorImg = "url('images/floor.png')";
 
         let enemyImg = "url('images/enemy.png')";
 
-        let x = enemy.getX;
-        let y = enemy.getY;
-        
+        let horizontalAxis = enemy.getX;
+        let verticalAxis = enemy.getY;
+
         //Top Visors
         let nwVisor = document.getElementById('nw-visor');
         let nVisor = document.getElementById('n-visor');
@@ -599,30 +602,30 @@ function updateVisor(enemy) {
         let seVisor = document.getElementById('se-visor');
 
 
-        if (x === (player.getX - 1) && y === (player.getY - 1)) { // NW
+        if (verticalAxis === (player.getY - 1) && horizontalAxis === (player.getX - 1)) { // NW
             setVisorImage(nwVisor, enemyImg);
-        } else if (x === (player.getX - 1) && y=== player.getY) { // N
+        } else if (verticalAxis === (player.getY -1) && horizontalAxis=== player.getX) { // N
             setVisorImage(nVisor, enemyImg);
 
-        } else if (x === (player.getX - 1) && y === (player.getY + 1)) { //NE
+        } else if (verticalAxis === (player.getY - 1) && horizontalAxis === (player.getX + 1)) { //NE
             setVisorImage(neVisor, enemyImg);
 
-        } else if (x === player.getX && y === (player.getY - 1)) { // W
+        } else if (verticalAxis === player.getY && horizontalAxis === (player.getX - 1)) { // W
             setVisorImage(mwVisor, enemyImg);
 
-        } else if (x === player.getX && y === player.getY) { // Esta en tu posicion
+        } else if (verticalAxis === player.getY && horizontalAxis === player.getX) { // Esta en tu posicion
             setVisorImage(mVisor, enemyImg);
 
-        } else if (x === player.getX && y === (player.getY + 1)) { // E
+        } else if (verticalAxis === player.getY && horizontalAxis === (player.getX + 1)) { // E
             setVisorImage(meVisor, enemyImg);
 
-        } else if (x === (player.getX + 1) && y === (player.getY - 1)) { // SW
+        } else if (verticalAxis === (player.getY + 1) && horizontalAxis === (player.getX - 1)) { // SW
             setVisorImage(swVisor, enemyImg);
 
-        } else if (x === (player.getX + 1) && y === player.getY) { // S
+        } else if (verticalAxis === (player.getY + 1) && horizontalAxis === player.getX) { // S
             setVisorImage(sVisor, enemyImg);
 
-        } else if (x === (player.getX + 1) && y === (player.getY + 1)) { // SE
+        } else if (verticalAxis === (player.getY + 1) && horizontalAxis === (player.getX + 1)) { // SE
             setVisorImage(seVisor, enemyImg);
         }
     }
@@ -664,20 +667,20 @@ function getMapInfo() {
 
         if (status === 200) {
             for (let i = 0; i < object.length; i++) {
-                let x = object[i][0];
-                let y = object[i][1];
-                map.setBoolCell(x, y, true);
-                let node = map.getDomCell(x, y);
+                let verticalAxis = object[i][0];
+                let horizontalAxis = object[i][1];
+                map.setBoolCell(horizontalAxis, verticalAxis, true);
+                let node = map.getDomCell(horizontalAxis, verticalAxis);
                 node.style.backgroundColor = "#ec2d42";
             }
-            let playerX = player.getX;
-            let playerY = player.getY;
+            let verticalAxis = player.getX;
+            let horizontalAxis = player.getY;
             let playerD = player.getD;
 
-            let playerNode = map.getDomCell(playerX, playerY);
+            let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
             playerNode.style.backgroundColor = "blue";
 
-            let test = map.getDomCell(playerX, playerY);
+            let test = map.getDomCell(horizontalAxis, verticalAxis);
             test.style.backgroundImage = "url('images/player-dir.png')";
             test.style.backgroundSize = "20px";
             test.style.backgroundRepeat = "no-repeat";
