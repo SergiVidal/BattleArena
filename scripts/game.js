@@ -17,9 +17,8 @@ function initGame() {
 /** Inicicializa las clases necesarias para el desarrollo del juego **/
 function initObjects() {
     playerAPI = new PlayerAPI();
-    map = new Map();
-    map.initBoolMatrix();
-    map.initDomMatrix();
+    initMap();
+
 }
 
 
@@ -27,7 +26,6 @@ function initObjects() {
 function initUI() {
     addTextToConsole("Bienvenido a Battle Arena! (Desarrollado por <b>Sergi Vidal</b>)");
 
-    createMap();
     addButtonsEvent();
     blockRevivePlayerButton();
     blockDeletePlayerButton();
@@ -104,6 +102,9 @@ function onClickCreateNewPlayer() {
 function onClickRevivePlayer() {
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
+        initMap();
+        getMapInfo();
+
         if (status === 200) {
             playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
                 addTextToConsole(response);
@@ -132,7 +133,7 @@ function onClickDeletePlayer() {
             blockDeletePlayerButton();
             blockRankingButton();
             blockControlButtons();
-            restartMap();
+            initMap();
         }
     });
 }
@@ -151,7 +152,10 @@ function onClickShowRanking() {
     });
 }
 
-function restartMap() {
+/**
+ * Función encargada de inicializar el mapa
+ */
+function initMap() {
 
     map = new Map();
     map.initBoolMatrix();
