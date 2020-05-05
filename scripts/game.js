@@ -86,35 +86,39 @@ function addButtonsEvent() {
  */
 function onClickCreateNewPlayer() {
     let playerName = document.getElementById('input-player-name').value;
-    closeCreatePlayerForm();
-    playerAPI.createNewPlayer(playerName, function (response, status, token) {
-        addTextToConsole(response);
+    if(playerName.length > 0 && playerName.startsWith(" ") !== true) {
+        closeCreatePlayerForm();
+        playerAPI.createNewPlayer(playerName, function (response, status, token) {
+            addTextToConsole(response);
 
-        if (status === 200) {
-            console.log(token);
-            playerAPI.setToken(token);
-            playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
-                addTextToConsole(response);
+            if (status === 200) {
+                console.log(token);
+                playerAPI.setToken(token);
+                playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
+                    addTextToConsole(response);
 
-                if (status === 200) {
-                    console.log(typeof object);
+                    if (status === 200) {
+                        console.log(typeof object);
 
-                    player = new Player(object);
-                    updateViewWithPlayerInfo();
-                    blockCreatePlayerButton();
-                    enableRevivePlayerButton();
-                    enableDeletePlayerButton();
-                    enableRankingButton();
-                    enableControlButtons();
-                    getMapInfo();
-                    getNearPlayers();
-                    isGameOn = true;
-                    refreshGame();
+                        player = new Player(object);
+                        updateViewWithPlayerInfo();
+                        blockCreatePlayerButton();
+                        enableRevivePlayerButton();
+                        enableDeletePlayerButton();
+                        enableRankingButton();
+                        enableControlButtons();
+                        getMapInfo();
+                        getNearPlayers();
+                        isGameOn = true;
+                        refreshGame();
 
-                }
-            })
-        }
-    });
+                    }
+                })
+            }
+        });
+    }else{
+        addTextToConsole("El nombre del jugador no debe estar vacio ni empezar por un espacio!");
+    }
 }
 
 /**
