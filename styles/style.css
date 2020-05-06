@@ -209,52 +209,79 @@ html {
       html main #bottom #east-bottom #controls {
         margin: 0 80px;
         display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto; }
-      html main #bottom #east-bottom .box {
-        border-radius: 5px;
-        align-self: stretch;
-        height: 80px;
-        width: 80px;
-        border: 1px solid white; }
-        html main #bottom #east-bottom .box .control-image {
-          width: 100%;
-          height: 100%; }
-        html main #bottom #east-bottom .box .btn_control {
-          background: none;
-          border: none;
-          height: 100%; }
-      html main #bottom #east-bottom #attack-north {
-        grid-column: 3/4;
-        grid-row: 1/2;
-        background: none;
-        margin: 0; }
-      html main #bottom #east-bottom #move-north {
-        grid-column: 4/5;
-        grid-row: 1/2; }
-        html main #bottom #east-bottom #move-north img {
-          transform: rotate(-90deg); }
-      html main #bottom #east-bottom #attack-west {
-        grid-column: 1/2;
-        grid-row: 2/3; }
-      html main #bottom #east-bottom #move-west {
-        grid-column: 2/3;
-        grid-row: 2/3; }
-        html main #bottom #east-bottom #move-west img {
-          transform: rotate(180deg); }
-      html main #bottom #east-bottom #attack-east {
-        grid-column: 6/7;
-        grid-row: 2/3; }
-      html main #bottom #east-bottom #move-east {
-        grid-column: 5/6;
-        grid-row: 2/3; }
-      html main #bottom #east-bottom #attack-south {
-        grid-column: 3/4;
-        grid-row: 3/4; }
-      html main #bottom #east-bottom #move-south {
-        grid-column: 4/5;
-        grid-row: 3/4; }
-        html main #bottom #east-bottom #move-south img {
-          transform: rotate(90deg); }
+        grid-template-columns: auto auto; }
+        html main #bottom #east-bottom #controls .box {
+          border-radius: 5px;
+          align-self: stretch;
+          height: 80px;
+          width: 80px;
+          border: 1px solid white; }
+          html main #bottom #east-bottom #controls .box .control-image {
+            width: 100%;
+            height: 100%; }
+          html main #bottom #east-bottom #controls .box .btn_control {
+            background: none;
+            border: none;
+            height: 100%; }
+        html main #bottom #east-bottom #controls #attack-controls {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-north {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            background: none;
+            margin: 0; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-west {
+            grid-column: 1/2;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-east {
+            grid-column: 3/4;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-south {
+            grid-column: 2/3;
+            grid-row: 3/4; }
+        html main #bottom #east-bottom #controls #move-controls {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto; }
+          html main #bottom #east-bottom #controls #move-controls #move-northWest {
+            grid-column: 1/2;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-northWest img {
+              transform: rotate(-135deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-north {
+            grid-column: 2/3;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-north img {
+              transform: rotate(-90deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-northEast {
+            grid-column: 3/4;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-northEast img {
+              transform: rotate(-45deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-west {
+            grid-column: 1/2;
+            grid-row: 2/3; }
+            html main #bottom #east-bottom #controls #move-controls #move-west img {
+              transform: rotate(180deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-east {
+            grid-column: 3/4;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #move-controls #move-southWest {
+            grid-column: 1/2;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-southWest img {
+              transform: rotate(135deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-south {
+            grid-column: 2/3;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-south img {
+              transform: rotate(90deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-southEast {
+            grid-column: 3/4;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-southEast img {
+              transform: rotate(45deg); }
 
 /*# sourceMappingURL=style.css.map */
