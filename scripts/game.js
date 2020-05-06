@@ -117,7 +117,7 @@ function onClickCreateNewPlayer() {
                     getNearPlayers();
                     isGameOn = true;
                     console.log("infoplayer, map info, near players");
-                    refreshGame1();
+                    refreshGame();
 
                     // }
                 })
@@ -737,9 +737,9 @@ function getMapInfo() {
 /**
  * Función encargada de refrescar el juego a tiempo real
  */
-function refreshGame1() {
+function refreshGame() {
     if (isGameOn) {
-        setTimeout(playerAPI.refreshGame, 1000);
+        setTimeout(playerAPI.fetchRefreshGame, 1000);
     }
 }
 

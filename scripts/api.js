@@ -307,25 +307,22 @@ class PlayerAPI {
     /**
      * Función encargada de refrescar el juego a tiempo real
      */
-    refreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //peticio 1
+    fetchRefreshGame() {
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
                 player = new Player(data);
                 updateViewWithPlayerInfo();
-                // initMap();
             })
             .then(function () {
                 getMapInfo(); //peticio2
             })
             .then(function () {
-                // setTimeout(getNearPlayers, 2000);
-                getNearPlayers(); //peticio 3
+                getNearPlayers();
             }).then(function () {
-                console.log("ha acabat fetch");
-            refreshGame1();
+            refreshGame();
         }).catch((e) => {
             console.log("error: " + e);
         })
