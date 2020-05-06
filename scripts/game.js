@@ -9,11 +9,30 @@ let map;
 
 /** @type {Boolean} */
 let isGameOn;
+let bgAudio;
 
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
+    hideBgAudio();
     initGame();
 };
+
+/**
+ * Oculta el reproductor de musica
+ */
+function hideBgAudio() {
+    bgAudio = document.getElementById("bg-audio");
+    bgAudio.style.display = "none";
+}
+
+/**
+ * Permite reproducir la música en background
+ * NOTA: En Chrome, es necesario la interacción del usuario para reproducirla. Se iniciará al crear un Jugador nuevo
+ */
+function startBgAudio() {
+    bgAudio.autoplay = true;
+    bgAudio.load();
+}
 
 /** Se encarga de inicializar el juego junto a sus componentes**/
 function initGame() {
@@ -22,7 +41,6 @@ function initGame() {
     initUI();
     isGameOn = false;
 }
-
 
 /** Inicializa los componentes de la UI (Botones y sus eventos) **/
 function initUI() {
@@ -91,6 +109,7 @@ function getVpPercentage() {
  * Función onClick del botón: Crear un nuevo jugador, se encarga de gestionar las fuciones de crear el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickCreateNewPlayer() {
+    startBgAudio();
     let playerName = document.getElementById('input-player-name').value;
     if (playerName.length > 0 && playerName.startsWith(" ") !== true) {
         closeCreatePlayerForm();
