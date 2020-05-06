@@ -34,16 +34,13 @@ class PlayerAPI {
      */
     createNewPlayer(playerName, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El jugador ha sido creado correctamente!";
-                console.log(response, this.status);
+                addTextToConsole("El jugador ha sido creado correctamente!");
+                callback(this.responseText);
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(response, this.status);
-
+                addTextToConsole("El nombre del Jugador ya ha sido utilizado!");
             }
-            callback(response, this.status, this.responseText);
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -65,16 +62,13 @@ class PlayerAPI {
      */
     respawnCurrentPlayer(token, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El jugador ha sido actualizado correctamente!";
-                console.log(response, this.status);
+                addTextToConsole("El jugador ha sido actualizado correctamente!");
+                callback();
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(response, this.status);
-
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
-            callback(response, this.status);
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -96,15 +90,13 @@ class PlayerAPI {
      */
     deleteCurrentPlayer(token, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El jugador ha sido eliminado correctamente!";
-                console.log(response, this.status);
+                addTextToConsole ("El jugador ha sido eliminado correctamente!");
+                callback();
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(response, this.status);
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
-            callback(response, this.status);
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -126,16 +118,13 @@ class PlayerAPI {
      */
     getCurrentPlayerInfo(token, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "Se ha obtenido la información del Jugador correctamente!";
-                // console.log(response, this.status);
-                callback(response, this.status, JSON.parse(this.responseText));
-
+                // addTextToConsole("Se ha obtenido la información del Jugador correctamente!");
+                callback(JSON.parse(this.responseText));
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(response, this.status);
+                // addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -158,15 +147,14 @@ class PlayerAPI {
      */
     movePlayer(token, d, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El Jugador se ha movido a la dirección: " + d;
-                console.log(response, this.status);
+                addTextToConsole("El Jugador se ha movido a la dirección: " + d);
+                callback();
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(this.responseText);
+                addTextToConsole("Te estas chocando contra una pared!");
             }
-            callback(response, this.status);
+            //console.log(this.status);
+            enableControlButtons();
         }
 
         var ajaxASYNC_GET = {
@@ -189,15 +177,14 @@ class PlayerAPI {
      */
     attackPlayer(token, d, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "El Jugador ha atacado a la dirección: " + d;
-                console.log(response, this.status);
+                addTextToConsole("El Jugador ha atacado a la dirección: " + d);
+                callback();
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(this.responseText);
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
-            callback(response, this.status);
+            //console.log(this.status);
+            enableControlButtons();
         }
 
         var ajaxASYNC_GET = {
@@ -218,16 +205,13 @@ class PlayerAPI {
      */
     showRanking(callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "Se ha mostrado correctamente el Ranking";
-                console.log(response, this.status);
+                addTextToConsole("Se ha mostrado correctamente el Ranking");
+                callback(this.responseText);
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(this.responseText);
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
-            callback(response, this.status, this.responseText);
-
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -249,17 +233,13 @@ class PlayerAPI {
      */
     getNearPlayers(token, callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
-                // console.log(response, this.status);
-                callback(response, this.status, JSON.parse(this.responseText));
-
+                // addTextToConsole("Se ha obtenido correctamente la información de los enemigos colindantes!");
+                callback(JSON.parse(this.responseText));
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(this.responseText);
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
-
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -280,16 +260,13 @@ class PlayerAPI {
      */
     getMapInfo(callback) {
         function reqListener() {
-            let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                response = "Se ha obtenido correctamente la información del mapa!";
-                // console.log(response, this.status);
-                callback(response, this.status, JSON.parse(this.responseText));
-
+                // addTextToConsole("Se ha obtenido correctamente la información del mapa!");
+                callback(JSON.parse(this.responseText));
             } else {
-                response = "Ha ocurrido un error!";
-                console.log(this.responseText);
+                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
             }
+            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -308,21 +285,21 @@ class PlayerAPI {
      * Función encargada de refrescar el juego a tiempo real
      */
     fetchRefreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken)
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //Obtener la información del jugador actual
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                player = new Player(data);
-                updateViewWithPlayerInfo();
+                player = new Player(data); //Actualizo el Jugador
+                updateViewWithPlayerInfo(); //Actualizo las estadisticas del jugador (HTML - Player Stats)
             })
             .then(function () {
-                getMapInfo(); //peticio2
+                getMapInfo(); //Obtener la información del mapa para poder actualizar el minimapa
             })
             .then(function () {
-                getNearPlayers();
+                getNearPlayers(); //Obtener la información de los enemigos colindantes
             }).then(function () {
-            refreshGame();
+            refreshGame(); //Vuelvo a llamar a la función refreshGame para que siga refrescando cada 1 segundo el juego.
         }).catch((e) => {
             console.log("error: " + e);
         })
