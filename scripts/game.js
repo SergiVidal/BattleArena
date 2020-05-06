@@ -1,7 +1,13 @@
-//TODO: JSDoc como definir estas variables de clase
+/** @type {Player} */
 let player;
+
+/** @type {PlayerAPI} */
 let playerAPI;
+
+/** @type {Map} */
 let map;
+
+/** @type {Boolean} */
 let isGameOn;
 
 //TODO: AL MATAR A UN ENEMIC NO DEIXAPAREIXEN, ELS POTS ATACAR INFINITAMENT (menys enemics crec)
@@ -86,7 +92,7 @@ function addButtonsEvent() {
  */
 function onClickCreateNewPlayer() {
     let playerName = document.getElementById('input-player-name').value;
-    if(playerName.length > 0 && playerName.startsWith(" ") !== true) {
+    if (playerName.length > 0 && playerName.startsWith(" ") !== true) {
         closeCreatePlayerForm();
         playerAPI.createNewPlayer(playerName, function (response, status, token) {
             addTextToConsole(response);
@@ -97,27 +103,27 @@ function onClickCreateNewPlayer() {
                 playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
                     addTextToConsole(response);
 
-                    if (status === 200) {
-                        console.log(typeof object);
+                    // if (status === 200) {
+                    console.log(typeof object);
 
-                        player = new Player(object);
-                        updateViewWithPlayerInfo();
-                        blockCreatePlayerButton();
-                        enableRevivePlayerButton();
-                        enableDeletePlayerButton();
-                        enableRankingButton();
-                        enableControlButtons();
-                        getMapInfo();
-                        getNearPlayers();
-                        isGameOn = true;
-                        console.log("infoplayer, map info, near players");
-                        refreshGame1();
+                    player = new Player(object);
+                    updateViewWithPlayerInfo();
+                    blockCreatePlayerButton();
+                    enableRevivePlayerButton();
+                    enableDeletePlayerButton();
+                    enableRankingButton();
+                    enableControlButtons();
+                    getMapInfo();
+                    getNearPlayers();
+                    isGameOn = true;
+                    console.log("infoplayer, map info, near players");
+                    refreshGame1();
 
-                    }
+                    // }
                 })
             }
         });
-    }else{
+    } else {
         addTextToConsole("El nombre del jugador no debe estar vacio ni empezar por un espacio!");
     }
 }
@@ -129,22 +135,33 @@ function getPlayerInfo() {
     playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
         addTextToConsole(response);
 
-        if (status === 200) { //si es 200 segueixo, si es 500 no //quan es correcta tracto les dades, quan es 500 decideixo no fer res ja que avisa a la consola y l'usuari ja es ...
-            player = new Player(object);
-            updateViewWithPlayerInfo();
-            // initMap();
-            getMapInfo();
-            getNearPlayers();
-        }
+        resetOldPlayerPosition();
+
+        // if (status === 200) { //si es 200 segueixo, si es 500 no //quan es correcta tracto les dades, quan es 500 decideixo no fer res ja que avisa a la consola y l'usuari ja es ...
+        player = new Player(object);
+        updateViewWithPlayerInfo();
+        getMapInfo();
+        getNearPlayers();
+        // }
     });
 }
 
+/**
+ * Función encargada de resetear la posición del jugador anterior a realizar un movimiento
+ */
+function resetOldPlayerPosition() {
+    let verticalAxis = player.getX;
+    let horizontalAxis = player.getY;
+
+    map.getBoolMatrix[horizontalAxis][verticalAxis] = false;
+    map.getDomMatrix[horizontalAxis][verticalAxis].style.backgroundColor = "white";
+    map.getDomMatrix[horizontalAxis][verticalAxis].style.backgroundImage = "none";
+}
 
 /**
  * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
-//TODO: CAL?    isGameOn = false;
     closeRanking();
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function (response, status) {
         addTextToConsole(response);
@@ -193,7 +210,7 @@ function onClickShowRanking() {
             }
 
             var linesArr = object.split('\n');
-            for (let i = 0; i < linesArr.length - 1; i++){
+            for (let i = 0; i < linesArr.length - 1; i++) {
                 var playerArr = linesArr[i].split(',');
                 createElement(playerArr[0] + " => " + playerArr[1], ranking, "LI");
 
@@ -511,8 +528,8 @@ function initCornerVisors() {
     let seVisor = document.getElementById('se-visor');
     setVisorImage(seVisor, floorImg);
 
-    let verticalAxis = player.getX;//x
-    let horizontalAxis = player.getY; //y
+    let verticalAxis = player.getX;
+    let horizontalAxis = player.getY;
 
     //Pared de arriba
     if (horizontalAxis === 0) {
@@ -584,7 +601,7 @@ function initCornerVisors() {
  * @param enemy - Enemigo colindante
  */
 function updateVisor(enemy) {
-    if (player.getName !== enemy.getName && enemy.getVp !== 0) {
+    if (player.getName !== enemy.getName && enemy.getVp > 0) {
         // console.log(enemy.getVp);
         // let wallImg = "url('images/wall.png')";
         // let floorImg = "url('images/floor.png')";
@@ -666,6 +683,14 @@ function getNearPlayers() {
     })
 }
 
+function resetOldMapInfo() {
+    for (let i = 0; i < map.getDomMatrix.length; i++) {
+        for (let j = 0; j < map.getDomMatrix[i].length; j++) {
+            map.getDomMatrix[i][j].style.backgroundColor = "white";
+        }
+    }
+}
+
 /**
  * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener la información del mapa y de actualizarlo
  */
@@ -673,34 +698,36 @@ function getMapInfo() {
     playerAPI.getMapInfo(function (response, status, object) {
         addTextToConsole(response);
 
-        if (status === 200) {
-            for (let i = 0; i < object.length; i++) {
-                let verticalAxis = object[i][0];
-                let horizontalAxis = object[i][1];
-                map.setBoolCell(horizontalAxis, verticalAxis, true);
-                let node = map.getDomCell(horizontalAxis, verticalAxis);
-                node.style.backgroundColor = "#ec2d42";
-            }
-            let verticalAxis = player.getX;
-            let horizontalAxis = player.getY;
-            let playerD = player.getD;
+        // if (status === 200) {
 
-            let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
-            playerNode.style.backgroundColor = "blue";
-
-            let playerCell = map.getDomCell(horizontalAxis, verticalAxis);
-            playerCell.style.backgroundImage = "url('images/player-dir.png')";
-            playerCell.style.backgroundSize = "15px";
-            playerCell.style.backgroundRepeat = "no-repeat";
-            playerCell.style.backgroundPosition = "center";
-            if (playerD === "E") {
-                playerCell.style.transform = "rotate(90deg)";
-            } else if (playerD === "S") {
-                playerCell.style.transform = "rotate(180deg)";
-            } else if (playerD === "O") {
-                playerCell.style.transform = "rotate(-90deg)";
-            }
+        resetOldMapInfo();
+        for (let i = 0; i < object.length; i++) {
+            let verticalAxis = object[i][0];
+            let horizontalAxis = object[i][1];
+            map.setBoolCell(horizontalAxis, verticalAxis, true);
+            let node = map.getDomCell(horizontalAxis, verticalAxis);
+            node.style.backgroundColor = "#ec2d42";
         }
+        let verticalAxis = player.getX;
+        let horizontalAxis = player.getY;
+        let playerD = player.getD;
+
+        let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
+        playerNode.style.backgroundColor = "blue";
+
+        let playerCell = map.getDomCell(horizontalAxis, verticalAxis);
+        playerCell.style.backgroundImage = "url('images/player-dir.png')";
+        playerCell.style.backgroundSize = "15px";
+        playerCell.style.backgroundRepeat = "no-repeat";
+        playerCell.style.backgroundPosition = "center";
+        if (playerD === "E") {
+            playerCell.style.transform = "rotate(90deg)";
+        } else if (playerD === "S") {
+            playerCell.style.transform = "rotate(180deg)";
+        } else if (playerD === "O") {
+            playerCell.style.transform = "rotate(-90deg)";
+        }
+        // }
     })
 }
 
@@ -709,13 +736,10 @@ function getMapInfo() {
  */
 function refreshGame1() {
     if (isGameOn) {
-        console.log("inici");
         setTimeout(playerAPI.refreshGame, 1000);
-        console.log("final");
     }
 }
 
-//TODO: Hay que modificar las funciones que hagan 2 llamadas seguidas a la API y unir las 2 llamadas a una Promise?
 //TODO: Añadir porcentajes a la vida, añadir cantidad de enemigos muertos en las estadisticas
 //TODO: Añadir animacions y efectos (visuales y/o sonoros)
 //TODO: Añadir al minimapa informacion aumentada (colores distintos segun puntos de vida... )

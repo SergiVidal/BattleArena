@@ -130,11 +130,12 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido la información del Jugador correctamente!";
                 // console.log(response, this.status);
+                callback(response, this.status, JSON.parse(this.responseText));
+
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
             }
-            callback(response, this.status, JSON.parse(this.responseText));
         }
 
         var ajaxASYNC_GET = {
@@ -225,7 +226,6 @@ class PlayerAPI {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
-            // callback(response, this.status, JSON.parse(this.responseText));
             callback(response, this.status, this.responseText);
 
         }
@@ -253,12 +253,12 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
                 // console.log(response, this.status);
+                callback(response, this.status, JSON.parse(this.responseText));
 
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
-            callback(response, this.status, JSON.parse(this.responseText));
 
         }
 
@@ -284,11 +284,12 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información del mapa!";
                 // console.log(response, this.status);
+                callback(response, this.status, JSON.parse(this.responseText));
+
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
-            callback(response, this.status, JSON.parse(this.responseText));
         }
 
         var ajaxASYNC_GET = {
@@ -317,7 +318,6 @@ class PlayerAPI {
                 // initMap();
             })
             .then(function () {
-                // setTimeout(getMapInfo, 2000);
                 getMapInfo(); //peticio2
             })
             .then(function () {
