@@ -83,6 +83,10 @@ function addButtonsEvent() {
     initPlayersControls();
 }
 
+function getVpPercentage() {
+    return Math.round((player.getVp / Player.prototype.maxVp) * 100);
+}
+
 /**
  * Función onClick del botón: Crear un nuevo jugador, se encarga de gestionar las fuciones de crear el jugador y de obtener su información mediante llamadas a la API
  */
@@ -96,6 +100,7 @@ function onClickCreateNewPlayer() {
 
             playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
                 player = new Player(object);
+                Player.prototype.maxVp = player.getVp;
                 updateViewWithPlayerInfo();
                 blockCreatePlayerButton();
                 enableRevivePlayerButton();
@@ -217,7 +222,14 @@ function updateViewWithPlayerInfo() {
         createElement("Name: " + player.name, playerStats, "H3");
         createElement("Attack: " + player.attack, playerStats, "H3");
         createElement("Defense: " + player.defense, playerStats, "H3");
-        createElement("Vitality Points: " + player.vp, playerStats, "H3");
+        createElement("", playerStats, "H3");
+        if(player.getVp > 0 ) {
+            playerStats.lastChild.innerHTML = "Vitality Points: " + player.getVp + " (" + getVpPercentage() + "%)";
+        }else{
+            playerStats.lastChild.innerHTML = "Vitality Points: 0 (0%)";
+
+        }
+        // document.getElementById("myList").lastChild.innerHTML;
     } else {
         document.getElementById('player-image').src = "images/skull.png";
         createElement("Name: -", playerStats, "H3");
@@ -728,7 +740,7 @@ function getMapInfo() {
  */
 function refreshGame() {
     if (isGameOn) {
-        setTimeout(playerAPI.fetchRefreshGame, 1000);
+        setTimeout(playerAPI.fetchRefreshGame, 2000);
     }
 }
 

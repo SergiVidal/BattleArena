@@ -290,24 +290,26 @@ class PlayerAPI {
      * 5 - Llamar a la función refreshGame (game.js) para que siga refrescando cada 1 segundo el juego.
      */
     fetchRefreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
-            .then((response) => {
-                return response.json();
+        if(isGameOn) {
+            fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => { // (2)
+                    player = new Player(data);
+                    updateViewWithPlayerInfo();
+                })
+                .then(function () { // (3)
+                    getMapInfo();
+                })
+                .then(function () {// (4)
+                    getNearPlayers();
+                }).then(function () {
+                refreshGame(); // (5)
+            }).catch((e) => {
+                console.log("error: " + e);
             })
-            .then((data) => { // (2)
-                player = new Player(data);
-                updateViewWithPlayerInfo();
-            })
-            .then(function () { // (3)
-                getMapInfo();
-            })
-            .then(function () {// (4)
-                getNearPlayers();
-            }).then(function () {
-            refreshGame(); // (5)
-        }).catch((e) => {
-            console.log("error: " + e);
-        })
+        }
     }
 
 }
