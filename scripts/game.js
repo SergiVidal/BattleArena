@@ -110,7 +110,8 @@ function onClickCreateNewPlayer() {
                         getMapInfo();
                         getNearPlayers();
                         isGameOn = true;
-                        refreshGame();
+                        console.log("infoplayer, map info, near players");
+                        refreshGame1();
 
                     }
                 })
@@ -128,10 +129,10 @@ function getPlayerInfo() {
     playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
         addTextToConsole(response);
 
-        if (status === 200) {
+        if (status === 200) { //si es 200 segueixo, si es 500 no //quan es correcta tracto les dades, quan es 500 decideixo no fer res ja que avisa a la consola y l'usuari ja es ...
             player = new Player(object);
             updateViewWithPlayerInfo();
-            initMap();
+            // initMap();
             getMapInfo();
             getNearPlayers();
         }
@@ -333,7 +334,6 @@ function enableRankingButton() {
     rankingBtn.style.backgroundColor = "#ec2d42";
 }
 
-//TODO: preguntar como hacer la consola, su tipo de tag y que contenga un scroll!
 /**
  * FUncion encargada de añadir logs a la consola
  * @param text - Información de lo sucedido
@@ -469,23 +469,6 @@ function onClickMove(d) {
         addTextToConsole(response);
 
         if (status === 200) {
-
-            // playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (response, status, object) {
-            //     addTextToConsole(response);
-            //
-            //     if (status === 200) {
-            //         console.log("Before");
-            //         console.log(player);
-            //         player = new Player(object);
-            //         console.log("After");
-            //         console.log(player);
-            //
-            //         updateViewWithPlayerInfo();
-            //         initMap();
-            //         getMapInfo();
-            //         getNearPlayers();
-            //     }
-            // });
             getPlayerInfo();
         }
     })
@@ -724,10 +707,12 @@ function getMapInfo() {
 /**
  * Función encargada de refrescar el juego a tiempo real
  */
-function refreshGame() {
-    // if (isGameOn) {
-    //     setTimeout(playerAPI.refreshGame(), 7000);
-    // }
+function refreshGame1() {
+    if (isGameOn) {
+        console.log("inici");
+        setTimeout(playerAPI.refreshGame, 1000);
+        console.log("final");
+    }
 }
 
 //TODO: Hay que modificar las funciones que hagan 2 llamadas seguidas a la API y unir las 2 llamadas a una Promise?

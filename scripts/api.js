@@ -129,7 +129,7 @@ class PlayerAPI {
             let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido la información del Jugador correctamente!";
-                console.log(response, this.status);
+                // console.log(response, this.status);
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(response, this.status);
@@ -211,8 +211,6 @@ class PlayerAPI {
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/attack/" + token + "/" + d);
     }
 
-    //TODO: ERROR AL RECUPERAR EL RANKING, POR CULPA DEL FORMATO, NO FUNCIONA JSON.parse()
-
     /**
      * Función encargada de obtener el Ranking de Jugadores
      * @param callback - Función callback donde tratar la información de la API
@@ -254,12 +252,14 @@ class PlayerAPI {
             let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información de los enemigos colindantes!";
-                console.log(response, this.status);
+                // console.log(response, this.status);
+
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
             }
             callback(response, this.status, JSON.parse(this.responseText));
+
         }
 
         var ajaxASYNC_GET = {
@@ -283,7 +283,7 @@ class PlayerAPI {
             let response;
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 response = "Se ha obtenido correctamente la información del mapa!";
-                console.log(response, this.status);
+                // console.log(response, this.status);
             } else {
                 response = "Ha ocurrido un error!";
                 console.log(this.responseText);
@@ -307,24 +307,25 @@ class PlayerAPI {
      * Función encargada de refrescar el juego a tiempo real
      */
     refreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //getPlayerInfo
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //peticio 1
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
                 player = new Player(data);
                 updateViewWithPlayerInfo();
-                initMap();
+                // initMap();
             })
             .then(function () {
-                setTimeout(getMapInfo, 2000);
-                // getMapInfo();
+                // setTimeout(getMapInfo, 2000);
+                getMapInfo(); //peticio2
             })
             .then(function () {
-                setTimeout(getNearPlayers, 2000);
-                // getNearPlayers();
+                // setTimeout(getNearPlayers, 2000);
+                getNearPlayers(); //peticio 3
             }).then(function () {
-            refreshGame();
+                console.log("ha acabat fetch");
+            refreshGame1();
         }).catch((e) => {
             console.log("error: " + e);
         })
