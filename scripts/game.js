@@ -683,6 +683,9 @@ function getNearPlayers() {
     })
 }
 
+/**
+ * Función encargada de resetear el background del minimapa a color blanco
+ */
 function resetOldMapInfo() {
     for (let i = 0; i < map.getDomMatrix.length; i++) {
         for (let j = 0; j < map.getDomMatrix[i].length; j++) {
