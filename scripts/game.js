@@ -390,17 +390,36 @@ function initAttackControls() {
  * Función encargada de asignar un onClick a los controles de movimiento.
  */
 function initMoveControls() {
+
+    document.getElementById('move-northWest').addEventListener("click", function () {
+        onClickDiagonalMove("N", "O");
+    });
+
     document.getElementById('move-north').addEventListener("click", function () {
         onClickMove("N")
     });
+
+    document.getElementById('move-northEast').addEventListener("click", function () {
+        onClickDiagonalMove("N", "E");
+    });
+
     document.getElementById('move-west').addEventListener("click", function () {
         onClickMove("O")
     });
     document.getElementById('move-east').addEventListener("click", function () {
         onClickMove("E")
     });
+
+    document.getElementById('move-southWest').addEventListener("click", function () {
+        onClickDiagonalMove("S", "O");
+    });
+
     document.getElementById('move-south').addEventListener("click", function () {
         onClickMove("S")
+    });
+
+    document.getElementById('move-southEast').addEventListener("click", function () {
+        onClickDiagonalMove("S", "E");
     });
 }
 
@@ -432,9 +451,9 @@ function enableControlButtons() {
  */
 function onClickAttack(d) {
     blockControlButtons();
-    setTimeout(playerAPI.attackPlayer(playerAPI.getToken, d, function () {
+    playerAPI.attackPlayer(playerAPI.getToken, d, function () {
 //TODO: Hago algo mas?
-    }), 1500);
+    });
 }
 
 /**
@@ -444,11 +463,27 @@ function onClickAttack(d) {
  */
 function onClickMove(d) {
     blockControlButtons();
-    setTimeout(playerAPI.movePlayer(playerAPI.getToken, d, function () {
+    playerAPI.movePlayer(playerAPI.getToken, d, function () {
         getPlayerInfo();
 
-    }), 1500);
+    });
 }
+
+function onClickDiagonalMove(d1, d2) {
+    blockControlButtons();
+    playerAPI.movePlayer(playerAPI.getToken, d1, function () {
+        getPlayerInfo();
+
+        setTimeout(function () {
+            playerAPI.movePlayer(playerAPI.getToken, d2, function () {
+                getPlayerInfo();
+
+            });
+        }, 1000);
+
+    });
+}
+
 
 /**
  * Función encargada de inicializar los visores laterales (si el jugador se encuentra en una pared o esquina)
@@ -667,7 +702,7 @@ function getMapInfo() {
         let verticalAxis = player.getX;
         let horizontalAxis = player.getY;
         let playerD = player.getD;
-        console.log(playerD);
+
         let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
         playerNode.style.backgroundColor = "blue";
 
@@ -693,7 +728,7 @@ function getMapInfo() {
  */
 function refreshGame() {
     if (isGameOn) {
-        setTimeout(playerAPI.fetchRefreshGame, 1500);
+        setTimeout(playerAPI.fetchRefreshGame, 1000);
     }
 }
 

@@ -124,6 +124,7 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 callback(JSON.parse(this.responseText));
             } else {
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar obtener la información del jugador!");
                 console.log("Ha ocurrido un error en el servidor al intentar obtener la información del jugador!");
             }
         }
@@ -237,6 +238,7 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 callback(JSON.parse(this.responseText));
             } else {
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar obtener la información de los enemigos colindantes!");
                 console.log("Ha ocurrido un error en el servidor al intentar obtener la información de los enemigos colindantes!");
             }
         }
@@ -262,6 +264,7 @@ class PlayerAPI {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 callback(JSON.parse(this.responseText));
             } else {
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar obtener la información del mapa!");
                 console.log("Ha ocurrido un error en el servidor al intentar obtener la información del mapa!");
             }
         }

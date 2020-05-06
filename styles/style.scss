@@ -366,6 +366,11 @@ html {
             border: none;
             height: 100%;
           }
+
+          .btn_control:focus {
+            outline: none;
+
+          }
         }
 
 

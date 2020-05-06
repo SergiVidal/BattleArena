@@ -223,6 +223,8 @@ html {
             background: none;
             border: none;
             height: 100%; }
+          html main #bottom #east-bottom #controls .box .btn_control:focus {
+            outline: none; }
         html main #bottom #east-bottom #controls #attack-controls {
           display: grid;
           grid-template-columns: auto auto auto;
