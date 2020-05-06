@@ -1,5 +1,8 @@
 /**
- * Representa una clase PlayerAPI donde gestionar las llamadas a la API que hacen referencia al usuario.
+ * Representa una clase PlayerAPI donde gestionar todas las llamadas a la API.
+ * Se comprueban y se tratan los códigos de respuesta:
+ * Código 200: La llamada se ha realizado correctamente, por lo que se sigue el hilo de ejecución y se llama a la función Callback
+ * Código 500: La llamada no se ha realizado satisfactoriamente, por lo que no se sigue el hilo de ejecución y no se llama a la función Callback
  * @constructor
  */
 
@@ -39,8 +42,8 @@ class PlayerAPI {
                 callback(this.responseText);
             } else {
                 addTextToConsole("El nombre del Jugador ya ha sido utilizado!");
+                console.log("El nombre del Jugador ya ha sido utilizado!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -66,9 +69,9 @@ class PlayerAPI {
                 addTextToConsole("El jugador ha sido actualizado correctamente!");
                 callback();
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar actualizar el jugador!");
+                console.log("Ha ocurrido un error en el servidor al intentar actualizar el jugador!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -94,9 +97,9 @@ class PlayerAPI {
                 addTextToConsole ("El jugador ha sido eliminado correctamente!");
                 callback();
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar eliminar al jugador!");
+                console.log("Ha ocurrido un error en el servidor al intentar eliminar al jugador!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -119,12 +122,10 @@ class PlayerAPI {
     getCurrentPlayerInfo(token, callback) {
         function reqListener() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // addTextToConsole("Se ha obtenido la información del Jugador correctamente!");
                 callback(JSON.parse(this.responseText));
             } else {
-                // addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                console.log("Ha ocurrido un error en el servidor al intentar obtener la información del jugador!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -152,8 +153,8 @@ class PlayerAPI {
                 callback();
             } else {
                 addTextToConsole("Te estas chocando contra una pared!");
+                console.log("Te estas chocando contra una pared!");
             }
-            //console.log(this.status);
             enableControlButtons();
         }
 
@@ -181,9 +182,9 @@ class PlayerAPI {
                 addTextToConsole("El Jugador ha atacado a la dirección: " + d);
                 callback();
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                addTextToConsole("No hay ningún enemigo vivo en esta dirección!");
+                console.log("No hay ningún enemigo vivo en esta dirección!");
             }
-            //console.log(this.status);
             enableControlButtons();
         }
 
@@ -209,9 +210,9 @@ class PlayerAPI {
                 addTextToConsole("Se ha mostrado correctamente el Ranking");
                 callback(this.responseText);
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                addTextToConsole("Ha ocurrido un error en el servidor al intentar obtener la información del ranking!");
+                console.log("Ha ocurrido un error en el servidor al intentar obtener la información del ranking!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -234,12 +235,10 @@ class PlayerAPI {
     getNearPlayers(token, callback) {
         function reqListener() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // addTextToConsole("Se ha obtenido correctamente la información de los enemigos colindantes!");
                 callback(JSON.parse(this.responseText));
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                console.log("Ha ocurrido un error en el servidor al intentar obtener la información de los enemigos colindantes!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -261,12 +260,10 @@ class PlayerAPI {
     getMapInfo(callback) {
         function reqListener() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                // addTextToConsole("Se ha obtenido correctamente la información del mapa!");
                 callback(JSON.parse(this.responseText));
             } else {
-                addTextToConsole("Ha ocurrido un error en el Servidor! Vuelva a intentarlo!");
+                console.log("Ha ocurrido un error en el servidor al intentar obtener la información del mapa!");
             }
-            //console.log(this.status);
         }
 
         var ajaxASYNC_GET = {
@@ -282,24 +279,29 @@ class PlayerAPI {
     }
 
     /**
-     * Función encargada de refrescar el juego a tiempo real
+     * Función encargada de refrescar el juego, encadenando ciertas llamadas a la API
+     * 1 - Obtener la información del jugador actual
+     * 2 - Actualizar el jugador y sus estadísticas (HTML - Player Stats)
+     * 3 - Obtener la información del mapa junto con la localización de los enemigos para actualizar el minimapa
+     * 4 - Obtener la información de los enemigos colindantes para actualizar el visor
+     * 5 - Llamar a la función refreshGame (game.js) para que siga refrescando cada 1 segundo el juego.
      */
     fetchRefreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) //Obtener la información del jugador actual
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
             .then((response) => {
                 return response.json();
             })
-            .then((data) => {
-                player = new Player(data); //Actualizo el Jugador
-                updateViewWithPlayerInfo(); //Actualizo las estadisticas del jugador (HTML - Player Stats)
+            .then((data) => { // (2)
+                player = new Player(data);
+                updateViewWithPlayerInfo();
             })
-            .then(function () {
-                getMapInfo(); //Obtener la información del mapa para poder actualizar el minimapa
+            .then(function () { // (3)
+                getMapInfo();
             })
-            .then(function () {
-                getNearPlayers(); //Obtener la información de los enemigos colindantes
+            .then(function () {// (4)
+                getNearPlayers();
             }).then(function () {
-            refreshGame(); //Vuelvo a llamar a la función refreshGame para que siga refrescando cada 1 segundo el juego.
+            refreshGame(); // (5)
         }).catch((e) => {
             console.log("error: " + e);
         })

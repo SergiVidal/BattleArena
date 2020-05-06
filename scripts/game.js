@@ -17,7 +17,6 @@ window.onload = function () {
 
 /** Se encarga de inicializar el juego junto a sus componentes**/
 function initGame() {
-    // initObjects();
     playerAPI = new PlayerAPI();
     initMap();
     initUI();
@@ -25,7 +24,7 @@ function initGame() {
 }
 
 
-/** Inicializa los componentes de la UI **/
+/** Inicializa los componentes de la UI (Botones y sus eventos) **/
 function initUI() {
     addTextToConsole("Bienvenido a Battle Arena! (Desarrollado por <b>Sergi Vidal</b>)");
 
@@ -82,11 +81,10 @@ function addButtonsEvent() {
     document.getElementById('btn-close-ranking').addEventListener("click", closeRanking);
 
     initPlayersControls();
-
 }
 
 /**
- * Función onClick del botón Crear un nuevo jugador, se encarga de gestionar las fuciones encargadas de crear el jugador y de obtener su información mediante llamadas a la API
+ * Función onClick del botón: Crear un nuevo jugador, se encarga de gestionar las fuciones de crear el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickCreateNewPlayer() {
     let playerName = document.getElementById('input-player-name').value;
@@ -141,7 +139,7 @@ function resetOldPlayerPosition() {
 }
 
 /**
- * Función onClick del botón Revivir el jugador actual, se encarga de gestionar las fuciones encargadas de revivir el jugador y de obtener su información mediante llamadas a la API
+ * Función onClick del botón: Revivir el jugador actual, se encarga de gestionar las fuciones de revivir el jugador y de obtener su nueva información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
     closeRanking();
@@ -151,7 +149,7 @@ function onClickRevivePlayer() {
 }
 
 /**
- * Función onClick del botón Eliminar el jugador actual, se encarga de gestionar las fuciones encargadas de eliminar el jugador mediante una llamada a la API
+ * Función onClick del botón: Eliminar el jugador actual, se encarga de gestionar la fucion de eliminar el jugador mediante una llamada a la API, además de resetear la UI
  */
 function onClickDeletePlayer() {
     closeRanking();
@@ -170,7 +168,8 @@ function onClickDeletePlayer() {
 }
 
 /**
- * Función onClick del botón Mostrar Ranking, se encarga de gestionar las fuciones encargadas de Mostrar el Ranking mediante una llamada a la API
+ * Función onClick del botón: Mostrar Ranking, se encarga de gestionar las fuciones de Mostrar el Ranking mediante una llamada a la API
+ * Además se encarga de tratar los datos devueltos del servidor y modificar su formato mediante splits de (\n) y (,)
  */
 function onClickShowRanking() {
     playerAPI.showRanking(function (object) {
@@ -179,8 +178,6 @@ function onClickShowRanking() {
             ranking.removeChild(ranking.lastChild);
         }
 
-        //Realizo splits para obtener el formato deseado a la hora de mostrar el ranking, primero realizo un split para obtener cada 1 de las lineas (\n),
-        // luego para partir cada una de estas y obtener el nombre del jugador que ha matado y el que ha muerto (,)
         let linesArr = object.split('\n');
         for (let i = 0; i < linesArr.length - 1; i++) {
             let playerArr = linesArr[i].split(',');
@@ -191,7 +188,7 @@ function onClickShowRanking() {
 }
 
 /**
- * Función encargada de inicializar el mapa
+ * Función encargada de inicializar y crear el mapa
  */
 function initMap() {
     map = new Map();
@@ -210,12 +207,11 @@ function restartVisor() {
 }
 
 /**
- * Función encargada de actualizar informació del usuario en el HTMl
+ * Función encargada de actualizar la informació del usuario en el HTMl - Player Stats
  */
 function updateViewWithPlayerInfo() {
     let playerStats = document.getElementById('stats');
     playerStats.innerHTML = "";
-    // url('images/floor.png')
     if (player !== null) {
         document.getElementById('player-image').src = player.getImg;
         createElement("Name: " + player.name, playerStats, "H3");
@@ -233,7 +229,10 @@ function updateViewWithPlayerInfo() {
 }
 
 /**
- * Función encargada de crear un elemento H3
+ * Función encargada de crear un nuevo elemento HTML y añadirlo dentro de otro
+ * @param data - Texto/Información que contendrá el nuevo nodo/tag (childNode)
+ * @param parentNode - Elemento HTML que en su interior contendrá el nuevo elemento (tag)
+ * @param childNode - Tipo de elemento nuevo (tag)
  */
 function createElement(data, parentNode, childNode) {
     let node = document.createElement(childNode);
@@ -315,8 +314,8 @@ function enableRankingButton() {
 }
 
 /**
- * FUncion encargada de añadir logs a la consola
- * @param text - Información de lo sucedido
+ * Función encargada de añadir logs a la consola
+ * @param text - Información a añadir
  */
 function addTextToConsole(text) {
     let console = document.getElementById('console');
@@ -324,7 +323,7 @@ function addTextToConsole(text) {
 }
 
 /**
- * Se encarga de crear el Map segun las filas y columnas definidas
+ * Se encarga de crear el Map segun las filas y columnas definidas por defecto
  */
 function createMap() {
     let mapUI = document.getElementById('map');
@@ -427,7 +426,8 @@ function enableControlButtons() {
 }
 
 /**
- * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el ataque de un Jugador.
+ * Función onClick del botón: Atacar a un Jugador enemigo, se encarga de gestionar la función de Atacar mediante una llamada a la API
+ * Bloquea los controles del jugador hasta haber terminado la llamada, esto provoca un efecto visual
  * @param d - Dirección donde va dirigido el ataque
  */
 function onClickAttack(d) {
@@ -438,7 +438,8 @@ function onClickAttack(d) {
 }
 
 /**
- * Función onClick encargada de llamar a la función de la clase PlayerAPI encargada de realizar el movimiento de un Jugador.
+ * Función onClick del botón: Mover al Jugador, se encarga de gestionar la función de Mover mediante una llamada a la API
+ * Bloquea los controles del jugador hasta haber terminado la llamada, esto provoca un efecto visual
  * @param d - Dirección donde moverse
  */
 function onClickMove(d) {
@@ -622,7 +623,7 @@ function setVisorImage(node, image) {
 }
 
 /**
- * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener los enemigos cercados
+ * Llama a la función de la clase PlayerAPI encargada de obtener los enemigos cercados
  */
 function getNearPlayers() {
     playerAPI.getNearPlayers(playerAPI.getToken, function (object) {
@@ -646,7 +647,10 @@ function resetOldMapInfo() {
 }
 
 /**
- * Función encargada de llamar a la función de la clase PlayerAPI encargada de obtener la información del mapa y de actualizarlo
+ * Llamar a la función de la clase PlayerAPI encargada de obtener la información del mapa y de actualizarlo (tanto visual como lógicamente)
+ * Si se encuentran enemigos en el mapa, la casilla correspondiente se pintará en rojo
+ * La casilla donde se encuentre el jugador se pintará en azul,
+ * además de mostrar la dirección a la que esta mirando mediante una flecha (rotando la imagen según necesidades)
  */
 function getMapInfo() {
     playerAPI.getMapInfo(function (object) {
@@ -685,7 +689,7 @@ function getMapInfo() {
 }
 
 /**
- * Función encargada de refrescar el juego a tiempo real
+ * Función encargada de refrescar el juego continuamente con un timeout, siempre y cuando haya un Jugador creado.
  */
 function refreshGame() {
     if (isGameOn) {
