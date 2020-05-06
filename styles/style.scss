@@ -78,18 +78,19 @@ html {
           overflow-y: scroll;
           max-height: 150px;
           margin-bottom: 10px;
+
           ul {
             margin: 0;
             padding: 0;
 
-            li{
+            li {
               margin: 5px;
             }
           }
         }
       }
 
-      #btn-close-ranking{
+      #btn-close-ranking {
         color: $white_color;
         padding: 16px 20px;
         border: none;
@@ -141,7 +142,7 @@ html {
       }
 
       /* Add some hover effects to buttons */
-      .form-container .btn:hover, .ranking-popup .btn:hover{
+      .form-container .btn:hover, .ranking-popup .btn:hover {
         opacity: 1;
       }
 
@@ -173,7 +174,8 @@ html {
 
     #top {
       display: grid;
-      grid-template-columns: 30% 40% 30%;
+      //grid-template-columns: 30% 40% 30%;
+      grid-template-columns: 35% 35% 30%;
       max-height: 500px;
 
       #west-top {
@@ -184,33 +186,84 @@ html {
           text-align: center;
         }
 
-        #compass {
-          img {
-            width: 75px;
-            color: white;
-            margin: 5px auto;
-            display: block;
-          }
-        }
-
-        #map {
-          margin: 0 auto;
+        #grid-map {
           display: grid;
-          grid-template-columns: auto auto auto auto auto auto;
-          grid-template-rows: auto auto auto auto auto auto;
-          max-width: 282px;
-          border: 1px solid $white_color;
-        }
+          grid-template-columns: auto auto;
 
-        .cell {
-          border-radius: 5px;
-          align-self: stretch;
-          background-color: $grey_color;
-          border: 1px solid $black_color;
-          width: 45px;
-          height: 45px;
-          //background-size: 20px;
-          //background-repeat: no-repeat;
+          #compass {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto;
+            margin-left: 20px;
+            margin-top: 35px;
+
+            #north {
+              grid-column: 2/3;
+              grid-row: 1/2;
+              text-align: center;
+
+              h1 {
+                margin-bottom: 0;
+              }
+            }
+
+            #west {
+              grid-column: 1/2;
+              grid-row: 2/3;
+              text-align: center;
+
+            }
+
+            #east {
+              grid-column: 3/4;
+              grid-row: 2/3;
+              text-align: center;
+
+            }
+
+            #south {
+              grid-column: 2/3;
+              grid-row: 3/4;
+              text-align: center;
+
+              h1 {
+                margin-top: 0;
+              }
+            }
+
+            h1 {
+              color: $white_color;
+            }
+
+            img {
+              width: 75px;
+              color: $white_color;
+              margin: 5px auto;
+              display: block;
+              grid-column: 2/3;
+              grid-row: 2/3;
+            }
+          }
+
+          #map {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-rows: auto auto auto auto auto auto;
+            //max-width: 282px;
+            border: 1px solid $white_color;
+          }
+
+          .cell {
+            border-radius: 5px;
+            align-self: stretch;
+            background-color: $grey_color;
+            border: 1px solid $black_color;
+            width: 50px;
+            height: 50px;
+            //background-size: 20px;
+            //background-repeat: no-repeat;
+          }
         }
 
       }
@@ -272,6 +325,7 @@ html {
       display: grid;
       grid-template-columns: 60% 40%;
       max-height: 500px;
+      margin-top: 20px;
 
       #middle-bottom {
         max-height: 500px;

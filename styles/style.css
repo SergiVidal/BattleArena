@@ -108,32 +108,64 @@ html {
     text-align: center; }
   html main #top {
     display: grid;
-    grid-template-columns: 30% 40% 30%;
+    grid-template-columns: 35% 35% 30%;
     max-height: 500px; }
     html main #top #west-top {
       max-height: 500px; }
       html main #top #west-top h3 {
         color: white;
         text-align: center; }
-      html main #top #west-top #compass img {
-        width: 75px;
-        color: white;
-        margin: 5px auto;
-        display: block; }
-      html main #top #west-top #map {
-        margin: 0 auto;
+      html main #top #west-top #grid-map {
         display: grid;
-        grid-template-columns: auto auto auto auto auto auto;
-        grid-template-rows: auto auto auto auto auto auto;
-        max-width: 282px;
-        border: 1px solid white; }
-      html main #top #west-top .cell {
-        border-radius: 5px;
-        align-self: stretch;
-        background-color: #f1f1f1;
-        border: 1px solid black;
-        width: 45px;
-        height: 45px; }
+        grid-template-columns: auto auto; }
+        html main #top #west-top #grid-map #compass {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto;
+          margin-left: 20px;
+          margin-top: 35px; }
+          html main #top #west-top #grid-map #compass #north {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            text-align: center; }
+            html main #top #west-top #grid-map #compass #north h1 {
+              margin-bottom: 0; }
+          html main #top #west-top #grid-map #compass #west {
+            grid-column: 1/2;
+            grid-row: 2/3;
+            text-align: center; }
+          html main #top #west-top #grid-map #compass #east {
+            grid-column: 3/4;
+            grid-row: 2/3;
+            text-align: center; }
+          html main #top #west-top #grid-map #compass #south {
+            grid-column: 2/3;
+            grid-row: 3/4;
+            text-align: center; }
+            html main #top #west-top #grid-map #compass #south h1 {
+              margin-top: 0; }
+          html main #top #west-top #grid-map #compass h1 {
+            color: white; }
+          html main #top #west-top #grid-map #compass img {
+            width: 75px;
+            color: white;
+            margin: 5px auto;
+            display: block;
+            grid-column: 2/3;
+            grid-row: 2/3; }
+        html main #top #west-top #grid-map #map {
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: auto auto auto auto auto auto;
+          grid-template-rows: auto auto auto auto auto auto;
+          border: 1px solid white; }
+        html main #top #west-top #grid-map .cell {
+          border-radius: 5px;
+          align-self: stretch;
+          background-color: #f1f1f1;
+          border: 1px solid black;
+          width: 50px;
+          height: 50px; }
     html main #top #middle-top {
       max-height: 500px; }
       html main #top #middle-top #visor {
@@ -162,7 +194,8 @@ html {
   html main #bottom {
     display: grid;
     grid-template-columns: 60% 40%;
-    max-height: 500px; }
+    max-height: 500px;
+    margin-top: 20px; }
     html main #bottom #middle-bottom {
       max-height: 500px; }
       html main #bottom #middle-bottom #console {
