@@ -10,6 +10,7 @@ let map;
 /** @type {Boolean} */
 let isGameOn;
 let bgAudio;
+let isRespawn;
 
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
@@ -40,6 +41,7 @@ function initGame() {
     initMap();
     initUI();
     isGameOn = false;
+    isRespawn = false;
 }
 
 /** Inicializa los componentes de la UI (Botones y sus eventos) **/
@@ -144,6 +146,10 @@ function getPlayerInfo() {
     playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
         resetOldPlayerPosition();
         player = new Player(object);
+        if(isRespawn){
+            Player.prototype.maxVp = player.getVp;
+            isRespawn = false;
+        }
         updateViewWithPlayerInfo();
         getMapInfo();
         getNearPlayers();
@@ -166,6 +172,7 @@ function resetOldPlayerPosition() {
  * Función onClick del botón: Revivir el jugador actual, se encarga de gestionar las fuciones de revivir el jugador y de obtener su nueva información mediante llamadas a la API
  */
 function onClickRevivePlayer() {
+    isRespawn = true;
     closeRanking();
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function () {
         getPlayerInfo();
@@ -242,11 +249,10 @@ function updateViewWithPlayerInfo() {
         createElement("Attack: " + player.attack, playerStats, "H3");
         createElement("Defense: " + player.defense, playerStats, "H3");
         createElement("", playerStats, "H3");
-        if(player.getVp > 0 ) {
+        if (player.getVp > 0) {
             playerStats.lastChild.innerHTML = "Vitality Points: " + player.getVp + " (" + getVpPercentage() + "%)";
-        }else{
+        } else {
             playerStats.lastChild.innerHTML = "Vitality Points: 0 (0%)";
-
         }
         // document.getElementById("myList").lastChild.innerHTML;
     } else {
@@ -256,7 +262,6 @@ function updateViewWithPlayerInfo() {
         createElement("Defense: -", playerStats, "H3");
         createElement("Vitality Points: -", playerStats, "H3");
     }
-
 }
 
 /**
@@ -627,7 +632,7 @@ function initCornerVisors() {
  */
 function updateVisor(enemy) {
     if (player.getName !== enemy.getName && enemy.getVp > 0) {
-         let enemyImg = "url('images/enemy.png')";
+        let enemyImg = "url('images/enemy.png')";
 
         let horizontalAxis = enemy.getX;
         let verticalAxis = enemy.getY;
@@ -748,7 +753,7 @@ function getMapInfo() {
             playerCell.style.transform = "rotate(180deg)";
         } else if (playerD === "O") {
             playerCell.style.transform = "rotate(-90deg)";
-        } else{
+        } else {
             playerCell.style.transform = "rotate(0)"
         }
     })
@@ -763,9 +768,7 @@ function refreshGame() {
     }
 }
 
-//TODO: Añadir porcentajes a la vida, añadir cantidad de enemigos muertos en las estadisticas
+//TODO: añadir cantidad de enemigos muertos en las estadisticas
 //TODO: Añadir animacions y efectos (visuales y/o sonoros)
 //TODO: Añadir al minimapa informacion aumentada (colores distintos segun puntos de vida... )
-//TODO: Hay un visor que muestra todos lo elementos, información de las APIs, información transformada  (porcentages…) o múltiples visores.
 //TODO: Al Atacar > intentar calcular el daño realizado y recibido
-//TODO: Añadir nuevos movimientos (huida: 2 pasos a la vez, ir en diagonal: 2 pasos a la vez...)

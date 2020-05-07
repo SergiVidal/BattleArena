@@ -183,8 +183,13 @@ class PlayerAPI {
                 addTextToConsole("El Jugador ha atacado a la dirección: " + d);
                 callback();
             } else {
-                addTextToConsole("No hay ningún enemigo vivo en esta dirección!");
-                console.log("No hay ningún enemigo vivo en esta dirección!");
+                if(player.getVp > 0 ) {
+                    addTextToConsole("No hay ningún enemigo vivo en esta dirección!");
+                    console.log("No hay ningún enemigo vivo en esta dirección!");
+                }else{
+                    addTextToConsole("Los fantasmas no pueden atacar!");
+                    console.log("Los fantasmas no pueden atacar!");
+                }
             }
             enableControlButtons();
         }
