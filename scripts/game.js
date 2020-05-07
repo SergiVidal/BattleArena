@@ -185,6 +185,7 @@ function onClickRevivePlayer() {
 function onClickDeletePlayer() {
     closeRanking();
     playerAPI.deleteCurrentPlayer(playerAPI.getToken, function () {
+        bgAudio.pause();
         player = null;
         updateViewWithPlayerInfo();
         enableCreatePlayerButton();
