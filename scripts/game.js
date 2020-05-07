@@ -713,8 +713,24 @@ function getNearPlayers() {
         for (let i = 0; i < object.length; i++) {
             let enemy = new Player(object[i]);
             updateVisor(enemy);
+            updateMapColorCell(enemy);
         }
     })
+}
+
+function updateMapColorCell(enemy) {
+    if (player.getName !== enemy.getName && enemy.getVp <= 0) {
+        // if (enemy.getY !== player.getY) {
+        //     if(enemy.getX !== player.getX) {
+                console.log(enemy);
+                console.log(player);
+
+                let node = map.getDomCell(enemy.getY, enemy.getX);
+                node.style.backgroundImage = "none";
+                node.style.backgroundColor = "grey"; //TODO: Me sigue pintando los enemigos muertos ya que getMapInfo solo devuelve sus coordenadas!
+            }
+        // }
+    // }
 }
 
 /**

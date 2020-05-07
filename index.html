@@ -38,7 +38,7 @@
         <button id="ranking" class="action-button">Show Ranking</button>
         <div class="ranking-popup">
             <h3>Ranking</h3>
-            <h4 id="kills"></h4>
+            <h4 id="kills">Kills: 0</h4>
             <div id="ranking-content">
                 <ul id="ranking-list">
 
@@ -56,16 +56,28 @@
                     <h3>Map</h3>
                 </div>
                 <div id="grid-map">
-                    <div id="compass">
-                        <div id="north"><h1>N</h1></div>
-                        <div id="west"><h1>W</h1></div>
-                        <div id="east"><h1>E</h1></div>
-                        <div id="south"><h1>S</h1></div>
-                        <img src="images/compass_red.png" alt="compass">
+
+                    <div id="map-info">
+                        <div id="compass">
+                            <div id="north"><h1>N</h1></div>
+                            <div id="west"><h1>W</h1></div>
+                            <div id="east"><h1>E</h1></div>
+                            <div id="south"><h1>S</h1></div>
+                            <img src="images/compass_red.png" alt="compass">
+                        </div>
+                        <div id="legend">
+                            <img src="images/blue.PNG" alt="blue-info">
+                            <h3>Player</h3></br>
+                            <img src="images/red.PNG" alt="red-info">
+                            <h3>Enemy</h3></br>
+                            <img src="images/grey.PNG" alt="blinking-dark-info">
+                            <h3>Ghost</h3></br>
+                        </div>
                     </div>
                     <div id="map">
                     </div>
                 </div>
+
             </div>
             <div id="middle-top">
                 <div class="title">

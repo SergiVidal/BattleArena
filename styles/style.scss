@@ -11,10 +11,18 @@ $grey_color: #f1f1f1;
 }
 
 @keyframes createPlayerAnimation {
-  0%   {background-color: $primary_color;}
-  25%  {background-color: $green_color;}
-  50%  {background-color: $green_color;}
-  100% {background-color: $primary_color;}
+  0% {
+    background-color: $primary_color;
+  }
+  25% {
+    background-color: $green_color;
+  }
+  50% {
+    background-color: $green_color;
+  }
+  100% {
+    background-color: $primary_color;
+  }
 }
 
 h3, h4, button, a {
@@ -176,67 +184,77 @@ html {
       #west-top {
         max-height: 500px;
 
-        h3 {
-          color: $white_color;
-          text-align: center;
-        }
-
         #grid-map {
           display: grid;
           grid-template-columns: auto auto;
 
-          #compass {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            grid-template-rows: auto auto auto;
-            margin-left: 20px;
-            margin-top: 35px;
-
-            #north {
-              grid-column: 2/3;
-              grid-row: 1/2;
-              text-align: center;
-
-              h1 {
-                margin-bottom: 0;
+          #map-info {
+            #legend {
+              margin-left: 45px;
+              margin-top: 20px;
+              img {
+                height: 35px;
               }
             }
 
-            #west {
-              grid-column: 1/2;
-              grid-row: 2/3;
-              text-align: center;
-
+            h3 {
+              display: inline;
+              color: $white_color;
+              vertical-align: super;
             }
 
-            #east {
-              grid-column: 3/4;
-              grid-row: 2/3;
-              text-align: center;
+            #compass {
+              display: grid;
+              grid-template-columns: auto auto auto;
+              grid-template-rows: auto auto auto;
+              margin-left: 30px;
 
-            }
+              #north {
+                grid-column: 2/3;
+                grid-row: 1/2;
+                text-align: center;
 
-            #south {
-              grid-column: 2/3;
-              grid-row: 3/4;
-              text-align: center;
+                h1 {
+                  margin-bottom: 0;
+                }
+              }
+
+              #west {
+                grid-column: 1/2;
+                grid-row: 2/3;
+                text-align: right;
+
+              }
+
+              #east {
+                grid-column: 3/4;
+                grid-row: 2/3;
+                text-align: left;
+
+              }
+
+              #south {
+                grid-column: 2/3;
+                grid-row: 3/4;
+                text-align: center;
+
+                h1 {
+                  margin: 0;
+                }
+              }
 
               h1 {
-                margin-top: 0;
+                color: $white_color;
               }
-            }
 
-            h1 {
-              color: $white_color;
-            }
-
-            img {
-              width: 75px;
-              color: $white_color;
-              margin: 5px auto;
-              display: block;
-              grid-column: 2/3;
-              grid-row: 2/3;
+              img {
+                width: 75px;
+                color: $white_color;
+                margin: 5px auto;
+                display: block;
+                grid-column: 2/3;
+                grid-row: 2/3;
+              }
             }
           }
 
@@ -344,32 +362,32 @@ html {
           //grid-template-rows: auto;
           grid-template-columns: auto auto;
 
-        .box {
-          border-radius: 5px;
-          align-self: stretch;
-          height: 80px;
-          width: 80px;
-          border: 1px solid $white_color;
+          .box {
+            border-radius: 5px;
+            align-self: stretch;
+            height: 80px;
+            width: 80px;
+            border: 1px solid $white_color;
 
-          .control-image {
-            width: 100%;
-            height: 100%;
+            .control-image {
+              width: 100%;
+              height: 100%;
+            }
+
+            .btn_control {
+              background: none;
+              border: none;
+              height: 100%;
+            }
+
+            .btn_control:focus {
+              outline: none;
+
+            }
           }
 
-          .btn_control {
-            background: none;
-            border: none;
-            height: 100%;
-          }
 
-          .btn_control:focus {
-            outline: none;
-
-          }
-        }
-
-
-          #attack-controls{
+          #attack-controls {
             display: grid;
             grid-template-columns: auto auto auto;
             grid-template-rows: auto auto auto;
@@ -385,11 +403,13 @@ html {
               grid-column: 1/2;
               grid-row: 2/3;
             }
+
             #attack-east {
               grid-column: 3/4;
               grid-row: 2/3;
 
             }
+
             #attack-south {
               grid-column: 2/3;
               grid-row: 3/4;
@@ -397,7 +417,7 @@ html {
 
           }
 
-          #move-controls{
+          #move-controls {
             display: grid;
             grid-template-columns: auto auto auto;
             grid-template-rows: auto auto auto;
@@ -437,6 +457,7 @@ html {
                 transform: rotate(180deg);
               }
             }
+
             #move-east {
               grid-column: 3/4;
               grid-row: 2/3;
@@ -463,6 +484,7 @@ html {
                 transform: rotate(90deg);
               }
             }
+
             #move-southEast {
               grid-column: 3/4;
               grid-row: 3/4;

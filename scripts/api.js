@@ -313,7 +313,7 @@ class PlayerAPI {
             })
             .then(function () {// (4)
                 if (isGameOn) {// (6)
-                    setTimeout(getNearPlayers, 1000);
+                    setTimeout(getNearPlayers, 750);
                 }
             }).then(function () {
             refreshGame(); // (5)
