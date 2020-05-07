@@ -10,19 +10,8 @@ const COLUMNS = 6;
  * */
 class Map {
     constructor() {
-        /** @type {Array.<boolean[]>} */
-        this.boolMatrix = [];
-
         /** @type {Array.<Object[]>} */
         this.domMatrix = [];
-    }
-
-    /**
-     * Obtiene la matriz de booleans
-     * @returns {Array<boolean[]>} - Matriz de boolean
-     */
-    get getBoolMatrix() {
-        return this.boolMatrix;
     }
 
     /**
@@ -31,18 +20,6 @@ class Map {
      */
     get getDomMatrix() {
         return this.domMatrix;
-    }
-
-    /**
-     * Inicializa la matriz de booleanos a FALSE
-     */
-    initBoolMatrix() {
-        for (let i = 0; i < ROWS; i++) {
-            this.boolMatrix[i] = [];
-            for (let j = 0; j < COLUMNS; j++) {
-                this.boolMatrix[i][j] = false;
-            }
-        }
     }
 
     /**
@@ -58,16 +35,6 @@ class Map {
     }
 
     /**
-     * Obtiene una casilla de la matriz de booleans
-     * @param x - Fila
-     * @param y - Columna
-     * @returns {boolean} - Valor de la casilla
-     */
-    getBoolCell(x, y){
-        return this.getBoolMatrix[x][y];
-    }
-
-    /**
      * Obtiene una casilla de la matriz de elementos HTML
      * @param x - Fila
      * @param y - Columna
@@ -75,16 +42,6 @@ class Map {
      */
     getDomCell(x, y){
         return this.getDomMatrix[x][y];
-    }
-
-    /**
-     * Modifica una casilla de la matriz de booleans
-     * @param x - Fila
-     * @param y - Columna
-     * @param boolean - Valor de la casilla
-     */
-    setBoolCell(x, y, boolean){
-        this.getBoolMatrix[x][y] = boolean;
     }
 
     /**

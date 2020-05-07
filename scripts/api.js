@@ -5,7 +5,6 @@
  * Código 500: La llamada no se ha realizado satisfactoriamente, por lo que no se sigue el hilo de ejecución y no se llama a la función Callback
  * @constructor
  */
-
 class PlayerAPI {
     constructor() {
         /**
@@ -321,5 +320,4 @@ class PlayerAPI {
             console.log("error: " + e);
         })
     }
-
 }

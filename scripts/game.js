@@ -9,7 +9,11 @@ let map;
 
 /** @type {Boolean} */
 let isGameOn;
+
+/** @type {Object} */
 let bgAudio;
+
+/** @type {Boolean} */
 let isRespawn;
 
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
@@ -165,7 +169,6 @@ function resetOldPlayerPosition() {
     let verticalAxis = player.getX;
     let horizontalAxis = player.getY;
 
-    map.getBoolMatrix[horizontalAxis][verticalAxis] = false;
     map.getDomMatrix[horizontalAxis][verticalAxis].style.backgroundColor = "white";
     map.getDomMatrix[horizontalAxis][verticalAxis].style.backgroundImage = "none";
 }
@@ -232,7 +235,6 @@ function onClickShowRanking() {
  */
 function initMap() {
     map = new Map();
-    map.initBoolMatrix();
     map.initDomMatrix();
     createMap();
 }
@@ -265,7 +267,6 @@ function updateViewWithPlayerInfo() {
             document.getElementById('revive-player').style.animation = "createPlayerAnimation 5s infinite";
             playerStats.lastChild.innerHTML = "Vitality Points: 0 (0%)";
         }
-        // document.getElementById("myList").lastChild.innerHTML;
     } else {
         document.getElementById('player-image').src = "images/skull.png";
         createElement("Name: -", playerStats, "H3");
@@ -718,19 +719,16 @@ function getNearPlayers() {
     })
 }
 
+/**
+ * Comprueba si los enemigos adyacentes estas muertos, y si lo estan, pinta su casilla de gris (ghost)
+ * @param enemy - Enemigo adyacente
+ */
 function updateMapColorCell(enemy) {
     if (player.getName !== enemy.getName && enemy.getVp <= 0) {
-        // if (enemy.getY !== player.getY) {
-        //     if(enemy.getX !== player.getX) {
-                console.log(enemy);
-                console.log(player);
-
-                let node = map.getDomCell(enemy.getY, enemy.getX);
-                node.style.backgroundImage = "none";
-                node.style.backgroundColor = "grey"; //TODO: Me sigue pintando los enemigos muertos ya que getMapInfo solo devuelve sus coordenadas!
-            }
-        // }
-    // }
+        let node = map.getDomCell(enemy.getY, enemy.getX);
+        node.style.backgroundImage = "none";
+        node.style.backgroundColor = "grey";
+    }
 }
 
 /**
@@ -753,14 +751,12 @@ function resetOldMapInfo() {
 function getMapInfo() {
     playerAPI.getMapInfo(function (object) {
         resetOldMapInfo();
-        // resetOldPlayerPosition();
         for (let i = 0; i < object.length; i++) {
             let verticalAxis = object[i][0];
             let horizontalAxis = object[i][1];
-            map.setBoolCell(horizontalAxis, verticalAxis, true);
             let node = map.getDomCell(horizontalAxis, verticalAxis);
             node.style.backgroundImage = "none";
-            node.style.backgroundColor = "#ec2d42"; //TODO: Me sigue pintando los enemigos muertos ya que getMapInfo solo devuelve sus coordenadas!
+            node.style.backgroundColor = "#ec2d42";
         }
         let verticalAxis = player.getX;
         let horizontalAxis = player.getY;
@@ -794,7 +790,3 @@ function refreshGame() {
         setTimeout(playerAPI.fetchRefreshGame, 2000);
     }
 }
-
-//TODO: Añadir animacions y efectos (visuales y/o sonoros)
-//TODO: Añadir al minimapa informacion aumentada (colores distintos segun puntos de vida... )
-//TODO: Al Atacar > intentar calcular el daño realizado y recibido
