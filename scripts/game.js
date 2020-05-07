@@ -73,6 +73,7 @@ function closeCreatePlayerForm() {
  * Se encarga de hacer aparecer el ranking
  */
 function openRanking() {
+    document.getElementById("kills").innerHTML = "Your kills: " + Player.prototype.kills;
     blockRankingButton();
     document.getElementsByClassName("ranking-popup")[0].style.display = "block";
 }
@@ -146,7 +147,7 @@ function getPlayerInfo() {
     playerAPI.getCurrentPlayerInfo(playerAPI.getToken, function (object) {
         resetOldPlayerPosition();
         player = new Player(object);
-        if(isRespawn){
+        if (isRespawn) {
             Player.prototype.maxVp = player.getVp;
             isRespawn = false;
         }
@@ -209,11 +210,15 @@ function onClickShowRanking() {
         while (ranking.firstChild) {
             ranking.removeChild(ranking.lastChild);
         }
+        Player.prototype.kills = 0;
 
         let linesArr = object.split('\n');
         for (let i = 0; i < linesArr.length - 1; i++) {
             let playerArr = linesArr[i].split(',');
             createElement(playerArr[0] + " => " + playerArr[1], ranking, "LI");
+            if (playerArr[0] === player.getName) {
+                Player.prototype.kills = Player.prototype.kills + 1;
+            }
         }
         openRanking();
     });

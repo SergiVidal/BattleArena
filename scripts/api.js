@@ -308,7 +308,7 @@ class PlayerAPI {
                     getMapInfo();
                 })
                 .then(function () {// (4)
-                    getNearPlayers();
+                    setTimeout(getNearPlayers,1000);
                 }).then(function () {
                 refreshGame(); // (5)
             }).catch((e) => {

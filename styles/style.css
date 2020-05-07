@@ -1,10 +1,7 @@
 @font-face {
   font-family: Gotham_medium;
   src: url("../font/gotham_medium.otf"); }
-@font-face {
-  font-family: Gotham_thin;
-  src: url("../font/gotham_thin.otf"); }
-h3, a {
+h3, h4, button, a {
   font-family: Gotham_medium; }
 
 html {
@@ -29,8 +26,6 @@ html {
       /* Set a style for the submit/login button */
       /* Add a red background color to the cancel button */
       /* Add some hover effects to buttons */ }
-      html header #header-right label b {
-        font-family: Gotham_medium; }
       html header #header-right form button {
         margin: 0 20px; }
       html header #header-right .form-popup {
@@ -86,8 +81,7 @@ html {
         cursor: pointer;
         width: 86%;
         margin-bottom: 10px;
-        opacity: 0.8;
-        font-family: Gotham_medium; }
+        opacity: 0.8; }
       html header #header-right .form-container .cancel, html header #header-right .ranking-popup .cancel {
         background-color: #ec2d42; }
       html header #header-right .form-container .btn:hover, html header #header-right .ranking-popup .btn:hover {
@@ -95,7 +89,6 @@ html {
       html header #header-right #new-player {
         margin-left: 3px !important; }
       html header #header-right .action-button {
-        font-family: Gotham_medium;
         padding: 5px 20px;
         margin-left: 50px;
         color: white;

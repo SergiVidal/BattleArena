@@ -10,12 +10,7 @@ $grey_color: #f1f1f1;
   src: url("../font/gotham_medium.otf");
 }
 
-@font-face {
-  font-family: Gotham_thin;
-  src: url("../font/gotham_thin.otf");
-}
-
-h3, a {
+h3, h4, button, a {
   font-family: Gotham_medium;
 
 }
@@ -45,11 +40,6 @@ html {
 
     #header-right {
       padding: 50px 50px;
-
-      label b {
-        font-family: Gotham_medium;
-
-      }
 
       form button {
         margin: 0 20px;
@@ -132,8 +122,6 @@ html {
         width: 86%;
         margin-bottom: 10px;
         opacity: 0.8;
-        font-family: Gotham_medium;
-
       }
 
       /* Add a red background color to the cancel button */
@@ -151,7 +139,6 @@ html {
       }
 
       .action-button {
-        font-family: Gotham_medium;
         padding: 5px 20px;
         margin-left: 50px;
         color: $white_color;
