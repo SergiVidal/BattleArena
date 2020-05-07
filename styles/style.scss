@@ -10,6 +10,13 @@ $grey_color: #f1f1f1;
   src: url("../font/gotham_medium.otf");
 }
 
+@keyframes createPlayerAnimation {
+  0%   {background-color: $primary_color;}
+  25%  {background-color: $green_color;}
+  50%  {background-color: $green_color;}
+  100% {background-color: $primary_color;}
+}
+
 h3, h4, button, a {
   font-family: Gotham_medium;
 
@@ -136,6 +143,7 @@ html {
 
       #new-player {
         margin-left: 3px !important;
+        animation: createPlayerAnimation 5s infinite;
       }
 
       .action-button {

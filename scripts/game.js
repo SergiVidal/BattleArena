@@ -112,6 +112,7 @@ function getVpPercentage() {
  * Función onClick del botón: Crear un nuevo jugador, se encarga de gestionar las fuciones de crear el jugador y de obtener su información mediante llamadas a la API
  */
 function onClickCreateNewPlayer() {
+    document.getElementById('new-player').style.animation = "none";
     startBgAudio();
     let playerName = document.getElementById('input-player-name').value;
     if (playerName.length > 0 && playerName.startsWith(" ") !== true) {
@@ -176,6 +177,7 @@ function onClickRevivePlayer() {
     isRespawn = true;
     closeRanking();
     playerAPI.respawnCurrentPlayer(playerAPI.getToken, function () {
+        document.getElementById('revive-player').style.animation = "none";
         getPlayerInfo();
     });
 }
@@ -186,6 +188,7 @@ function onClickRevivePlayer() {
 function onClickDeletePlayer() {
     closeRanking();
     playerAPI.deleteCurrentPlayer(playerAPI.getToken, function () {
+        document.getElementById('revive-player').style.animation = "none";
         bgAudio.pause();
         player = null;
         updateViewWithPlayerInfo();
@@ -258,6 +261,8 @@ function updateViewWithPlayerInfo() {
         if (player.getVp > 0) {
             playerStats.lastChild.innerHTML = "Vitality Points: " + player.getVp + " (" + getVpPercentage() + "%)";
         } else {
+            addTextToConsole("<b>Has muerto! Haz click en el botón Respawn Player!</b>");
+            document.getElementById('revive-player').style.animation = "createPlayerAnimation 5s infinite";
             playerStats.lastChild.innerHTML = "Vitality Points: 0 (0%)";
         }
         // document.getElementById("myList").lastChild.innerHTML;
@@ -774,7 +779,6 @@ function refreshGame() {
     }
 }
 
-//TODO: añadir cantidad de enemigos muertos en las estadisticas
 //TODO: Añadir animacions y efectos (visuales y/o sonoros)
 //TODO: Añadir al minimapa informacion aumentada (colores distintos segun puntos de vida... )
 //TODO: Al Atacar > intentar calcular el daño realizado y recibido

@@ -1,6 +1,15 @@
 @font-face {
   font-family: Gotham_medium;
   src: url("../font/gotham_medium.otf"); }
+@keyframes createPlayerAnimation {
+  0% {
+    background-color: #ec2d42; }
+  25% {
+    background-color: #1ed760; }
+  50% {
+    background-color: #1ed760; }
+  100% {
+    background-color: #ec2d42; } }
 h3, h4, button, a {
   font-family: Gotham_medium; }
 
@@ -87,7 +96,8 @@ html {
       html header #header-right .form-container .btn:hover, html header #header-right .ranking-popup .btn:hover {
         opacity: 1; }
       html header #header-right #new-player {
-        margin-left: 3px !important; }
+        margin-left: 3px !important;
+        animation: createPlayerAnimation 5s infinite; }
       html header #header-right .action-button {
         padding: 5px 20px;
         margin-left: 50px;

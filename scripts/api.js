@@ -94,7 +94,7 @@ class PlayerAPI {
     deleteCurrentPlayer(token, callback) {
         function reqListener() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                addTextToConsole ("El jugador ha sido eliminado correctamente!");
+                addTextToConsole("El jugador ha sido eliminado correctamente!");
                 callback();
             } else {
                 addTextToConsole("Ha ocurrido un error en el servidor al intentar eliminar al jugador!");
@@ -183,10 +183,10 @@ class PlayerAPI {
                 addTextToConsole("El Jugador ha atacado a la dirección: " + d);
                 callback();
             } else {
-                if(player.getVp > 0 ) {
+                if (player.getVp > 0) {
                     addTextToConsole("No hay ningún enemigo vivo en esta dirección!");
                     console.log("No hay ningún enemigo vivo en esta dirección!");
-                }else{
+                } else {
                     addTextToConsole("Los fantasmas no pueden atacar!");
                     console.log("Los fantasmas no pueden atacar!");
                 }
@@ -285,7 +285,7 @@ class PlayerAPI {
 
         ajaxASYNC_GET.request("http://puigpedros.salleurl.edu/pwi/arena/api/map");
     }
-
+//TODO: Preguntar (6)
     /**
      * Función encargada de refrescar el juego, encadenando ciertas llamadas a la API
      * 1 - Obtener la información del jugador actual
@@ -293,28 +293,33 @@ class PlayerAPI {
      * 3 - Obtener la información del mapa junto con la localización de los enemigos para actualizar el minimapa
      * 4 - Obtener la información de los enemigos colindantes para actualizar el visor
      * 5 - Llamar a la función refreshGame (game.js) para que siga refrescando cada 1 segundo el juego.
+     * 6 - Comprobar antes de obtener/modificar cualquier dato, si el juego sigue activo, hay la posibilidad de que esté a media ejecución y el jugador termine la partida (Delete Player), por lo que se intentarán acceder a valores no definidos (null)
      */
     fetchRefreshGame() {
-        if(isGameOn) {
-            fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => { // (2)
+        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => { // (2)
+                if (isGameOn) { // (6)
                     player = new Player(data);
                     updateViewWithPlayerInfo();
-                })
-                .then(function () { // (3)
-                    getMapInfo();
-                })
-                .then(function () {// (4)
-                    setTimeout(getNearPlayers,1000);
-                }).then(function () {
-                refreshGame(); // (5)
-            }).catch((e) => {
-                console.log("error: " + e);
+                }
             })
-        }
+            .then(function () { // (3)
+                if (isGameOn) { // (6)
+                    getMapInfo();
+                }
+            })
+            .then(function () {// (4)
+                if (isGameOn) {// (6)
+                    setTimeout(getNearPlayers, 1000);
+                }
+            }).then(function () {
+            refreshGame(); // (5)
+        }).catch((e) => {
+            console.log("error: " + e);
+        })
     }
 
 }
