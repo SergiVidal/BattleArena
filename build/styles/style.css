@@ -1,0 +1,290 @@
+@font-face {
+  font-family: Gotham_medium;
+  src: url("../font/gotham_medium.otf"); }
+@keyframes createPlayerAnimation {
+  0% {
+    background-color: #ec2d42; }
+  25% {
+    background-color: #1ed760; }
+  50% {
+    background-color: #1ed760; }
+  100% {
+    background-color: #ec2d42; } }
+h3, h4, button, a {
+  font-family: Gotham_medium; }
+
+html {
+  height: 100%;
+  background-color: black; }
+  html header {
+    display: grid;
+    grid-template-columns: 40% 60%; }
+    html header #header-left {
+      padding: 0 100px; }
+      html header #header-left img {
+        width: 250px;
+        margin: 15px; }
+    html header #header-center h3 {
+      color: #ec2d42; }
+    html header #header-right {
+      padding: 50px 50px; }
+      html header #header-right form button {
+        margin: 0 20px; }
+      html header #header-right .form-popup {
+        display: none;
+        position: fixed;
+        border: 3px solid black;
+        z-index: 9; }
+      html header #header-right .ranking-popup {
+        display: none;
+        position: fixed;
+        border: 3px solid black;
+        z-index: 9;
+        max-width: 400px;
+        padding: 10px;
+        background-color: white;
+        right: 62px;
+        width: 15%; }
+        html header #header-right .ranking-popup #ranking-content {
+          overflow-y: scroll;
+          max-height: 150px;
+          margin-bottom: 10px; }
+          html header #header-right .ranking-popup #ranking-content ul {
+            margin: 0;
+            padding: 0; }
+            html header #header-right .ranking-popup #ranking-content ul li {
+              margin: 5px; }
+      html header #header-right #btn-close-ranking {
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8; }
+      html header #header-right .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white; }
+      html header #header-right .form-container input[type=text], html header #header-right .form-container input[type=password] {
+        width: 90%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1; }
+      html header #header-right .form-container input[type=text]:focus, html header #header-right .form-container input[type=password]:focus {
+        background-color: white;
+        outline: none; }
+      html header #header-right .form-container .btn {
+        background-color: #1ed760;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 86%;
+        margin-bottom: 10px;
+        opacity: 0.8; }
+      html header #header-right .form-container .cancel, html header #header-right .ranking-popup .cancel {
+        background-color: #ec2d42; }
+      html header #header-right .form-container .btn:hover, html header #header-right .ranking-popup .btn:hover {
+        opacity: 1; }
+      html header #header-right #new-player {
+        margin-left: 3px !important;
+        animation: createPlayerAnimation 5s infinite; }
+      html header #header-right .action-button {
+        padding: 5px 20px;
+        margin-left: 50px;
+        color: white;
+        background-color: #ec2d42; }
+  html main .title {
+    background-color: #ec2d42;
+    margin: 0 20px 15px;
+    padding: 1px;
+    color: white;
+    text-align: center; }
+  html main #top {
+    display: grid;
+    grid-template-columns: 35% 35% 30%;
+    max-height: 500px; }
+    html main #top #west-top {
+      max-height: 500px; }
+      html main #top #west-top #grid-map {
+        display: grid;
+        grid-template-columns: auto auto; }
+        html main #top #west-top #grid-map #map-info #legend {
+          margin-left: 45px;
+          margin-top: 20px; }
+          html main #top #west-top #grid-map #map-info #legend img {
+            height: 35px; }
+        html main #top #west-top #grid-map #map-info h3 {
+          display: inline;
+          color: white;
+          vertical-align: super; }
+        html main #top #west-top #grid-map #map-info #compass {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto;
+          margin-left: 30px; }
+          html main #top #west-top #grid-map #map-info #compass #north {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            text-align: center; }
+            html main #top #west-top #grid-map #map-info #compass #north h1 {
+              margin-bottom: 0; }
+          html main #top #west-top #grid-map #map-info #compass #west {
+            grid-column: 1/2;
+            grid-row: 2/3;
+            text-align: right; }
+          html main #top #west-top #grid-map #map-info #compass #east {
+            grid-column: 3/4;
+            grid-row: 2/3;
+            text-align: left; }
+          html main #top #west-top #grid-map #map-info #compass #south {
+            grid-column: 2/3;
+            grid-row: 3/4;
+            text-align: center; }
+            html main #top #west-top #grid-map #map-info #compass #south h1 {
+              margin: 0; }
+          html main #top #west-top #grid-map #map-info #compass h1 {
+            color: white; }
+          html main #top #west-top #grid-map #map-info #compass img {
+            width: 75px;
+            color: white;
+            margin: 5px auto;
+            display: block;
+            grid-column: 2/3;
+            grid-row: 2/3; }
+        html main #top #west-top #grid-map #map {
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: auto auto auto auto auto auto;
+          grid-template-rows: auto auto auto auto auto auto;
+          border: 1px solid white; }
+        html main #top #west-top #grid-map .cell {
+          border-radius: 5px;
+          align-self: stretch;
+          background-color: #f1f1f1;
+          border: 1px solid black;
+          width: 50px;
+          height: 50px; }
+    html main #top #middle-top {
+      max-height: 500px; }
+      html main #top #middle-top #visor {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto auto;
+        margin: 0 auto;
+        border: 1px solid white;
+        max-width: 351px; }
+        html main #top #middle-top #visor .view {
+          border-radius: 5px;
+          align-self: stretch;
+          background-color: #f1f1f1;
+          border: 1px solid black;
+          width: 115px;
+          height: 115px; }
+    html main #top #east-top {
+      max-height: 500px; }
+      html main #top #east-top #player-characteristics img {
+        width: 75px;
+        margin: 10px auto;
+        display: block; }
+      html main #top #east-top #player-characteristics h3 {
+        color: #ec2d42;
+        padding: 10px 100px; }
+  html main #bottom {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    max-height: 500px;
+    margin-top: 20px; }
+    html main #bottom #middle-bottom {
+      max-height: 500px; }
+      html main #bottom #middle-bottom #console {
+        height: 245px;
+        background-color: #f1f1f1;
+        margin: 0 20px;
+        overflow-y: scroll;
+        border: 3px solid #ec2d42; }
+    html main #bottom #east-bottom {
+      max-height: 500px; }
+      html main #bottom #east-bottom #controls {
+        margin: 0 80px;
+        display: grid;
+        grid-template-columns: auto auto; }
+        html main #bottom #east-bottom #controls .box {
+          border-radius: 5px;
+          align-self: stretch;
+          height: 80px;
+          width: 80px;
+          border: 1px solid white; }
+          html main #bottom #east-bottom #controls .box .control-image {
+            width: 100%;
+            height: 100%; }
+          html main #bottom #east-bottom #controls .box .btn_control {
+            background: none;
+            border: none;
+            height: 100%; }
+          html main #bottom #east-bottom #controls .box .btn_control:focus {
+            outline: none; }
+        html main #bottom #east-bottom #controls #attack-controls {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-north {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            background: none;
+            margin: 0; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-west {
+            grid-column: 1/2;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-east {
+            grid-column: 3/4;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #attack-controls #attack-south {
+            grid-column: 2/3;
+            grid-row: 3/4; }
+        html main #bottom #east-bottom #controls #move-controls {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          grid-template-rows: auto auto auto; }
+          html main #bottom #east-bottom #controls #move-controls #move-northWest {
+            grid-column: 1/2;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-northWest img {
+              transform: rotate(-135deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-north {
+            grid-column: 2/3;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-north img {
+              transform: rotate(-90deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-northEast {
+            grid-column: 3/4;
+            grid-row: 1/2; }
+            html main #bottom #east-bottom #controls #move-controls #move-northEast img {
+              transform: rotate(-45deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-west {
+            grid-column: 1/2;
+            grid-row: 2/3; }
+            html main #bottom #east-bottom #controls #move-controls #move-west img {
+              transform: rotate(180deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-east {
+            grid-column: 3/4;
+            grid-row: 2/3; }
+          html main #bottom #east-bottom #controls #move-controls #move-southWest {
+            grid-column: 1/2;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-southWest img {
+              transform: rotate(135deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-south {
+            grid-column: 2/3;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-south img {
+              transform: rotate(90deg); }
+          html main #bottom #east-bottom #controls #move-controls #move-southEast {
+            grid-column: 3/4;
+            grid-row: 3/4; }
+            html main #bottom #east-bottom #controls #move-controls #move-southEast img {
+              transform: rotate(45deg); }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,1 @@
+const ROWS=6,COLUMNS=6;class Map{constructor(){this.domMatrix=[]}get getDomMatrix(){return this.domMatrix}initDomMatrix(){for(let t=0;t<ROWS;t++){this.domMatrix[t]=[];for(let i=0;i<COLUMNS;i++)this.domMatrix[t][i]=null}}getDomCell(t,i){return this.getDomMatrix[t][i]}setDomCell(t,i,r){this.getDomMatrix[t][i]=r}}
