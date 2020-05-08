@@ -60,7 +60,6 @@ html {
         margin: 0 20px;
       }
 
-      /* The popup form - hidden by default */
       .form-popup {
         display: none;
         position: fixed;
@@ -105,14 +104,12 @@ html {
         opacity: 0.8;
       }
 
-      /* Add styles to the form container */
       .form-container {
         max-width: 300px;
         padding: 10px;
         background-color: $white_color;
       }
 
-      /* Full-width input fields */
       .form-container input[type=text], .form-container input[type=password] {
         width: 90%;
         padding: 15px;
@@ -121,13 +118,11 @@ html {
         background: $grey_color;
       }
 
-      /* When the inputs get focus, do something */
       .form-container input[type=text]:focus, .form-container input[type=password]:focus {
         background-color: $white_color;
         outline: none;
       }
 
-      /* Set a style for the submit/login button */
       .form-container .btn {
         background-color: $green_color;
         color: $white_color;
@@ -139,12 +134,10 @@ html {
         opacity: 0.8;
       }
 
-      /* Add a red background color to the cancel button */
       .form-container .cancel, .ranking-popup .cancel {
         background-color: $primary_color;
       }
 
-      /* Add some hover effects to buttons */
       .form-container .btn:hover, .ranking-popup .btn:hover {
         opacity: 1;
       }
@@ -177,7 +170,6 @@ html {
 
     #top {
       display: grid;
-      //grid-template-columns: 30% 40% 30%;
       grid-template-columns: 35% 35% 30%;
       max-height: 500px;
 
@@ -263,7 +255,6 @@ html {
             display: grid;
             grid-template-columns: auto auto auto auto auto auto;
             grid-template-rows: auto auto auto auto auto auto;
-            //max-width: 282px;
             border: 1px solid $white_color;
           }
 
@@ -274,8 +265,6 @@ html {
             border: 1px solid $black_color;
             width: 50px;
             height: 50px;
-            //background-size: 20px;
-            //background-repeat: no-repeat;
           }
         }
 
@@ -300,15 +289,7 @@ html {
             border: 1px solid $black_color;
             width: 115px;
             height: 115px;
-            //background-size: 135px;
-            //background-repeat: no-repeat;
           }
-
-          //img {
-          //  width: 40%;
-          //  margin: 40px auto;
-          //  display: block;
-          //}
         }
 
       }
@@ -358,8 +339,6 @@ html {
         #controls {
           margin: 0 80px;
           display: grid;
-          //grid-template-columns: auto;
-          //grid-template-rows: auto;
           grid-template-columns: auto auto;
 
           .box {
@@ -462,9 +441,6 @@ html {
               grid-column: 3/4;
               grid-row: 2/3;
 
-              img {
-                //transform: rotate(90deg);
-              }
             }
 
             #move-southWest {
@@ -498,20 +474,4 @@ html {
       }
     }
   }
-
-  //footer {
-  //  text-align: center;
-  //  padding: 10px;
-  //  background-color: $black_color;
-  //
-  //  a {
-  //    margin: 0 20px;
-  //    color: $white_color;
-  //    text-decoration: none;
-  //  }
-  //
-  //  a:hover {
-  //    color: $primary_color;
-  //  }
-  //}
 }
