@@ -18,25 +18,16 @@ let isRespawn;
 
 /** Esta función es la primera que se llama cuando la aplicacion es iniciada **/
 window.onload = function () {
-    hideBgAudio();
     initGame();
 };
 
 /**
- * Oculta el reproductor de musica
- */
-function hideBgAudio() {
-    bgAudio = document.getElementById("bg-audio");
-    bgAudio.style.display = "none";
-}
-
-/**
  * Permite reproducir la música en background
- * NOTA: En Chrome, es necesario la interacción del usuario para reproducirla. Se iniciará al crear un Jugador nuevo
+ * NOTA: Utiliza una libreria CDN: https://cdnjs.cloudflare.com/ajax/libs/audiojs/1.0.1/audio.min.js
  */
 function startBgAudio() {
-    bgAudio.autoplay = true;
-    bgAudio.load();
+    bgAudio = new Audio("song/zelda-forest.mp3");
+    bgAudio.play();
 }
 
 /** Se encarga de inicializar el juego junto a sus componentes**/
@@ -710,11 +701,14 @@ function setVisorImage(node, image) {
  */
 function getNearPlayers() {
     playerAPI.getNearPlayers(playerAPI.getToken, function (object) {
-        initCornerVisors();
-        for (let i = 0; i < object.length; i++) {
-            let enemy = new Player(object[i]);
-            updateVisor(enemy);
-            updateMapColorCell(enemy);
+        if (player !== null) {
+
+            initCornerVisors();
+            for (let i = 0; i < object.length; i++) {
+                let enemy = new Player(object[i]);
+                updateVisor(enemy);
+                updateMapColorCell(enemy);
+            }
         }
     })
 }
@@ -750,34 +744,36 @@ function resetOldMapInfo() {
  */
 function getMapInfo() {
     playerAPI.getMapInfo(function (object) {
-        resetOldMapInfo();
-        for (let i = 0; i < object.length; i++) {
-            let verticalAxis = object[i][0];
-            let horizontalAxis = object[i][1];
-            let node = map.getDomCell(horizontalAxis, verticalAxis);
-            node.style.backgroundImage = "none";
-            node.style.backgroundColor = "#ec2d42";
-        }
-        let verticalAxis = player.getX;
-        let horizontalAxis = player.getY;
-        let playerD = player.getD;
+        if (player !== null) {
+            resetOldMapInfo();
+            for (let i = 0; i < object.length; i++) {
+                let verticalAxis = object[i][0];
+                let horizontalAxis = object[i][1];
+                let node = map.getDomCell(horizontalAxis, verticalAxis);
+                node.style.backgroundImage = "none";
+                node.style.backgroundColor = "#ec2d42";
+            }
+            let verticalAxis = player.getX;
+            let horizontalAxis = player.getY;
+            let playerD = player.getD;
 
-        let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
-        playerNode.style.backgroundColor = "blue";
+            let playerNode = map.getDomCell(horizontalAxis, verticalAxis);
+            playerNode.style.backgroundColor = "blue";
 
-        let playerCell = map.getDomCell(horizontalAxis, verticalAxis);
-        playerCell.style.backgroundImage = "url('images/player-dir.png')";
-        playerCell.style.backgroundSize = "15px";
-        playerCell.style.backgroundRepeat = "no-repeat";
-        playerCell.style.backgroundPosition = "center";
-        if (playerD === "E") {
-            playerCell.style.transform = "rotate(90deg)";
-        } else if (playerD === "S") {
-            playerCell.style.transform = "rotate(180deg)";
-        } else if (playerD === "O") {
-            playerCell.style.transform = "rotate(-90deg)";
-        } else {
-            playerCell.style.transform = "rotate(0)"
+            let playerCell = map.getDomCell(horizontalAxis, verticalAxis);
+            playerCell.style.backgroundImage = "url('images/player-dir.png')";
+            playerCell.style.backgroundSize = "15px";
+            playerCell.style.backgroundRepeat = "no-repeat";
+            playerCell.style.backgroundPosition = "center";
+            if (playerD === "E") {
+                playerCell.style.transform = "rotate(90deg)";
+            } else if (playerD === "S") {
+                playerCell.style.transform = "rotate(180deg)";
+            } else if (playerD === "O") {
+                playerCell.style.transform = "rotate(-90deg)";
+            } else {
+                playerCell.style.transform = "rotate(0)"
+            }
         }
     })
 }

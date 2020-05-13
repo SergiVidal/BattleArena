@@ -295,29 +295,33 @@ class PlayerAPI {
      * 6 - Comprobar antes de obtener/modificar cualquier dato, si el juego sigue activo, hay la posibilidad de que esté a media ejecución y el jugador termine la partida (Delete Player), por lo que se intentarán acceder a valores no definidos (null)
      */
     fetchRefreshGame() {
-        fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
-            .then((response) => {
-                return response.json();
+        if(isGameOn) {
+            fetch("http://puigpedros.salleurl.edu/pwi/arena/api/player/" + player.getToken) // (1)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => { // (2)
+                    if (isGameOn) { // (6)
+                        player = new Player(data);
+                        updateViewWithPlayerInfo();
+                    }
+                })
+                .then(function () { // (3)
+                    if (isGameOn) { // (6)
+                        getMapInfo();
+                    }
+                })
+                .then(function () {// (4)
+                    if (isGameOn) {// (6)
+                        setTimeout(getNearPlayers, 750);
+                    }
+                }).then(function () {
+                refreshGame(); // (5)
+            }).catch((e) => {
+                console.log("error: " + e);
             })
-            .then((data) => { // (2)
-                if (isGameOn) { // (6)
-                    player = new Player(data);
-                    updateViewWithPlayerInfo();
-                }
-            })
-            .then(function () { // (3)
-                if (isGameOn) { // (6)
-                    getMapInfo();
-                }
-            })
-            .then(function () {// (4)
-                if (isGameOn) {// (6)
-                    setTimeout(getNearPlayers, 750);
-                }
-            }).then(function () {
-            refreshGame(); // (5)
-        }).catch((e) => {
-            console.log("error: " + e);
-        })
+        }
     }
 }
+
+//TODO: Preguntar Rubrica Tecnologia - JavaScript: Utiliza una libreria JavaScript CDN!
